@@ -11,7 +11,7 @@ const parkSchema = new Schema(
         description: {
             type: String,
             require: [true, 'You need a description'],
-            minlength: [30, 'Description must have 30 digits.']
+            minlength: [15, 'Description must have 30 digits.']
         },
 
         imagePArk: {
@@ -28,12 +28,13 @@ const parkSchema = new Schema(
         crowdedness: {
             type: String,
             enum: ['HIGH', 'MODERATE', 'LOW'],
-            default: 'MEDIUM'
+            default: 'MODERATE'
         },
 
-        closed: {
+        cerrado: {
             type: Boolean,
-            required: [true, 'It is a closed park or not?']
+            default: true,
+
         },
 
         rating: {
@@ -44,18 +45,18 @@ const parkSchema = new Schema(
             type: String,
         },
 
-        parkLocation: {
+        // parkLocation: {
 
-            type: {
-                Types: String,
-                required: [true],
-            },
-            cordinates: {
-                type: [Number],
-                required: [true, 'You need a location']
+        //     type: {
+        //         Types: String,
+        //         required: [true],
+        //     },
+        //     cordinates: {
+        //         type: [Number],
+        //         required: [true, 'You need a location']
 
-            },
-        },
+        //     },
+        // },
 
 
     }
