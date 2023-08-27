@@ -6,13 +6,11 @@ const userSchema = new Schema(
     username: {
       type: String,
       required: [true, 'Username is required.'],
-      unique: true,
-
     },
 
     imageUser: {
       type: String,
-      required: true,
+      default: "#"
     },
 
     email: {
@@ -45,6 +43,9 @@ const userSchema = new Schema(
       enum: ['USER', 'ADMIN'],
       default: 'USER'
     }
+  },
+  {
+    timestamps: true
   }
 
 );

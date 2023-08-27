@@ -14,6 +14,7 @@ router.post('/create', cloudinary.single('image'), (req, res, next) => {
 
     const { path: image } = req.file
 
+    
 
     bcrypt
         .genSalt(saltRounds)

@@ -28,12 +28,13 @@ const parkSchema = new Schema(
         crowdedness: {
             type: String,
             enum: ['HIGH', 'MODERATE', 'LOW'],
-            default: 'MEDIUM'
+            default: 'MODERATE'
         },
 
-        closed: {
+        cerrado: {
             type: Boolean,
-            required: [true, 'It is a closed park or not?']
+            default: true,
+
         },
 
         rating: {
