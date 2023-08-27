@@ -1,32 +1,32 @@
 const router = require("express").Router()
 
-const Park = require('../models/Park.model')
+const Event = require('../models/Event.model')
 
-router.get('/parkList', (req, res, next) => {
+router.get('/eventList', (req, res, next) => {
 
-    Park
+    Event
         .find()
         .then(response => res.json(response))
         .catch(err => next(err))
 })
 
-router.get('/:park_id', (req, res, next) => {
+router.get('/:event_id', (req, res, next) => {
 
-    const { park_id } = req.params
+    const { event_id } = req.params
 
-    Park
-        .findById(park_id)
+    Event
+        .findById(event_id)
         .then(response => res.json(response))
         .catch(err => next(err))
 
 })
 
-router.post('/newPark', (req, res, next) => {
+router.post('/newEvent', (req, res, next) => {
 
-    const { parkName } = req.body
+    const { title } = req.body
 
     Park
-        .create({ parkName })
+        .create({ title })
         .then(response => res.json(response))
         .catch(err => next(err))
 })

@@ -5,12 +5,12 @@ const parkSchema = new Schema(
 
         parkName: {
             type: String,
-            require: [true, 'You need a name']
+            required: [true, 'You need a name']
         },
 
         description: {
             type: String,
-            require: [true, 'You need a description'],
+            required: [true, 'You need a description'],
             minlength: [30, 'Description must have 30 digits.']
         },
 
@@ -44,18 +44,18 @@ const parkSchema = new Schema(
             type: String,
         },
 
-        parkLocation: {
+        // parkLocation: {
 
-            type: {
-                Types: String,
-                required: [true],
-            },
-            cordinates: {
-                type: [Number],
-                required: [true, 'You need a location']
+        //     type: {
+        //         Types: String,
+        //         required: [true],
+        //     },
+        //     cordinates: {
+        //         type: [Number],
+        //         required: [true, 'You need a location']
 
-            },
-        },
+        //     },
+        // },
 
 
     }

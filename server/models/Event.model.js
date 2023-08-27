@@ -3,11 +3,6 @@ const { Schema, model } = require("mongoose");
 const eventSchema = new Schema(
     {
 
-        owner: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-        },
-
         title: {
             type: String,
             required: [true, 'You need a title']
@@ -28,6 +23,12 @@ const eventSchema = new Schema(
             type: date,
             required: [true]
         },
+
+        owner: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
+
 
         attendees: [{
             type: Schema.Types.ObjectId,
@@ -58,6 +59,7 @@ const eventSchema = new Schema(
 
     }
 );
+
 eventSchema.index({ location: '2dsphere' })
 const Event = model("Event", eventSchema)
 module.exports = Event
