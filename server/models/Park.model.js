@@ -5,7 +5,7 @@ const parkSchema = new Schema(
 
         parkName: {
             type: String,
-            require: [true, 'You need a name']
+            required: [true, 'You need a name']
         },
 
         description: {
