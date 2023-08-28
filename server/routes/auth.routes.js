@@ -1,29 +1,38 @@
 const router = require("express").Router()
 const User = require('../models/User.model')
 const bcrypt = require('bcryptjs')
+const saltRounds = 10
 
 
-router.get('/create', (req, res, next) => {
-    res.render('auth/create')
-})
 
 
-router.post('/create', cloudinary.single('image'), (req, res, next) => {
+router.post('/signup', (req, res, next) => {
 
-    const { username, email, birthday, gender, password } = req.body
+    const { username, email, password } = req.body
 
-    const { path: image } = req.file
+    if (password.length < 2) {
+        res.status(400).json({ message: "pasword must have at least 3 character" })
 
-    
+    }
 
-    bcrypt
-        .genSalt(saltRounds)
-        .then(salt => bcrypt.hash(password, salt))
-        .then(hash => User.create({ username, email, birthday, gender, password: hash, image }))
-        .then(res.redirect('/'))
+    User
+        .find({ email })
+        .then((foundUser) => {
+            if (foundUser) {
+                res.status(400).json({ message: "user already exist" })
+            }
+        })
+
+    const salt = bcrypt.genSaltSync(saltRounds)
+    const hashedPassword = bcrypt.hashSync(password, salt)
+    return User.create({ email, password: hashedPassword, username })
+        .then(() => res.sendStatus(201))
         .catch(err => next(err))
 
 })
+
+
+
 
 
 module.exports = router
