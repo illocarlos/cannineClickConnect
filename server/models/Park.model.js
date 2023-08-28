@@ -15,9 +15,9 @@ const parkSchema = new Schema(
         },
 
         gallery: {
-            type: [{String}],
+            type: [{ String }],
             validate: {
-                validator: value => value.length > 0, 
+                validator: value => value.length > 0,
                 message: 'One photo is required'
             }
         },

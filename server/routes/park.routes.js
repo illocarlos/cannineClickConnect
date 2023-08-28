@@ -23,10 +23,10 @@ router.get('/:park_id', (req, res, next) => {
 
 router.post('/newPark', (req, res, next) => {
 
-    const { parkName } = req.body
+    const { name, description } = req.body
 
     Park
-        .create({ parkName })
+        .create({ name, description })
         .then(response => res.json(response))
         .catch(err => next(err))
 })
