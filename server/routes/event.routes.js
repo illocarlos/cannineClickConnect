@@ -2,7 +2,7 @@ const router = require("express").Router()
 
 const Event = require('../models/Event.model')
 
-router.get('/eventList', (req, res, next) => {
+router.get('/list', (req, res, next) => {
 
     Event
         .find()
@@ -25,7 +25,7 @@ router.post('/newEvent', (req, res, next) => {
 
     const { title } = req.body
 
-    Park
+    Event
         .create({ title })
         .then(response => res.json(response))
         .catch(err => next(err))

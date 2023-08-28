@@ -2,8 +2,8 @@ const router = require("express").Router()
 
 const Park = require('../models/Park.model')
 
-router.get('/parkList', (req, res, next) => {
-
+router.get('/list', (req, res, next) => {
+   
     Park
         .find()
         .then(response => res.json(response))
