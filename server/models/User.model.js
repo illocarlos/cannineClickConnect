@@ -8,7 +8,7 @@ const userSchema = new Schema(
       required: [true, 'Username is required.'],
     },
 
-    imageUser: {
+    avatar: {
       type: String,
       default: "#"
     },
@@ -26,7 +26,7 @@ const userSchema = new Schema(
       required: [true, 'Password is required.']
     },
 
-    aboutMe: {
+    about: {
       type: String,
     },
 
@@ -34,22 +34,19 @@ const userSchema = new Schema(
       type: String,
     },
 
-    pack: [{
+    dogs: [{
       type: Schema.Types.ObjectId,
-      ref: 'dog'
+      ref: 'Dog'
     }],
+
     role: {
       type: String,
       enum: ['USER', 'ADMIN'],
       default: 'USER'
     }
   },
-  {
-    timestamps: true
-  }
 
 );
 
 const User = model("User", userSchema);
-
 module.exports = User;

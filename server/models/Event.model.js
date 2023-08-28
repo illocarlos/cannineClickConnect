@@ -8,7 +8,7 @@ const eventSchema = new Schema(
             required: [true, 'You need a title']
         },
 
-        imageEvent: {
+        cover: {
             type: String,
             default: '#'
         },
@@ -20,8 +20,8 @@ const eventSchema = new Schema(
         },
 
         date: {
-            type: date,
-            required: [true]
+            type: Date,
+            required: [true, 'You need a date']
         },
 
         owner: {
@@ -29,37 +29,32 @@ const eventSchema = new Schema(
             ref: 'User',
         },
 
-
         attendees: [{
             type: Schema.Types.ObjectId,
             ref: 'User',
         }],
 
-        eventAdresss: {
-            type: String,
+        address: {
+            street: String,
+            number: Number,
+            zipcode: Number,
+            city: String,
+            country: String
         },
 
-        eventLocation: {
-
+        location: {
             type: {
                 Types: String,
-                required: [true],
             },
 
             cordinates: {
                 type: [Number],
-                required: [true, 'You need a location']
-
             }
 
         },
 
-
-
-
     }
 );
 
-eventSchema.index({ location: '2dsphere' })
 const Event = model("Event", eventSchema)
 module.exports = Event

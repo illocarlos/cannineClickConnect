@@ -3,46 +3,44 @@ const { Schema, model } = require("mongoose");
 const dogSchema = new Schema(
     {
 
-        dogname: {
+        name: {
             type: String,
             required: [true, 'Name is required.'],
         },
 
-        imageDog: {
-            type: String,
-            required: true,
 
+        description: {
+            type: String,
         },
 
-        birthday: {
-            type: Date,
-            require: [true, 'birthday is required']
+        image: {
+            type: String,
+            default: "#"
+        },
+
+        age: {
+            type: Number,
+            require: [true, 'Age is required']
         },
 
         size: {
             type: String,
             enum: ['LARGE', 'MEDIUM', 'SMALL'],
-            required: [true, 'size is required.'],
+            required: [true, 'Size is required.'],
         },
 
         gender: {
             type: String,
-            enum: ['male', 'female',],
+            enum: ['MALE', 'FEMALE'],
 
         },
 
         castrated: {
             type: Boolean,
-            require: [true, 'castrated is required ']
+            require: [true, 'Castrated is required ']
         },
-
-        aboutMyDog: {
-            type: String,
-        },
-
     })
 
 
 const Dog = model("Dog", dogSchema);
-
 module.exports = Dog;

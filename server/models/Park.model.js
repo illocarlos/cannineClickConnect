@@ -3,7 +3,7 @@ const { Schema, model } = require("mongoose");
 const parkSchema = new Schema(
     {
 
-        parkName: {
+        name: {
             type: String,
             required: [true, 'You need a name']
         },
@@ -11,15 +11,18 @@ const parkSchema = new Schema(
         description: {
             type: String,
             required: [true, 'You need a description'],
-            minlength: [30, 'Description must have 30 digits.']
+            minlength: [20, 'Description must have 20 digits.']
         },
 
-        imagePArk: {
-            type: String,
-            default: '#'
+        gallery: {
+            type: [{String}],
+            validate: {
+                validator: value => value.length > 0, 
+                message: 'One photo is required'
+            }
         },
 
-        dimensions: {
+        size: {
             type: String,
             enum: ['LARGE', 'MEDIUM', 'SMALL'],
             default: 'MEDIUM'
@@ -31,33 +34,32 @@ const parkSchema = new Schema(
             default: 'MODERATE'
         },
 
-        cerrado: {
+        open: {
             type: Boolean,
             default: true,
-
         },
 
         rating: {
             type: Number
         },
 
-        parkAdresss: {
-            type: String,
+        address: {
+            street: String,
+            number: Number,
+            zipcode: Number,
+            city: String,
+            country: String
         },
 
-        // parkLocation: {
+        location: {
 
-        //     type: {
-        //         Types: String,
-        //         required: [true],
-        //     },
-        //     cordinates: {
-        //         type: [Number],
-        //         required: [true, 'You need a location']
-
-        //     },
-        // },
-
+            type: {
+                type: String,
+            },
+            cordinates: {
+                type: [Number],
+            },
+        },
 
     }
 );
