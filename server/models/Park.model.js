@@ -36,7 +36,7 @@ const parkSchema = new Schema(
 
         open: {
             type: Boolean,
-            default: true,
+            // default: true,
         },
 
         rating: {
