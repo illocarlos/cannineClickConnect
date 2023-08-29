@@ -23,11 +23,22 @@ router.get('/:event_id', (req, res, next) => {
 
 router.post('/newEvent', (req, res, next) => {
 
-    const { title } = req.body
-
+    const { title, description, cover, date, attendees, address:{street, number, zipcode, city, country} } = req.body
+    
     Event
-        .create({ title })
-        .then(response => res.json(response))
+        .create({ title, 
+            description, 
+            cover, 
+            date, 
+            attendees, 
+            address:{
+                street, 
+                number, 
+                zipcode, 
+                city, 
+                country
+            }})
+        .then(() => res.sendStatus(200))
         .catch(err => next(err))
 })
 
