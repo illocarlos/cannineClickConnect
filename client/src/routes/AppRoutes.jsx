@@ -3,6 +3,7 @@ import ParkGalleryPage from '../pages/ParksPage/ParkGalleryPage'
 import EventsGalleryPage from '../pages/EventsPage/EventsGalleryPage'
 import UsersPage from '../pages/UsersPage/UsersPage'
 import NewParkPage from '../pages/newParkPage/newParkPage'
+import NewEventPage from '../pages/EventsPage/NewEventPage'
 
 // import PrivateRoute from './PrivateRoutes'
 
@@ -15,6 +16,7 @@ function AppRoutes() {
       <Route path={"/user/list"} element={<UsersPage />} />
       <Route path={"/event/list"} element={<EventsGalleryPage />} />
       <Route path={"/park/newPark"} element={<NewParkPage />} />
+      <Route path={"/event/newEvent"} element={<NewEventPage />} />
 
       <Route path={"*"} element={<p>ERROR</p>} />
 

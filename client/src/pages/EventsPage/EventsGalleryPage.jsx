@@ -24,7 +24,7 @@ const[events,setEvents]=useState([])
         <Container>
         <h1>Galeria de eventos</h1>
                 <hr />
-                <Button variant="success">New Event</Button>{' '}
+                <Button href="/event/newEvent" variant="success">New Event</Button>{''}
                 <EventList events={events}/>
         </Container>
         </>
