@@ -10,7 +10,7 @@ const eventSchema = new Schema(
 
         cover: {
             type: String,
-            default: '#'
+            default: ''
         },
 
         description: {
