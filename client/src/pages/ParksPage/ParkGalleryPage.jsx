@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import {Container} from 'react-bootstrap'
+import { Container, Button } from 'react-bootstrap'
 import parkService from '../../services/parks.service'
 import ParkList from '../../components/ParkList/ParkList'
 
@@ -29,6 +29,7 @@ const ParkGalleryPage = () => {
             <h1>Galeria de parques</h1>
                 
             <hr />
+            <Button variant="success">New Park</Button>{' '}
             
             <ParkList parks={parks} />
             

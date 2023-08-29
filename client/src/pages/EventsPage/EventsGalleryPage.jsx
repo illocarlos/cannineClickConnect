@@ -1,5 +1,5 @@
 import { useEffect,useState } from 'react'
-import { Container } from 'react-bootstrap'
+import { Container, Button } from 'react-bootstrap'
 import eventService from '../../services/events.service.jsx'
 import EventList from '../../components/EventList/EventList.jsx'
 
@@ -24,6 +24,7 @@ const[events,setEvents]=useState([])
         <Container>
         <h1>Galeria de eventos</h1>
                 <hr />
+                <Button variant="success">New Event</Button>{' '}
                 <EventList events={events}/>
         </Container>
         </>
