@@ -11,7 +11,12 @@ class ParkService {
     getParks() {
         return this.api.get('/park/list')
     }
-    
+
+    newPark(parkData) {
+
+        return this.api.post('/park/newPark', parkData)
+    }
+
 }
 
 const parkService = new ParkService()
