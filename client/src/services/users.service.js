@@ -1,13 +1,11 @@
 import axios from 'axios'
 
-class UploadServices {
+class UsersService {
 
     constructor() {
-
         this.api = axios.create({
-            baseURL: `${import.meta.env.VITE_API_URL}/upload`
+            baseURL: `${import.meta.env.VITE_API_URL}`
         })
-
         this.api.interceptors.request.use((config) => {
 
             const storedToken = localStorage.getItem("authToken");
@@ -20,12 +18,10 @@ class UploadServices {
         })
 
     }
-
-    uploadimage(imageForm) {
-        return this.api.post('/image', imageForm)
+    getUsers() {
+        return this.api.get('/user/list')
     }
 }
+const usersService = new UsersService()
 
-const uploadServices = new UploadServices()
-
-export default uploadServices
+export default usersService
