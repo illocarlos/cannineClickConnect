@@ -3,9 +3,6 @@ import { Form, Button, Row, Col, ButtonGroup, ToggleButton } from 'react-bootstr
 
 const ButtonOpen = ({ handleOpenStatus }) => {
 
-    const [parkData, setParkData] = useState({
-        open: true
-    })
 
     const [openValue, setOpenValue] = useState('open');
 
