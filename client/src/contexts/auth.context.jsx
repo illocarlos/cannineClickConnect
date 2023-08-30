@@ -1,45 +1,48 @@
-// import { createContext, useEffect, useState } from "react"
-// import authService from './../services/auth.services'
+import { createContext, useEffect, useState } from "react"
+import authService from '../services/auth.service'
  
-// const AuthContext = createContext()
+const AuthContext = createContext()
  
-// function AuthProviderWrapper(props) {
+function AuthProviderWrapper(props) {
  
-//     const [user, setUser] = useState(null)
-//     const [isLoading, setIsLoading] = useState(true)
+    const [user, setUser] = useState(null)
+
+    const [isLoading, setIsLoading] = useState(true)
  
-//     const authenticateUser = () => {
+    const authenticateUser = () => {
  
-//         const token = localStorage.getItem('authToken')
+        const token = localStorage.getItem('authToken')
  
-//         if (token) {
-//             authService
-//                 .verify(token)
-//                 .then(({ data }) => {
-//                     setUser(data)
-//                     setIsLoading(false)
-//                 })
-//                 .catch(err => logout())
-//         } else {
-//             logout()
-//         }
-//     }
+        if (token) {
+            authService
+                .verify(localStorage.getItem('authToken'))
+                .then(({ data }) => {
+                    setUser(data)
+                    setIsLoading(false)
+                })
+                .catch(err => logout())
+        } else {
+            logout()
+        }
+    }
  
-//     const logout = () => {
-//         localStorage.removeItem('authToken')
-//         setUser(null)
-//         setIsLoading(false)
-//     }
+    const logout = () => {
+        localStorage.removeItem('authToken')
+        setUser(null)
+        setIsLoading(false)
+    }
+
+    const storeToken = authToken => localStorage.setItem('authToken', authToken)
  
-//     useEffect(() => {
-//         authenticateUser()
-//     }, [])
+    useEffect(() => {
+        authenticateUser()
+    }, [])
  
-//     return (
-//         <AuthContext.Provider value={{ authenticateUser, user, logout, isLoading }}>
-//             {props.children}
-//         </AuthContext.Provider>
-//     )
-// }
+    return (
+        <AuthContext.Provider value={{ authenticateUser, user, logout, storeToken, isLoading }}>
+            {props.children}
+        </AuthContext.Provider>
+    )
+}
  
-// export { AuthContext, AuthProviderWrapper }
+export { AuthContext, AuthProviderWrapper }

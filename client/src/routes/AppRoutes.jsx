@@ -6,6 +6,8 @@ import NewParkPage from '../pages/Parks/NewParkPage/NewParkPage'
 import NewEventPage from '../pages/Events/NewEventsPage/NewEventPage'
 import DetailsEventsPage from '../pages/Events/DetailsEventsPage/DetailsEventsPage'
 import DetailsParkPage from '../pages/Parks/DetailsParkPage/DetailsParkPage'
+import SignupPage from '../pages/Auth/SignupPage/SignupPage'
+import LoginPage from '../pages/Auth/LoginPage/LoginPage'
 
 // import PrivateRoute from './PrivateRoutes'
 
@@ -21,6 +23,9 @@ function AppRoutes() {
       <Route path={"/event/newEvent"} element={<NewEventPage />} />
       <Route path={"/event/:event_id"} element={<DetailsEventsPage />} />
       <Route path={"/park/:park_id"} element={<DetailsParkPage />} />
+
+      <Route path={"/auth/signup"} element={<SignupPage />} />
+      <Route path={"/auth/login"} element={<LoginPage />} />
 
       <Route path={"*"} element={<p>ERROR</p>} />
 
