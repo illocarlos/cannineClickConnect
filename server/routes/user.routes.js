@@ -8,7 +8,6 @@ router.get('/list', (req, res, next) => {
         .then(response => res.json(response))
         .catch(err=>next(err))
 
-
 })
 
 module.exports=router
