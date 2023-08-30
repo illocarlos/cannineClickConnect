@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import './NewPark.css'
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col, ButtonGroup, ToggleButton } from 'react-bootstrap';
 import ButtonOpen from './ButtonOpen';
-import parkService from "../../services/parks.service";
-import uploadServices from '../../services/upload.service';
+import parkService from "../../../services/parks.service";
 
 function NewParkForm() {
 
@@ -16,7 +15,6 @@ function NewParkForm() {
         crowdedness: "",
         rating: 0,
         open: true,
-        gallery: ""
     })
 
     const handleOpenStatus = value => {
@@ -38,24 +36,11 @@ function NewParkForm() {
             .newPark(parkData)
             .then(respose => console.log(respose))
             .catch(err => console.log(err))
+
+
+
+
     }
-
-
-    const handleFileUpload = e => {
-
-        const formData = new FormData()
-        formData.append('imageData', e.target.files[0])
-
-        uploadServices
-            .uploadimage(formData)
-            .then(({ data }) => {
-                setParkData({ ...parkData, gallery: data.cloudinary_url })
-            })
-            .catch(err => console.log(err))
-    }
-
-
-
     return (
         <div className='NewCoasterForm'>
             <Form onSubmit={handleParkSubmit}>
@@ -99,11 +84,12 @@ function NewParkForm() {
                     </Form.Text>
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="image">
-                    <Form.Label>Imagen (URL)</Form.Label>
-                    <Form.Control type="file" onChange={handleFileUpload} />
+                <Form.Group className="mb-3" >
+                    <Form.Label>Photo</Form.Label>
+                    <Form.Control type="text" placeholder="Picture" value={parkData.gallery} name="gallery" onChange={handleInputChange} />
+                    <Form.Text className="text-muted">
+                    </Form.Text>
                 </Form.Group>
-
 
                 <ButtonOpen handleOpenStatus={handleOpenStatus} />
 

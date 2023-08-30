@@ -9,8 +9,5 @@ module.exports = app => {
     app.use("/api/event", eventRoutes)
 
     const userRoutes = require('./user.routes')
-    app.use("/api/user", userRoutes)
-
-    const uploadRoutes = require('./upload.routes')
-    app.use("/api/upload", uploadRoutes)
+    app.use("/api/user",userRoutes)
 }

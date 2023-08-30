@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Container, Button } from 'react-bootstrap'
-import parkService from '../../services/parks.service'
-import ParkList from '../../components/ParkList/ParkList'
+import parkService from '../../../services/parks.service'
+import ParkList from '../../../components/ParkComponents/ParkList/ParkList'
 
 
 const ParkGalleryPage = () => {
