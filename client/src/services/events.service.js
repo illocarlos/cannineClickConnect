@@ -12,7 +12,7 @@ class EventService {
         return this.api.get('/event/list')
     }
 
-    getEventDetails() {
+    getEventDetails(event_id) {
         return this.api.get(`/event/${event_id}`)
     }
     

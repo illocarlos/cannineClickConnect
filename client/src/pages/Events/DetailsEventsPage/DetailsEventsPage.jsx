@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import eventsService from '../../../services/events.service'
+import EventDetails from "../../../components/EventComponents/EventDetails/EventDetails"
 
 
 
@@ -24,7 +25,7 @@ const DetailsEventsPage = () => {
 
 
     return (
-        <h1>Detalles del evento</h1>
+        <EventDetails />
     )
 }
 

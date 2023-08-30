@@ -12,10 +12,15 @@ class ParkService {
         return this.api.get('/park/list')
     }
 
+    getParkDetails(park_id) {
+        return this.api.get(`/park/${park_id}`, park_id)        
+    }
+
     newPark(parkData) {
 
         return this.api.post('/park/newPark', parkData)
     }
+
 
 }
 

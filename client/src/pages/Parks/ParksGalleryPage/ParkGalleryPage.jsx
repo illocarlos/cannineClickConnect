@@ -29,7 +29,7 @@ const ParkGalleryPage = () => {
             <h1>Galeria de parques</h1>
                 
             <hr />
-            <Button variant="success">New Park</Button>{' '}
+            <Button href="/park/newPark" variant="success">New Event</Button>
             
             <ParkList parks={parks} />
             

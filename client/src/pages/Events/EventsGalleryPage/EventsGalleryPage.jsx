@@ -13,10 +13,10 @@ const[events,setEvents]=useState([])
 
     const loadEvents = () => {
 
-            eventService
-              .getEvents()
-              .then(({ data }) =>setEvents(data))
-              .catch((err) => console.log(err));
+      eventService
+        .getEvents()
+        .then(({ data }) =>setEvents(data))
+        .catch((err) => console.log(err));
 }
 
     return (
@@ -24,7 +24,7 @@ const[events,setEvents]=useState([])
         <Container>
         <h1>Galeria de eventos</h1>
                 <hr />
-                <Button href="/event/newEvent" variant="success">New Event</Button>{''}
+                <Button href="/event/newEvent" variant="success">New Event</Button>
                 <EventList events={events}/>
         </Container>
         </>
