@@ -30,6 +30,7 @@ function NewParkForm() {
 
     const handleParkSubmit = e => {
         e.preventDefault()
+        console.log(parkData)
         parkService
             .newPark(parkData)
             .then(() => alert('CREADO'))
@@ -39,19 +40,24 @@ function NewParkForm() {
     const handleFileUpload = e => {
 
         const formData = new FormData()
-        formData.append('imageData', e.target.files[0])
+
+        // formData.append('imageData', e.target.files[0])
+
+        for (let i = 0; i < e.target.files.length; i++) {
+            formData.append('imagesData', e.target.files[i])
+        }
 
         uploadServices
-            .uploadimage(formData)
+            .uploadimages(formData)
             .then(({ data }) => {
-                setParkData({ ...parkData, gallery: data.cloudinary_url })
+                setParkData({ ...parkData, gallery: data.cloudinary_urls })
             })
             .catch(err => console.log(err))
     }
 
     return (
         <div className='NewCoasterForm'>
-            <Form onSubmit={handleParkSubmit}>
+            <Form onSubmit={handleParkSubmit} encType='multipart/form-data'>
                 <Form.Group className="mb-3">
                     <Form.Label>Name</Form.Label>
                     <Form.Control type="text" placeholder="Enter Name" name="name" value={parkData.name} onChange={handleInputChange} />
@@ -95,7 +101,7 @@ function NewParkForm() {
 
                 <Form.Group className="mb-3" controlId="image">
                     <Form.Label>Imagen (URL)</Form.Label>
-                    <Form.Control type="file" onChange={handleFileUpload} />
+                    <Form.Control type="file" multiple onChange={handleFileUpload} />
                 </Form.Group>
 
                 <ButtonOpen handleOpenStatus={handleOpenStatus} />
