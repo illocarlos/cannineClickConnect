@@ -3,12 +3,9 @@ import './NewPark.css'
 import { Form, Button, Row, Col, ButtonGroup, ToggleButton } from 'react-bootstrap';
 import ButtonOpen from './ButtonOpen';
 import parkService from "../../../services/parks.service";
-<<<<<<< HEAD
-=======
 import uploadServices from '../../../services/upload.service';
 
 
->>>>>>> master
 
 function NewParkForm() {
     const [parkData, setParkData] = useState({
@@ -41,12 +38,6 @@ function NewParkForm() {
             .then(respose => console.log(respose))
             .catch(err => console.log(err))
 
-<<<<<<< HEAD
-
-
-
-    }
-=======
     }
 
     const handleFileUpload = e => {
@@ -62,7 +53,6 @@ function NewParkForm() {
             .catch(err => console.log(err))
     }
 
->>>>>>> master
     return (
         <div className='NewCoasterForm'>
             <Form onSubmit={handleParkSubmit}>
@@ -106,18 +96,10 @@ function NewParkForm() {
                     </Form.Text>
                 </Form.Group>
 
-<<<<<<< HEAD
-                <Form.Group className="mb-3" >
-                    <Form.Label>Photo</Form.Label>
-                    <Form.Control type="text" placeholder="Picture" value={parkData.gallery} name="gallery" onChange={handleInputChange} />
-                    <Form.Text className="text-muted">
-                    </Form.Text>
-=======
 
                 <Form.Group className="mb-3" controlId="image">
                     <Form.Label>Imagen (URL)</Form.Label>
                     <Form.Control type="file" onChange={handleFileUpload} />
->>>>>>> master
                 </Form.Group>
 
                 <ButtonOpen handleOpenStatus={handleOpenStatus} />
