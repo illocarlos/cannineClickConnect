@@ -8,13 +8,13 @@ function App() {
   return (
     <div className="App">
 
-      <Navigation/>
-        <AppRoutes/>
+      <Navigation />
+      <AppRoutes />
       <Footer />
-      
+
     </div>
   )
-  
+
 }
 
 export default App

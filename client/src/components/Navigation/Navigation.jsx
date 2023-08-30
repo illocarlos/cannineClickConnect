@@ -1,5 +1,5 @@
-import {Container, Nav, Navbar} from "react-bootstrap";
-import {Link} from 'react-router-dom'
+import { Container, Nav, Navbar } from "react-bootstrap";
+import { Link } from 'react-router-dom'
 
 
 const Navigation = () => {
@@ -7,7 +7,7 @@ const Navigation = () => {
     <>
       <Navbar bg="dark" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="/">CanineClick Connect</Navbar.Brand>
+          <Navbar.Brand href="/">{import.meta.env.VITE_APP_NAME}</Navbar.Brand>
           <Nav className="me-auto">
             <Link to={"/"} className="nav-link">
               Home

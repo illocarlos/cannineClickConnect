@@ -7,35 +7,31 @@ import UserList from '../../../components/UserComponents/UserList/UserList'
 
 const UsersPage = () => {
 
-    const [ users , setUsers ] = useState([])
-    
+    const [users, setUsers] = useState([])
+
     useEffect(() => {
         loadUsers()
-    },[])
+    }, [])
 
     const loadUsers = () => {
 
         usersService
-        .getUsers()
-        .then(({data})=> setUsers(data))
-        .catch((err) => console.log(err))
+            .getUsers()
+            .then(({ data }) => setUsers(data))
+            .catch((err) => console.log(err))
     }
-
 
     return (
         <>
-        <Container>
+            <Container>
 
                 <h1>galeria users</h1>
                 <hr />
                 <UserList users={users} />
 
-        </Container>   
-        </>      
-
+            </Container>
+        </>
     )
-
-
 }
 
 export default UsersPage

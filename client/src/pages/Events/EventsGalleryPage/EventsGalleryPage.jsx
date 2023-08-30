@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Container, Button } from 'react-bootstrap'
-import eventService from '../../services/events.service'
-import EventList from '../../components/EventList/EventList'
+import eventService from '../../../services/events.service'
+import EventList from '../../../components/EventComponents/EventList/EventList'
 
 const EventsGalleryPage = () => {
 
