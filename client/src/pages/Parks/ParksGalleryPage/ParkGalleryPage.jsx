@@ -1,7 +1,6 @@
 import { Container, Button } from 'react-bootstrap'
 import ParkList from '../../../components/ParkComponents/ParkList/ParkList'
-
-// TODO: REVISAR QUE TODOS LOS ENLACES INTERNOS SEAN COMPONENTE LINK DE RRD
+import { Link } from 'react-router-dom'
 
 const ParkGalleryPage = () => {
 
@@ -11,8 +10,9 @@ const ParkGalleryPage = () => {
             <h1>Galeria de parques</h1>
 
             <hr />
-
-            <Button href="/park/newPark" variant="success">New Event</Button>
+            <Link to={"/park/newPark"}>
+                <Button variant="success">New Event</Button>
+            </Link>
 
             <ParkList />
 

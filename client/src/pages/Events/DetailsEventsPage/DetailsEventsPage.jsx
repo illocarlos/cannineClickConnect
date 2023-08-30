@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import eventsService from '../../../services/events.service'
-import EventDetails from "../../../components/EventComponents/EventDetails/EventDetails"
 
 const DetailsEventsPage = () => {
 
@@ -23,8 +22,10 @@ const DetailsEventsPage = () => {
 
 
     return (
-        // TODO: ESTE COMPONENTE NO DEBE EXISTIR
-        <EventDetails />
+        /*Elimino el "TODO" de German nota(si son solo dealles de los evento deben de ser
+            incluidos aqui no debe de crearse otro componente )*/
+
+        <h1>DETALLES EVENTO</h1>
     )
 }
 

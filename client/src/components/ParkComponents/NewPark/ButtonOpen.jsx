@@ -2,11 +2,6 @@ import { useState } from 'react';
 import { Form, Button, Row, Col, ButtonGroup, ToggleButton } from 'react-bootstrap';
 
 const ButtonOpen = ({ handleOpenStatus }) => {
-
-    const [parkData, setParkData] = useState({
-        open: true
-    })
-
     const [openValue, setOpenValue] = useState('open');
 
     const boleOpen = [

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Container, Button } from 'react-bootstrap'
 import eventService from '../../../services/events.service'
 import EventList from '../../../components/EventComponents/EventList/EventList'
+import { Link } from 'react-router-dom'
 
 const EventsGalleryPage = () => {
 
@@ -24,7 +25,9 @@ const EventsGalleryPage = () => {
       <Container>
         <h1>Galeria de eventos</h1>
         <hr />
-        <Button href="/event/newEvent" variant="success">New Event</Button>{''}
+        <Link to={"/event/newEvent"}>
+          <Button variant="success">New Event</Button>
+        </Link>
         <EventList events={events} />
       </Container>
     </>
