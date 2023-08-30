@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap"
-import NewParkForm from "../../components/NewPark/newpark"
+import NewParkForm from "../../../components/ParkComponents/NewPark/Newpark"
 
 
 

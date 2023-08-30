@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Form, Button, Row, Col } from "react-bootstrap"
 
-import eventService from "../../services/events.service"
+import eventService from "../../../services/events.service"
 
 const NewEventForm = () => {
 

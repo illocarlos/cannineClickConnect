@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Container, Button } from 'react-bootstrap'
-import parkService from '../../services/parks.service'
-import ParkList from '../../components/ParkList/ParkList'
+import parkService from '../../../services/parks.service'
+import ParkList from '../../../components/ParkComponents/ParkList/ParkList'
 
 
 const ParkGalleryPage = () => {
@@ -29,7 +29,7 @@ const ParkGalleryPage = () => {
             <h1>Galeria de parques</h1>
                 
             <hr />
-            <Button variant="success">New Park</Button>{' '}
+            <Button href="/park/newPark" variant="success">New Event</Button>
             
             <ParkList parks={parks} />
             

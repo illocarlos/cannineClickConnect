@@ -14,13 +14,13 @@ const parkSchema = new Schema(
             minlength: [20, 'Description must have 20 digits.']
         },
 
-        gallery: {
-            type: [{ String }],
-            validate: {
-                validator: value => value.length > 0,
-                message: 'One photo is required'
-            }
-        },
+        // gallery: {
+        //     type: [{ String }],
+        //     validate: {
+        //         validator: value => value.length > 0,
+        //         message: 'One photo is required'
+        //     }
+        // },
 
         size: {
             type: String,

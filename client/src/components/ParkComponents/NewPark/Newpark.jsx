@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import './NewPark.css'
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col, ButtonGroup, ToggleButton } from 'react-bootstrap';
 import ButtonOpen from './ButtonOpen';
-import parkService from "../../services/parks.service";
-import uploadServices from '../../services/upload.service';
+import parkService from "../../../services/parks.service";
+import uploadServices from '../../../services/upload.service';
+
+
 
 function NewParkForm() {
-
-
     const [parkData, setParkData] = useState({
         name: "",
         description: "",
@@ -16,7 +16,6 @@ function NewParkForm() {
         crowdedness: "",
         rating: 0,
         open: true,
-        gallery: ""
     })
 
     const handleOpenStatus = value => {
@@ -38,8 +37,8 @@ function NewParkForm() {
             .newPark(parkData)
             .then(respose => console.log(respose))
             .catch(err => console.log(err))
-    }
 
+    }
 
     const handleFileUpload = e => {
 
@@ -53,8 +52,6 @@ function NewParkForm() {
             })
             .catch(err => console.log(err))
     }
-
-
 
     return (
         <div className='NewCoasterForm'>
@@ -99,11 +96,11 @@ function NewParkForm() {
                     </Form.Text>
                 </Form.Group>
 
+
                 <Form.Group className="mb-3" controlId="image">
                     <Form.Label>Imagen (URL)</Form.Label>
                     <Form.Control type="file" onChange={handleFileUpload} />
                 </Form.Group>
-
 
                 <ButtonOpen handleOpenStatus={handleOpenStatus} />
 

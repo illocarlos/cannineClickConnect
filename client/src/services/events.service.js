@@ -25,6 +25,10 @@ class EventService {
         return this.api.get('/event/list')
     }
 
+    getEventDetails(event_id) {
+        return this.api.get(`/event/${event_id}`)
+    }
+
     newEvent(eventData) {
 
         return this.api.post('event/newEvent', eventData)
@@ -32,6 +36,6 @@ class EventService {
 
 }
 
-const eventService = new EventService()
+const eventsService = new EventService()
 
-export default eventService
+export default eventsService
