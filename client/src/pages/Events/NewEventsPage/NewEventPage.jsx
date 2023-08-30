@@ -1,5 +1,5 @@
 import { Container } from "react-bootstrap";
-import NewEventForm from "../../components/NewEventForm/NewEventForm";
+import NewEventForm from "../../../components/EventComponents/NewEventForm/NewEventForm";
 
 const newEventPage = () => {
 

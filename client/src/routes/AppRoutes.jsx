@@ -1,9 +1,10 @@
 import { Routes, Route } from 'react-router-dom'
-import ParkGalleryPage from '../pages/ParksPage/ParkGalleryPage'
-import EventsGalleryPage from '../pages/EventsPage/EventsGalleryPage'
-import UsersPage from '../pages/UsersPage/UsersPage'
-import NewParkPage from '../pages/newParkPage/newParkPage'
-import NewEventPage from '../pages/EventsPage/NewEventPage'
+import ParkGalleryPage from '../pages/Parks/ParksGalleryPage/ParkGalleryPage'
+import EventsGalleryPage from '../pages/Events/EventsGalleryPage/EventsGalleryPage'
+import UsersPage from '../pages/Users/UsersPage/UsersPage'
+import NewParkPage from '../pages/Parks/NewParkPage/NewParkPage'
+import NewEventPage from '../pages/Events/NewEventsPage/NewEventPage'
+import DetailsEventsPage from '../pages/Events/DetailsEventsPage/DetailsEventsPage'
 
 // import PrivateRoute from './PrivateRoutes'
 
@@ -17,6 +18,7 @@ function AppRoutes() {
       <Route path={"/event/list"} element={<EventsGalleryPage />} />
       <Route path={"/park/newPark"} element={<NewParkPage />} />
       <Route path={"/event/newEvent"} element={<NewEventPage />} />
+      <Route path={"/event/:event_id"} element={<DetailsEventsPage />} />
 
       <Route path={"*"} element={<p>ERROR</p>} />
 
