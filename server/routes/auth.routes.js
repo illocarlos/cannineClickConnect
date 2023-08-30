@@ -4,8 +4,6 @@ const bcrypt = require('bcryptjs')
 const saltRounds = 10
 
 
-
-
 router.post('/signup', (req, res, next) => {
 
     const { username, email, password } = req.body

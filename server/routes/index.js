@@ -1,16 +1,18 @@
-module.exports = app => {
-    const parkRoutes = require('./park.routes')
-    app.use("/api/park", parkRoutes)
+const router = require("express").Router()
 
-    const authRoutes = require('./auth.routes')
-    app.use("/api/auth", authRoutes)
+const parkRoutes = require('./park.routes')
+router.use("/park", parkRoutes)
 
-    const eventRoutes = require('./event.routes')
-    app.use("/api/event", eventRoutes)
+const authRoutes = require('./auth.routes')
+router.use("/auth", authRoutes)
 
-    const userRoutes = require('./user.routes')
-    app.use("/api/user", userRoutes)
+const eventRoutes = require('./event.routes')
+router.use("/event", eventRoutes)
 
-    const uploadRoutes = require('./upload.routes')
-    app.use("/api/upload", uploadRoutes)
-}
+const userRoutes = require('./user.routes')
+router.use("/user", userRoutes)
+
+const uploadRoutes = require('./upload.routes')
+router.use("/upload", uploadRoutes)
+
+module.exports = router
