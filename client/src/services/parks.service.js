@@ -24,7 +24,7 @@ class ParkService {
     }
 
     getParkDetails(park_id) {
-        return this.api.get(`/park/${park_id}`, park_id)
+        return this.api.get(`/park/${park_id}`)
     }
 
     newPark(parkData) {
