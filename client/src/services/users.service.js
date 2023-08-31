@@ -21,7 +21,12 @@ class UsersService {
     getUsers() {
         return this.api.get('/user/list')
     }
+
+    getUserDetails(user_id) {
+        return this.api.get(`/user/${user_id}`);
+    }
 }
+
 const usersService = new UsersService()
 
 export default usersService

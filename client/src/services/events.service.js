@@ -1,41 +1,35 @@
-import axios from 'axios'
+import axios from "axios";
 
 class EventService {
+  constructor() {
+    this.api = axios.create({
+      baseURL: `${import.meta.env.VITE_API_URL}`,
+    });
 
-    constructor() {
-        this.api = axios.create({
-            baseURL: `${import.meta.env.VITE_API_URL}`
+    this.api.interceptors.request.use((config) => {
+      const storedToken = localStorage.getItem("authToken");
 
-        })
+      if (storedToken) {
+        config.headers = { Authorization: `Bearer ${storedToken}` };
+      }
 
-        this.api.interceptors.request.use((config) => {
+      return config;
+    });
+  }
 
-            const storedToken = localStorage.getItem("authToken");
+  getEvents() {
+    return this.api.get("/event/list");
+  }
 
-            if (storedToken) {
-                config.headers = { Authorization: `Bearer ${storedToken}` }
-            }
+  getEventDetails(event_id) {
+    return this.api.get(`/event/${event_id}`);
+  }
 
-            return config
-        })
-
-    }
-
-    getEvents() {
-        return this.api.get('/event/list')
-    }
-
-    getEventDetails(event_id) {
-        return this.api.get(`/event/${event_id}`)
-    }
-
-    newEvent(eventData) {
-
-        return this.api.post('event/newEvent', eventData)
-    }
-
+  newEvent(eventData) {
+    return this.api.post("event/newEvent", eventData);
+  }
 }
 
-const eventsService = new EventService()
+const eventsService = new EventService();
 
-export default eventsService
+export default eventsService;

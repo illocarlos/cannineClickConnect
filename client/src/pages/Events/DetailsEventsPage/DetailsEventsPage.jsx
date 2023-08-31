@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import eventsService from '../../../services/events.service'
+import { Container, Row, Col } from "react-bootstrap"
 
 const DetailsEventsPage = () => {
 
@@ -22,10 +23,25 @@ const DetailsEventsPage = () => {
 
 
     return (
-        /*Elimino el "TODO" de German nota(si son solo dealles de los evento deben de ser
-            incluidos aqui no debe de crearse otro componente )*/
+        <Container>
 
-        <h1>DETALLES EVENTO</h1>
+            <h1 className="mb-4">Detalles de {event.title}</h1>
+            <hr />
+
+            <Row>
+
+                <Col md={{ span: 6, offset: 1 }}>
+                    <h3>Descripción</h3>
+                    <p>{event.description}</p>
+                    <hr />
+
+                    <Link to="/events/list" className="btn btn-dark">Volver a la galería</Link>
+                </Col>
+
+
+            </Row>
+
+        </Container >
     )
 }
 
