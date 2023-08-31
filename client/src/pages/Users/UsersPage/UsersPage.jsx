@@ -1,17 +1,35 @@
-import { Container } from "react-bootstrap"
+import { useEffect, useState } from 'react'
+import { Container } from 'react-bootstrap'
+import usersService from '../../../services/users.service'
 import UserList from '../../../components/UserComponents/UserList/UserList'
 
 
 const UsersPage = () => {
 
-    return (
-            <Container>
+    const [users, setUsers] = useState([])
 
-                <h1>Galería de usuarios</h1>
+    useEffect(() => {
+        loadUsers()
+    }, [])
+
+    const loadUsers = () => {
+
+        usersService
+            .getUsers()
+            .then(({ data }) => setUsers(data))
+            .catch((err) => console.log(err))
+    }
+
+    return (
+        <>
+            <Container>
+                <h1>Nuestra comunidad</h1>
                 <hr />
-                <UserList />
+
+                <UserList users={users} />
 
             </Container>
+        </>
     )
 }
 

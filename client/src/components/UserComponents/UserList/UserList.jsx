@@ -1,27 +1,20 @@
 import './UserList.css'
-
-import { useEffect, useState } from 'react'
-import usersService from '../../../services/users.service'
+import { Link } from 'react-router-dom'
 
 
-const UserList = () => {
+const UserList = ({ users }) => {
 
-    const [users, setUsers] = useState([])
 
-    useEffect(() => {
-        loadUsers()
-    }, [])
-
-    const loadUsers = () => {
-
-        usersService
-            .getUsers()
-            .then(({ data }) => setUsers(data))
-            .catch((err) => console.log(err))
-    }
-   
     return (
-      users.map(elm => <p>{elm.username}</p>)
+        <>
+
+            {users.map(elm =>
+                <Link to={`/user/${elm._id}`}>
+                    {elm.username}
+                    <br />
+                </Link >)}
+
+        </>
     );
 
 }

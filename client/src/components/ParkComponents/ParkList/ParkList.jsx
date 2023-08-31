@@ -1,27 +1,20 @@
 import './ParkList.css'
-
-import { useEffect, useState } from 'react'
-import parkService from '../../../services/parks.service'
+import { Link } from 'react-router-dom'
 
 
-const ParkList = () => {
+const ParkList = ({ parks }) => {
 
-  const [parks, setParks] = useState([])
-
-  useEffect(() => {
-    loadParks()
-  }, [])
-
-  const loadParks = () => {
-    
-    parkService
-      .getParks()
-      .then(({ data }) => setParks(data))
-      .catch((err) => console.log(err))
-  }
 
   return (
-    parks.map(elm => <p>{elm.name}</p>)
+    <>
+
+      {parks.map(elm =>
+        <Link to={`/park/${elm._id}`}>
+          {elm.name}
+          <br />
+        </Link >)}
+
+    </>
   )
 
 }

@@ -1,16 +1,19 @@
-import { useContext } from 'react'
 import './EventList.css'
-import { ThemeContext } from '../../../contexts/theme.context'
+import { Link } from 'react-router-dom'
 
 
 const EventList = ({ events }) => {
 
 
-
-
     return (
         <>
-            {events.map(elm => <p> {elm.title}</p>)}
+
+            {events.map(elm =>
+                <Link to={`/event/${elm._id}`}>
+                    {elm.title}
+                    <br />
+                </Link >)}
+
         </>
     )
 }
