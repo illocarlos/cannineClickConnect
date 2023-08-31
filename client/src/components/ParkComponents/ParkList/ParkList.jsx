@@ -13,6 +13,7 @@ const ParkList = () => {
   }, [])
 
   const loadParks = () => {
+    
     parkService
       .getParks()
       .then(({ data }) => setParks(data))
