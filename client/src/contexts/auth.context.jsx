@@ -1,48 +1,43 @@
 import { createContext, useEffect, useState } from "react"
 import authService from '../services/auth.service'
- 
-const AuthContext = createContext()
- 
-function AuthProviderWrapper(props) {
- 
-    const [user, setUser] = useState(null)
+import { joinPaths } from "@remix-run/router"
 
-    const [isLoading, setIsLoading] = useState(true)
- 
+const AuthContext = createContext()
+
+function AuthProviderWrapper(props) {
+
+    const [loggedUser, setLoggedUser] = useState(null)
+
     const authenticateUser = () => {
- 
+
         const token = localStorage.getItem('authToken')
- 
+
         if (token) {
             authService
                 .verify(localStorage.getItem('authToken'))
-                .then(({ data }) => {
-                    setUser(data)
-                    setIsLoading(false)
-                })
-                .catch(err => logout())
+                .then(response => setLoggedUser(response.data.loggedUser))
+                .catch(err => console.log(err))
         } else {
             logout()
         }
     }
- 
+
     const logout = () => {
+        setLoggedUser(null)
         localStorage.removeItem('authToken')
-        setUser(null)
-        setIsLoading(false)
     }
 
     const storeToken = authToken => localStorage.setItem('authToken', authToken)
- 
+
     useEffect(() => {
         authenticateUser()
     }, [])
- 
+
     return (
-        <AuthContext.Provider value={{ authenticateUser, user, logout, storeToken, isLoading }}>
+        <AuthContext.Provider value={{ loggedUser, authenticateUser, logout, storeToken }}>
             {props.children}
         </AuthContext.Provider>
     )
 }
- 
+
 export { AuthContext, AuthProviderWrapper }
