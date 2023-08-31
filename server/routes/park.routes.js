@@ -24,12 +24,12 @@ router.get('/:park_id', (req, res, next) => {
 
 router.post('/newPark', (req, res, next) => {
 
-    const { name, description, gallery } = req.body
+    const { name, description, gallery, size, crowdedness, open } = req.body
 
     // TODO: REVISAR ENDPOINTS RESOLUBLES CON ESTADOS HHTTP
 
     Park
-        .create({ name, description, gallery })
+        .create({ name, description, gallery, size, crowdedness, open })
         .then(() => res.sendStatus(201))
         .catch(err => next(err))
 })
