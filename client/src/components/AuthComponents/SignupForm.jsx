@@ -35,9 +35,6 @@ const SignupForm = () => {
     const handleFileUpload = e => {
 
         const formData = new FormData()
-
-        // formData.append('imageData', e.target.files[0])
-
         for (let i = 0; i < e.target.files.length; i++) {
             formData.append('imagesData', e.target.files[i])
         }
@@ -49,7 +46,6 @@ const SignupForm = () => {
             })
             .catch(err => console.log(err))
     }
-
 
     return (
 

@@ -10,9 +10,6 @@ const Navigation = () => {
   const { theme, switchTheme } = useContext(ThemeContext)
   const { loggedUser, logout } = useContext(AuthContext)
 
-
-
-
   return (
     <>
       <Navbar className="justify-content-between" bg={theme === 'dark' ? 'light' : 'dark'} data-bs-theme={theme === 'dark' ? 'light' : 'dark'}>

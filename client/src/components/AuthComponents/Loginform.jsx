@@ -8,13 +8,16 @@ import { AuthContext } from "../../contexts/auth.context"
 const LoginForm = () => {
 
     const [loginData, setLoginData] = useState({
+
         email: '',
-        password: ''
+        password: '',
+
     })
 
     const navigate = useNavigate()
 
     const { authenticateUser, storeToken } = useContext(AuthContext)
+    const { loggedUser, logout } = useContext(AuthContext)
 
     const handleInputChange = e => {
         const { value, name } = e.target
@@ -22,20 +25,26 @@ const LoginForm = () => {
     }
 
     const handleSubmit = e => {
-
         e.preventDefault()
 
         authService
+
             .login(loginData)
             .then(({ data }) => {
                 storeToken(data.authToken)
                 authenticateUser()
-                /*redireccion perfil usuario */
-                navigate('/')
+
+                if (loggedUser) {
+                    console.log("AUN NO TENGO EL USUARIO CONECTADO")
+                }
+                {
+                    navigate(`/user/${loggedUser._id}`)
+                }
+
+
             })
             .catch(err => console.log(err))
     }
-
     return (
 
         <Form onSubmit={handleSubmit}>

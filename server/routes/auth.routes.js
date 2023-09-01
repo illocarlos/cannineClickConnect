@@ -9,6 +9,7 @@ const { verifyToken } = require("../../server/middlewares/verifyToken")
 
 router.post('/signup', (req, res, next) => {
 
+
     const { username, email, password, avatar, about, city } = req.body
 
     if (password.length < 2) {
@@ -33,7 +34,7 @@ router.post('/signup', (req, res, next) => {
 })
 router.post('/login', (req, res, next) => {
 
-    const { email, password } = req.body;
+    const { _id, email, password } = req.body;
 
     if (email === '' || password === '') {
         res.status(400).json({ message: "Provide email and password." });
