@@ -30,6 +30,7 @@ const LoginForm = () => {
             .then(({ data }) => {
                 storeToken(data.authToken)
                 authenticateUser()
+                /*redireccion perfil usuario */
                 navigate('/')
             })
             .catch(err => console.log(err))

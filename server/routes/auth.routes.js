@@ -9,13 +9,12 @@ const { verifyToken } = require("../../server/middlewares/verifyToken")
 
 router.post('/signup', (req, res, next) => {
 
-    const { username, email, password } = req.body
+    const { username, email, password, avatar, about, city } = req.body
 
     if (password.length < 2) {
         res.status(400).json({ message: "Pasword must have at least 3 character" })
 
     }
-
     User
         .findOne({ email })
         .then((foundUser) => {
@@ -27,14 +26,11 @@ router.post('/signup', (req, res, next) => {
             const salt = bcrypt.genSaltSync(saltRounds)
             const hashedPassword = bcrypt.hashSync(password, salt)
 
-            return User.create({ email, password: hashedPassword, username })
+            return User.create({ username, email, password: hashedPassword, avatar, about, city })
         })
         .then(() => res.sendStatus(201))
         .catch(err => next(err))
 })
-
-
-
 router.post('/login', (req, res, next) => {
 
     const { email, password } = req.body;
@@ -74,13 +70,10 @@ router.post('/login', (req, res, next) => {
         .catch(err => next(err));
 })
 
-
 router.get('/verify', verifyToken, (req, res, next) => {
 
     const loggedUser = req.payload
 
     res.json({ loggedUser })
 })
-
-
 module.exports = router
