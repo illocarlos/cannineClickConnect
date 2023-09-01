@@ -1,23 +1,12 @@
 const router = require("express").Router()
-const User = require('../models/User.model')
 
-router.get('/list', (req, res, next) => {
+const {
+    listUsers,
+    userId,
 
-    User
-        .find()
-        .then(response => res.json(response))
-        .catch(err => next(err))   
-})
+} = require('./../controllers/user.controllers')
 
-router.get('/:user_id', (req, res, next) => {
-
-    const { user_id } = req.params
-
-    User
-        .findById(user_id)
-        .then(response => res.json(response))
-        .catch(err => next(err))
-
-})
+router.get('/list', listUsers)
+router.get('/:user_id', userId)
 
 module.exports = router
