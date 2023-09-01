@@ -5,18 +5,22 @@ import { Link } from 'react-router-dom'
 import { AuthContext } from '../../../contexts/auth.context'
 
 
-const EventList = ({ events, owner }) => {
+const EventList = ({ events }) => {
 
-    //const { user } = useContext(AuthContext)
+    const { loggedUser } = useContext(AuthContext)
 
+    console.log("estos son los eventossss", events)
 
+    const ownerEvent = (event) => {
+        return event.owner === loggedUser._id;
+    }
     return (
         <>
 
             {events.map(elm =>
                 <Link to={`/event/${elm._id}`}>
                     {elm.title}
-                    {/* {user._id === owner && <p>Este es mi evento!!</p>} */}
+                    {ownerEvent(elm) && <p>Este es mi evento!!</p>}
                     <br />
                 </Link >)}
 
