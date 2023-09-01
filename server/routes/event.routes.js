@@ -1,4 +1,5 @@
 const router = require("express").Router()
+const { verifyToken } = require("../middlewares/verifyToken")
 const Event = require('../models/Event.model')
 
 router.get('/list', (req, res, next) => {
@@ -20,9 +21,13 @@ router.get('/:event_id', (req, res, next) => {
 
 })
 
-router.post('/newEvent', (req, res, next) => {
+router.post('/newEvent', verifyToken, (req, res, next) => {
+
 
     const { title, description, cover, date, attendees, address: { street, number, zipcode, city, country } } = req.body
+
+    
+    const { _id: owner } = req.payload
 
     Event
         .create({
@@ -31,6 +36,7 @@ router.post('/newEvent', (req, res, next) => {
             cover,
             date,
             attendees,
+            owner,
             address: {
                 street,
                 number,

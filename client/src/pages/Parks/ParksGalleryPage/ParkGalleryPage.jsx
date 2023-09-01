@@ -27,6 +27,7 @@ const ParkGalleryPage = () => {
             <Link to={"/park/newPark"}>
                 <Button variant="success">New Event</Button>
             </Link>
+            <br />
 
             <ParkList parks={parks} />
 

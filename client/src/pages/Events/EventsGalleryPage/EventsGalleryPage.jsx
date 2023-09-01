@@ -29,6 +29,7 @@ const EventsGalleryPage = ({ }) => {
         <Link to={"/event/newEvent"}>
           <Button variant="success">New Event</Button>
         </Link>
+        <br />
 
         <EventList events={events} />
 

@@ -5,7 +5,7 @@ router.get('/list', (req, res, next) => {
 
     Park
         .find()
-        // TODO: REVISAR ENDPINTS QUE PUEDAN SER PROYECTADOS U ORDENADOS
+        // TODO: REVISAR ENDPOINTS QUE PUEDAN SER PROYECTADOS U ORDENADOS
         .then(response => res.json(response))
         .catch(err => next(err))
 })
@@ -25,7 +25,7 @@ router.post('/newPark', (req, res, next) => {
 
     const { name, description, gallery, size, crowdedness, open } = req.body
 
-    // TODO: REVISAR ENDPOINTS RESOLUBLES CON ESTADOS HHTTP
+    // TODO: REVISAR ENDPOINTS RESOLUBLES CON ESTADOS HTTP
 
     Park
         .create({ name, description, gallery, size, crowdedness, open })
