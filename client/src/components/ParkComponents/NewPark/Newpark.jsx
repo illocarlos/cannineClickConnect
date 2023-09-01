@@ -30,7 +30,6 @@ function NewParkForm() {
 
     const handleParkSubmit = e => {
         e.preventDefault()
-        console.log(parkData)
         parkService
             .newPark(parkData)
             .then(() => alert('CREADO'))
@@ -40,8 +39,6 @@ function NewParkForm() {
     const handleFileUpload = e => {
 
         const formData = new FormData()
-
-        // formData.append('imageData', e.target.files[0])
 
         for (let i = 0; i < e.target.files.length; i++) {
             formData.append('imagesData', e.target.files[i])
@@ -105,6 +102,8 @@ function NewParkForm() {
                 </Form.Group>
 
                 <ButtonOpen handleOpenStatus={handleOpenStatus} />
+
+                {/* TODO: CREAR ESTADO DE CARGA PARA INHABILITAR BOTÓN DURANTE SUBIDA */}
 
                 <div className="d-grid">
                     <Button variant="dark" type="submit">

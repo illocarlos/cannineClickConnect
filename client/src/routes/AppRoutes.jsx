@@ -15,6 +15,9 @@ import DetailsUserPage from '../pages/Users/ProfilePage/DetailsUsersPage'
 function AppRoutes() {
 
   return (
+
+    // TODO: REVISAR TODAS LAS LISTAS QUE PUDIESEN ALOJAR SU PROPIO ESTADO
+
     <Routes>
       <Route path={"/"} element={<p>Página de inicio: UNDER CONSTRUCTION</p>} />
       <Route path={"/park/list"} element={<ParkGalleryPage />} />

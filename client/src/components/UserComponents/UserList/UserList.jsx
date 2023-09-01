@@ -9,6 +9,7 @@ const UserList = ({ users }) => {
         <>
 
             {users.map(elm =>
+                // TODO: DESACOPLAR USERCARD
                 <Link to={`/user/${elm._id}`}>
                     {elm.username}
                     <br />

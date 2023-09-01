@@ -8,9 +8,11 @@ const dogSchema = new Schema(
             required: [true, 'Name is required.'],
         },
 
+        // EXTENDER LA VALIDACIÓN DE LOS MODELOS RESPONSABLEMENTE
 
         description: {
             type: String,
+            minlength: [10, 'Description must be at least 20 characters long']
         },
 
         image: {

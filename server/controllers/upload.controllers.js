@@ -19,6 +19,7 @@ const images = (req, res) => {
 
     res.json({ cloudinary_urls: urls })
 }
+
 module.exports = {
     image,
     images

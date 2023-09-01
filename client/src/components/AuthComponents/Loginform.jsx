@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Form, Button } from "react-bootstrap"
 import authService from "../../services/auth.service"
 import { useNavigate } from "react-router-dom"
@@ -17,7 +17,7 @@ const LoginForm = () => {
     const navigate = useNavigate()
 
     const { authenticateUser, storeToken } = useContext(AuthContext)
-    const { loggedUser, logout } = useContext(AuthContext)
+    const { loggedUser } = useContext(AuthContext)
 
     const handleInputChange = e => {
         const { value, name } = e.target
@@ -33,18 +33,14 @@ const LoginForm = () => {
             .then(({ data }) => {
                 storeToken(data.authToken)
                 authenticateUser()
-
-                if (loggedUser) {
-                    console.log("AUN NO TENGO EL USUARIO CONECTADO")
-                }
-                {
-                    navigate(`/user/${loggedUser._id}`)
-                }
-
-
             })
             .catch(err => console.log(err))
     }
+
+    useEffect(() => {
+        loggedUser && navigate(`/users/${loggedUser._id}`)
+    }, [loggedUser])
+
     return (
 
         <Form onSubmit={handleSubmit}>

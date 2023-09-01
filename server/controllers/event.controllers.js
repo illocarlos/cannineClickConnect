@@ -21,10 +21,7 @@ const eventId = (req, res, next) => {
 
 const newPark = (req, res, next) => {
 
-
     const { title, description, cover, date, attendees, address: { street, number, zipcode, city, country } } = req.body
-
-
     const { _id: owner } = req.payload
 
     Event

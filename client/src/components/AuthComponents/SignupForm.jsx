@@ -35,6 +35,7 @@ const SignupForm = () => {
     const handleFileUpload = e => {
 
         const formData = new FormData()
+
         for (let i = 0; i < e.target.files.length; i++) {
             formData.append('imagesData', e.target.files[i])
         }
@@ -79,6 +80,7 @@ const SignupForm = () => {
                 <Form.Control type="file" multiple onChange={handleFileUpload} />
             </Form.Group>
 
+            {/* TODO: CREAR ESTADO DE CARGA PARA INHABILITAR BOTÓN DURANTE SUBIDA */}
 
             <div className="d-grid">
                 <Button variant="dark" type="submit">Registrarme</Button>

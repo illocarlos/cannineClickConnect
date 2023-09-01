@@ -18,6 +18,8 @@ const EventList = ({ events }) => {
 
             {events.map(elm =>
 
+                // TODO: DESACOPLAR EVENTCARD
+
                 <Card style={{ width: '18rem' }}>
                     <Card.Img variant="top" src={elm.cover} />
                     <Card.Body>

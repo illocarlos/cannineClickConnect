@@ -22,6 +22,7 @@ const NewEventForm = () => {
 
   const handleInputChange = e => {
     const { value, name } = e.currentTarget
+
     setEventData({
       ...eventData,
       [name]: value,
@@ -30,6 +31,8 @@ const NewEventForm = () => {
         [name]: value,
       },
     })
+
+
   }
 
   const handleEventSubmit = e => {
@@ -99,6 +102,8 @@ const NewEventForm = () => {
         </Col>
 
       </Row>
+
+      {/* TODO: CREAR ESTADO DE CARGA PARA INHABILITAR BOTÓN DURANTE SUBIDA */}
 
       <Button variant="dark" type="submit">
         Submit
