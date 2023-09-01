@@ -1,22 +1,37 @@
 import './ParkList.css'
 import { Link } from 'react-router-dom'
+import { Card, Button, Container, Row, Col } from 'react-bootstrap'
 
 
 const ParkList = ({ parks }) => {
 
 
   return (
-    <>
+    <Container>
 
-      {parks.map(elm =>
-        <Link to={`/park/${elm._id}`}>
-          {elm.name}
-          <br />
-        </Link >)}
+      <Row>
+        {parks.map(elm =>
+          <Col md={{ span: 3 }}>
 
-    </>
+            <Card style={{ width: '18rem' }}>
+              <Card.Img variant="top" src={elm.gallery[0]} />
+              <Card.Body>
+                <Card.Title>{elm.name}</Card.Title>
+                <Card.Text>
+                  {elm.description}
+                </Card.Text>
+                <Link to={`/park/${elm._id}`}>
+                  <Button variant="primary">Details</Button>
+                </Link >
+
+              </Card.Body>
+            </Card>
+          </Col>)}
+      </Row>
+    </Container>
   )
 
 }
 
 export default ParkList
+

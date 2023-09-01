@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import './EventList.css'
 import { Link } from 'react-router-dom'
+import { Card, Button } from 'react-bootstrap'
 
 import { AuthContext } from '../../../contexts/auth.context'
 
@@ -9,8 +10,6 @@ const EventList = ({ events }) => {
 
     const { loggedUser } = useContext(AuthContext)
 
-    console.log("estos son los eventossss", events)
-
     const ownerEvent = (event) => {
         return event.owner === loggedUser._id;
     }
@@ -18,11 +17,26 @@ const EventList = ({ events }) => {
         <>
 
             {events.map(elm =>
-                <Link to={`/event/${elm._id}`}>
-                    {elm.title}
-                    {ownerEvent(elm) && <p>Este es mi evento!!</p>}
-                    <br />
-                </Link >)}
+
+                <Card style={{ width: '18rem' }}>
+                    <Card.Img variant="top" src={elm.cover} />
+                    <Card.Body>
+                        <Card.Title>{elm.title}</Card.Title>
+                        <Card.Text>
+                            {elm.description}
+                        </Card.Text>
+                        <Link to={`/event/${elm._id}`}>
+                            <Button variant="primary">Details</Button>
+                        </Link >
+                        {ownerEvent(elm) &&
+                            <Link to={`/event/${elm._id}`}>
+                                <Button variant="primary">Edit</Button>
+                            </Link >
+                        }
+                    </Card.Body>
+                </Card>
+            )}
+
 
         </>
     )
