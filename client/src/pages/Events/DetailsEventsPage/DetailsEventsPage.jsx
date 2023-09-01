@@ -29,13 +29,18 @@ const DetailsEventsPage = () => {
             <hr />
 
             <Row>
+                <Col md={{ span: 6 }}>
 
-                <Col md={{ span: 6, offset: 1 }}>
+                    <img src={event.cover} alt="" />
+
+                </Col>
+
+                <Col md={{ span: 6 }}>
                     <h3>Descripción</h3>
                     <p>{event.description}</p>
                     <hr />
 
-                    <Link to="/events/list" className="btn btn-dark">Volver a la galería</Link>
+                    <Link to="/event/list" className="btn btn-dark">Volver a la galería</Link>
                 </Col>
 
 

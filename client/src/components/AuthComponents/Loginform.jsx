@@ -38,7 +38,7 @@ const LoginForm = () => {
     }
 
     useEffect(() => {
-        loggedUser && navigate(`/users/${loggedUser._id}`)
+        loggedUser && navigate(`/user/${loggedUser._id}`)
     }, [loggedUser])
 
     return (

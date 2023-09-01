@@ -2,7 +2,6 @@ import { useContext } from 'react'
 import './EventList.css'
 import { Link } from 'react-router-dom'
 import { Card, Button } from 'react-bootstrap'
-
 import { AuthContext } from '../../../contexts/auth.context'
 
 
