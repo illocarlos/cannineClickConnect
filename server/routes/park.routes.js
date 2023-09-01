@@ -1,37 +1,16 @@
 const router = require("express").Router()
-const Park = require('../models/Park.model')
 
-router.get('/list', (req, res, next) => {
+const {
+    listPark,
+    parkId,
+    newPark,
+} = require('../controllers/park.controllers')
 
-    Park
-        .find()
-        // TODO: REVISAR ENDPOINTS QUE PUEDAN SER PROYECTADOS U ORDENADOS
-        .then(response => res.json(response))
-        .catch(err => next(err))
-})
+router.get('/list', listPark)
 
-router.get('/:park_id', (req, res, next) => {
+router.get('/:park_id', parkId)
 
-    const { park_id } = req.params
-
-    Park
-        .findById(park_id)
-        .then(response => res.json(response))
-        .catch(err => next(err))
-
-})
-
-router.post('/newPark', (req, res, next) => {
-
-    const { name, description, gallery, size, crowdedness, open } = req.body
-
-    // TODO: REVISAR ENDPOINTS RESOLUBLES CON ESTADOS HTTP
-
-    Park
-        .create({ name, description, gallery, size, crowdedness, open })
-        .then(() => res.sendStatus(201))
-        .catch(err => next(err))
-})
+router.post('/newPark', newPark)
 
 
 module.exports = router
