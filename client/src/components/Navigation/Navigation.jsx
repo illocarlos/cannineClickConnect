@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Button, Container, Nav, Navbar, DropdownButton, Dropdown } from "react-bootstrap";
+import { Button, Container, Nav, Navbar, DropdownButton } from "react-bootstrap";
 import { Link } from 'react-router-dom'
 import { ThemeContext } from "../../contexts/theme.context";
 import { AuthContext } from "../../contexts/auth.context";
@@ -41,7 +41,7 @@ const Navigation = () => {
                   {
                     loggedUser &&
                     <>
-                      <span className='nav-link' onClick={logout}>Cerrar sesión</span>
+                      <Link to={'/'} className='nav-link' onClick={logout}>Cerrar sesión</Link>
                     </>
                   }
                   {

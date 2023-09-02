@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react"
 import authService from '../services/auth.service'
-import { joinPaths } from "@remix-run/router"
+
 
 const AuthContext = createContext()
 

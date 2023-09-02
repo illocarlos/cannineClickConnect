@@ -5,18 +5,18 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { AuthProviderWrapper } from './contexts/auth.context'
 import { ThemeProviderWrapper } from './contexts/theme.context'
-import { MessageProviderWrapper } from './contexts/message.Context'
+import { MessageProviderWrapper } from '../src/contexts/message.context'
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Router>
-      <AuthProviderWrapper>
-        <ThemeProviderWrapper>
-          <MessageProviderWrapper>
+    <MessageProviderWrapper>
+      <Router>
+        <AuthProviderWrapper>
+          <ThemeProviderWrapper>
             <App />
-          </MessageProviderWrapper>
-        </ThemeProviderWrapper>
-      </AuthProviderWrapper>
-    </Router >
+          </ThemeProviderWrapper>
+        </AuthProviderWrapper>
+      </Router >
+    </MessageProviderWrapper>
   </React.StrictMode>
 );

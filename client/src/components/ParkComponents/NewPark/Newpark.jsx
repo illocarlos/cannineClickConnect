@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import './NewPark.css'
-import { Form, Button, Row, Col, ButtonGroup, ToggleButton } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import ButtonOpen from './ButtonOpen';
 import parkService from "../../../services/parks.service";
 import uploadServices from '../../../services/upload.service';
+import { MessageContext } from '../../../contexts/message.context';
+import { useNavigate } from "react-router-dom"
 
 
 
@@ -17,6 +19,8 @@ function NewParkForm() {
         rating: 0,
         open: true,
     })
+    const navigate = useNavigate()
+    const { emitMessage } = useContext(MessageContext)
 
     const handleOpenStatus = value => {
         setParkData({ ...parkData, open: value })
@@ -30,9 +34,15 @@ function NewParkForm() {
 
     const handleParkSubmit = e => {
         e.preventDefault()
+
+
         parkService
             .newPark(parkData)
-            .then(() => alert('CREADO'))
+            .then(() => {
+                emitMessage('create new park')
+                navigate('/park/list')
+            })
+
             .catch(err => console.log(err))
     }
 

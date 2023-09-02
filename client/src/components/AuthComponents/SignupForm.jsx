@@ -1,8 +1,9 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { Form, Button } from "react-bootstrap"
 import authService from "../../services/auth.service"
 import { useNavigate } from "react-router-dom"
 import uploadServices from "../../services/upload.service"
+import { MessageContext } from "../../contexts/message.context"
 
 
 const SignupForm = () => {
@@ -17,6 +18,7 @@ const SignupForm = () => {
     })
 
     const navigate = useNavigate()
+    const { emitMessage } = useContext(MessageContext)
 
     const handleInputChange = e => {
         const { value, name } = e.target
@@ -28,7 +30,10 @@ const SignupForm = () => {
         e.preventDefault()
         authService
             .signup(signupData)
-            .then(() => navigate('/'))
+            .then(() => {
+                emitMessage('welcome')
+                navigate('/')
+            })
             .catch(err => console.log(err))
     }
 

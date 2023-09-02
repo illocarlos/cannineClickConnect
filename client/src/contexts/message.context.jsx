@@ -1,12 +1,10 @@
 import { createContext, useState } from 'react'
 
-
-
 const MessageContext = createContext()
 
 function MessageProviderWrapper(props) {
 
-    const [showToast, setShowToast] = useState(true)
+    const [showToast, setShowToast] = useState(false)
     const [toastMessage, setToastMessage] = useState('Mensaje de ejemplo')
 
     const emitMessage = text => {
@@ -14,10 +12,10 @@ function MessageProviderWrapper(props) {
         setShowToast(true)
     }
 
-    const closeMessage = () => setShowToast(false)
+    const closeToast = () => setShowToast(false)
 
     return (
-        <MessageContext.Provider value={{ toastMessage, emitMessage, showToast, closeMessage }}>
+        <MessageContext.Provider value={{ toastMessage, emitMessage, closeToast, showToast }}>
             {props.children}
         </MessageContext.Provider>
     )

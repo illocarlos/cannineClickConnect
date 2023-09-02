@@ -1,8 +1,8 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { Form, Button, Row, Col } from "react-bootstrap"
-
+import { useNavigate } from "react-router-dom"
 import eventService from "../../../services/events.service"
-
+import { MessageContext } from "../../../contexts/message.context"
 const NewEventForm = () => {
 
   const [eventData, setEventData] = useState({
@@ -19,6 +19,9 @@ const NewEventForm = () => {
       country: ''
     }
   })
+  const navigate = useNavigate()
+  const { emitMessage } = useContext(MessageContext)
+
 
   const handleInputChange = e => {
     const { value, name } = e.currentTarget
@@ -39,7 +42,10 @@ const NewEventForm = () => {
     e.preventDefault()
     eventService
       .newEvent(eventData)
-      .then(response => console.log(response))
+      .then(() => {
+        emitMessage('create new event')
+        navigate('/event/list')
+      })
       .catch(err => console.log(err))
   }
 

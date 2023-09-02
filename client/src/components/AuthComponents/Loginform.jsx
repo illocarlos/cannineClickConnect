@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap"
 import authService from "../../services/auth.service"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../../contexts/auth.context"
+import { MessageContext } from "../../contexts/message.context"
 
 
 const LoginForm = () => {
@@ -15,6 +16,7 @@ const LoginForm = () => {
     })
 
     const navigate = useNavigate()
+    const { emitMessage } = useContext(MessageContext)
 
     const { authenticateUser, storeToken } = useContext(AuthContext)
     const { loggedUser } = useContext(AuthContext)
@@ -31,6 +33,7 @@ const LoginForm = () => {
 
             .login(loginData)
             .then(({ data }) => {
+                emitMessage('welcome')
                 storeToken(data.authToken)
                 authenticateUser()
             })
