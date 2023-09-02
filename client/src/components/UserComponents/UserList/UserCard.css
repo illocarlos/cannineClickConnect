@@ -1,0 +1,38 @@
+.user-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 5px #00000033;
+    padding: 20px;
+    width: 750px;
+    height: 200px;
+}
+
+.user-avatar img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
+.user-info {
+    flex: 1;
+    margin-right: 50px;
+    color: black;
+}
+
+.user-name {
+    font-size: 1.5rem;
+    margin: 10px;
+}
+
+.user-about {
+    font-size: 1rem;
+    margin: 10px;
+}
+
+.user-link {
+    color: none;
+    text-decoration: none;
+}

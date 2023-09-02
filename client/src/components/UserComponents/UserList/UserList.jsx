@@ -1,23 +1,11 @@
-import './UserList.css'
-import { Link } from 'react-router-dom'
-
-
+import UserCard from './UserCard.jsx'
 const UserList = ({ users }) => {
-
-
     return (
         <>
-
-            {users.map(elm =>
-                // TODO: DESACOPLAR USERCARD
-                <Link to={`/user/${elm._id}`}>
-                    {elm.username}
-                    <br />
-                </Link >)}
-
+            {
+                users.map(elm => <UserCard {...elm} />)
+            }
         </>
     );
-
 }
-
 export default UserList
