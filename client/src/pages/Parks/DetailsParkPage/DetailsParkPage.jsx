@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, useNavigate } from "react-router-dom"
 import parksService from '../../../services/parks.service'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import MapContainer from "../../../components/Maps/Maps"
 
 const DetailsParkPage = () => {
@@ -9,6 +9,9 @@ const DetailsParkPage = () => {
     const { park_id } = useParams()
 
     const [park, setPark] = useState({})
+
+    const navigate = useNavigate()
+
 
     useEffect(() => {
         loadParkDetails()
@@ -20,6 +23,18 @@ const DetailsParkPage = () => {
             .then(({ data }) => setPark(data))
             .catch(err => console.log(err))
     }
+
+    const ownerPark = () => {
+        return owner === loggedUser._id;
+    }
+
+    const handleDeletePark = () => {
+        parksService
+            .deletePark(park_id)
+            .then(() => navigate('/park/list'))
+            .catch((err) => console.log(err))
+    }
+
     return (
         <Container>
 
@@ -40,6 +55,13 @@ const DetailsParkPage = () => {
 
 
                 </Col>
+                {ownerPark &&
+                    <>
+                        <Button variant="primary">Edit</Button>
+
+                        <Button onClick={handleDeletePark}>Delete</Button>
+                    </>
+                }
 
                 <Link to="/parks/list" className="btn btn-dark">Volver a la galería</Link>
 

@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { Form, Link } from 'react-router-dom'
 import { Card, Button, Container } from 'react-bootstrap'
 import { AuthContext } from '../../../contexts/auth.context'
@@ -14,12 +14,6 @@ const EventList = ({ title, cover, description, _id, owner }) => {
         return owner === loggedUser._id;
     }
 
-    const onDelete = () => {
-        eventsService
-            .deleteEvent(_id)
-            .catch((err) => console.log(err))
-    }
-
     return (
         <Container>
             <Card style={{ width: '18rem' }}>
@@ -32,13 +26,7 @@ const EventList = ({ title, cover, description, _id, owner }) => {
                     <Link to={`/event/${_id}`}>
                         <Button variant="primary">Details</Button>
                     </Link >
-                    {ownerEvent &&
-                        <>
-                            <Button variant="primary">Edit</Button>
 
-                            <Button onClick={onDelete}>Delete</Button>
-                        </>
-                    }
                 </Card.Body>
             </Card>
         </Container>

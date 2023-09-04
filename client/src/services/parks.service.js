@@ -29,6 +29,14 @@ class ParkService {
     newPark(parkData) {
         return this.api.post("/park/newPark", parkData);
     }
+
+    editPark(park_id, parkData) {
+        return this.api.put(`park/edit/${park_id}`, parkData)
+    }
+
+    deletePark(park_id) {
+        return this.api.delete(`/park/delete/${park_id}`)
+    }
 }
 
 const parkService = new ParkService();

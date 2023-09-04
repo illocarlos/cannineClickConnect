@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, useNavigate } from "react-router-dom"
 import eventsService from '../../../services/events.service'
-import { Container, Row, Col } from "react-bootstrap"
+import { Container, Row, Col, Button } from "react-bootstrap"
 import MapContainer from "../../../components/Maps/Maps"
 
 const DetailsEventsPage = () => {
@@ -9,6 +9,8 @@ const DetailsEventsPage = () => {
     const { event_id } = useParams()
 
     const [event, setEvent] = useState({})
+
+    const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -22,6 +24,16 @@ const DetailsEventsPage = () => {
             .catch(err => console.log(err))
     }
 
+    const ownerEvent = () => {
+        return owner === loggedUser._id;
+    }
+
+    const handleDeleteEvent = () => {
+        eventsService
+            .deleteEvent(event_id)
+            .then(() => navigate('/event/list'))
+            .catch((err) => console.log(err))
+    }
 
     return (
         <Container>
@@ -42,6 +54,13 @@ const DetailsEventsPage = () => {
 
 
                 </Col>
+                {ownerEvent &&
+                    <>
+                        <Button variant="primary">Edit</Button>
+
+                        <Button onClick={handleDeleteEvent}>Delete</Button>
+                    </>
+                }
 
                 <Link to="/event/list" className="btn btn-dark">Volver a la galería</Link>
 

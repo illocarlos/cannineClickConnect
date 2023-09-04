@@ -40,13 +40,22 @@ const newEvent = (req, res, next) => {
                 country
             }
         })
-        .then(() => res.sendStatus(200))
+        .then(() => res.sendStatus(201))
         .catch(err => next(err))
+}
+
+const deleteEvent = (req,res, next) => {
+    const {event_id} = req.params
+    Event
+    .findByIdAndDelete(event_id)
+    .then(response => res.json(response))
+    .catch((err) => next(err))
 }
 
 
 module.exports = {
     listEvent,
     eventId,
-    newEvent
+    newEvent,
+    deleteEvent
 }
