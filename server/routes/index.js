@@ -4,6 +4,9 @@ const router = require("express").Router()
 const parkRoutes = require('./park.routes')
 router.use("/park", parkRoutes)
 
+const dogRoutes = require('./dog.routes')
+router.use("/dog", dogRoutes)
+
 const authRoutes = require('./auth.routes')
 router.use("/auth", authRoutes)
 

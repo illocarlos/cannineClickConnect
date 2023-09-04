@@ -15,7 +15,7 @@ const dogSchema = new Schema(
             minlength: [10, 'Description must be at least 20 characters long']
         },
 
-        image: {
+        images: {
             type: String,
             default: "#"
         },
@@ -34,7 +34,7 @@ const dogSchema = new Schema(
         gender: {
             type: String,
             enum: ['MALE', 'FEMALE'],
-
+            required: [true, 'gender is required.'],
         },
 
         castrated: {

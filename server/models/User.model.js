@@ -12,7 +12,7 @@ const userSchema = new Schema(
     },
 
     avatar: {
-      type: [String],
+      type: String,
       validate: {
         validator: value => value.length > 0,
         message: 'at least one photo is required'

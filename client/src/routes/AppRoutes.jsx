@@ -19,7 +19,7 @@ function AppRoutes() {
     // TODO: REVISAR TODAS LAS LISTAS QUE PUDIESEN ALOJAR SU PROPIO ESTADO
 
     <Routes>
-      <Route path={"/"} element={<p>Página de inicio: UNDER CONSTRUCTION</p>} />
+      <Route path={"/"} />
       <Route path={"/park/list"} element={<ParkGalleryPage />} />
       <Route path={"/user/list"} element={<UsersPage />} />
       <Route path={"/event/list"} element={<EventsGalleryPage />} />

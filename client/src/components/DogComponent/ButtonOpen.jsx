@@ -1,24 +1,24 @@
 import { useState } from 'react';
 import { ButtonGroup, ToggleButton } from 'react-bootstrap';
 
-const ButtonOpen = ({ handleOpenStatus }) => {
+const ButtonCastrated = ({ handleCastratedStatus }) => {
 
 
-    const [openValue, setOpenValue] = useState('open');
+    const [castratedValue, setCastratedValue] = useState('castrated');
 
-    const boleOpen = [
-        { name: "open", value: true },
-        { name: "close", value: false },
+    const boleCastrated = [
+        { name: "castrated", value: true },
+        { name: "Not castrated", value: false },
     ];
 
     const inputValue = (inputValue) => {
-        handleOpenStatus(inputValue)
+        handleCastratedStatus(inputValue)
     }
 
     return (
 
         <ButtonGroup>
-            {boleOpen.map((bolean, idx) => (
+            {boleCastrated.map((bolean, idx) => (
                 <ToggleButton
                     key={idx}
                     id={`radio-${idx}`}
@@ -26,7 +26,7 @@ const ButtonOpen = ({ handleOpenStatus }) => {
                     variant={idx % 2 ? 'outline-success' : 'outline-danger'}
                     name="open"
                     value={bolean.value}
-                    checked={openValue === bolean.value}
+                    checked={castratedValue === bolean.value}
                     onClick={() => inputValue(bolean.value)}
                 >
                     {bolean.name}
@@ -37,4 +37,4 @@ const ButtonOpen = ({ handleOpenStatus }) => {
 
     )
 }
-export default ButtonOpen
+export default ButtonCastrated
