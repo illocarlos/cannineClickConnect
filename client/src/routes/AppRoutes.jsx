@@ -29,6 +29,10 @@ function AppRoutes() {
       <Route path={"/park/:park_id"} element={<DetailsParkPage />} />
       <Route path={"/user/:user_id"} element={<DetailsUserPage />} />
 
+      <Route path={"/event/delete/:event_id"} />
+
+      <Route path={"/event/edit/:event_id"} element={<DetailsUserPage />} />
+
       <Route path={"/auth/signup"} element={<SignupPage />} />
       <Route path={"/auth/login"} element={<LoginPage />} />
 

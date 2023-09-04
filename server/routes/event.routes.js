@@ -10,6 +10,8 @@ const {
 router.get('/list', listEvent)
 router.get('/:event_id', eventId)
 router.post('/newEvent', verifyToken, newPark)
+router.put('/edit/:event_id', verifyToken, eventId)
+router.delete('/delete/:event:id', verifyToken)
 
 
 module.exports = router

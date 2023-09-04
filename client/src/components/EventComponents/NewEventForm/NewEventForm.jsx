@@ -3,6 +3,7 @@ import { Form, Button, Row, Col } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import eventService from "../../../services/events.service"
 import { MessageContext } from "../../../contexts/message.context"
+import Loader from "../../Loader/Loader"
 const NewEventForm = () => {
 
   const [eventData, setEventData] = useState({
@@ -19,6 +20,9 @@ const NewEventForm = () => {
       country: ''
     }
   })
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate()
   const { emitMessage } = useContext(MessageContext)
 
@@ -34,12 +38,13 @@ const NewEventForm = () => {
         [name]: value,
       },
     })
-
-
   }
 
   const handleEventSubmit = e => {
+
     e.preventDefault()
+    setIsLoading(true)
+
     eventService
       .newEvent(eventData)
       .then(() => {
@@ -47,6 +52,9 @@ const NewEventForm = () => {
         navigate('/event/list')
       })
       .catch(err => console.log(err))
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   return (
@@ -109,11 +117,12 @@ const NewEventForm = () => {
 
       </Row>
 
-      {/* TODO: CREAR ESTADO DE CARGA PARA INHABILITAR BOTÓN DURANTE SUBIDA */}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Button variant="dark" type="submit">Submit</Button>
+      )}
 
-      <Button variant="dark" type="submit">
-        Submit
-      </Button>
 
     </Form>
   )
