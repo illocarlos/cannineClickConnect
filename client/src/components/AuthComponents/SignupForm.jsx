@@ -4,6 +4,7 @@ import authService from "../../services/auth.service"
 import { useNavigate } from "react-router-dom"
 import uploadServices from "../../services/upload.service"
 import { MessageContext } from "../../contexts/message.context"
+import Loader from "../Loader/Loader"
 
 
 const SignupForm = () => {
@@ -17,6 +18,8 @@ const SignupForm = () => {
 
     })
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const navigate = useNavigate()
     const { emitMessage } = useContext(MessageContext)
 
@@ -28,6 +31,8 @@ const SignupForm = () => {
     const handleFormSubmit = e => {
 
         e.preventDefault()
+        setIsLoading(true)
+
         authService
             .signup(signupData)
             .then(() => {
@@ -35,7 +40,11 @@ const SignupForm = () => {
                 navigate('/')
             })
             .catch(err => console.log(err))
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
+
 
     const handleFileUpload = e => {
 
@@ -45,6 +54,7 @@ const SignupForm = () => {
             formData.append('imagesData', e.target.files[i])
         }
 
+
         uploadServices
             .uploadimages(formData)
             .then(({ data }) => {
@@ -52,6 +62,7 @@ const SignupForm = () => {
             })
             .catch(err => console.log(err))
     }
+
 
     return (
 
@@ -85,11 +96,13 @@ const SignupForm = () => {
                 <Form.Control type="file" multiple onChange={handleFileUpload} />
             </Form.Group>
 
-            {/* TODO: CREAR ESTADO DE CARGA PARA INHABILITAR BOTÓN DURANTE SUBIDA */}
-
-            <div className="d-grid">
-                <Button variant="dark" type="submit">Registrarme</Button>
-            </div>
+            {isLoading ? (
+                <Loader />
+            ) : (
+                <div className="d-grid">
+                    <Button variant="dark" type="submit">Registrarme</Button>
+                </div>
+            )}
 
         </Form>
     )

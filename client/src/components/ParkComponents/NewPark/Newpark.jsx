@@ -6,6 +6,7 @@ import parkService from "../../../services/parks.service";
 import uploadServices from '../../../services/upload.service';
 import { MessageContext } from '../../../contexts/message.context';
 import { useNavigate } from "react-router-dom"
+import Loader from '../../Loader/Loader';
 
 
 
@@ -19,6 +20,9 @@ function NewParkForm() {
         rating: 0,
         open: true,
     })
+
+    const [isLoading, setIsLoading] = useState(false);
+
     const navigate = useNavigate()
     const { emitMessage } = useContext(MessageContext)
 
@@ -33,8 +37,9 @@ function NewParkForm() {
     }
 
     const handleParkSubmit = e => {
-        e.preventDefault()
 
+        e.preventDefault()
+        setIsLoading(true)
 
         parkService
             .newPark(parkData)
@@ -44,6 +49,9 @@ function NewParkForm() {
             })
 
             .catch(err => console.log(err))
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
 
     const handleFileUpload = e => {
@@ -53,6 +61,7 @@ function NewParkForm() {
         for (let i = 0; i < e.target.files.length; i++) {
             formData.append('imagesData', e.target.files[i])
         }
+
 
         uploadServices
             .uploadimages(formData)
@@ -113,14 +122,15 @@ function NewParkForm() {
 
                 <ButtonOpen handleOpenStatus={handleOpenStatus} />
 
-                {/* TODO: CREAR ESTADO DE CARGA PARA INHABILITAR BOTÓN DURANTE SUBIDA */}
-
-                <div className="d-grid">
-                    <Button variant="dark" type="submit">
-                        New Park
-                    </Button>
-                </div>
-
+                {isLoading ? (
+                    <Loader />
+                ) : (
+                    <div className="d-grid">
+                        <Button variant="dark" type="submit">
+                            New Park
+                        </Button>
+                    </div>
+                )}
 
             </Form>
         </div>

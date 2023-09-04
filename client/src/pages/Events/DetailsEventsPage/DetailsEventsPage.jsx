@@ -41,6 +41,8 @@ const DetailsEventsPage = () => {
                     <hr />
 
                     <Link to="/event/list" className="btn btn-dark">Volver a la galería</Link>
+
+
                 </Col>
 
 

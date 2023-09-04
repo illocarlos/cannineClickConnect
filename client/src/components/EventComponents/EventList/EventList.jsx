@@ -1,6 +1,8 @@
 import './EventList.css'
 import EventCardList from './EventCardList.jsx'
+
 const EventList = ({ events }) => {
+
     return (
         <>
             {

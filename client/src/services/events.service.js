@@ -29,6 +29,14 @@ class EventService {
   newEvent(eventData) {
     return this.api.post("event/newEvent", eventData);
   }
+
+  editEvent(event_id, eventData) {
+    return this.api.put(`event/edit/${event_id}`, eventData)
+  }
+
+  deleteEvent(event_id) {
+    return this.api.delete(`/event/delete/${event_id}`);
+  }
 }
 
 const eventsService = new EventService();
