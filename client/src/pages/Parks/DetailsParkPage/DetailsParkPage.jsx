@@ -40,6 +40,7 @@ const DetailsParkPage = () => {
 
 
                 </Col>
+
                 <Link to="/parks/list" className="btn btn-dark">Volver a la galería</Link>
 
 

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { GoogleMap, useJsApiLoader, MarkerF } from '@react-google-maps/api';
+import Loader from './../Loader/Loader'
+
 
 
 const containerStyle = {
@@ -17,20 +19,15 @@ function MyComponent({ location }) {
         googleMapsApiKey: "AIzaSyDEfioKfYGi6udaByyFEojQ4p3fvjcP00Q"
     });
 
-
     const center = {
-        lat: 40.39320454495474,
-        lng: -3.6980923636579637,
+        lat: location?.cordinates[0],
+        lng: location?.cordinates[1],
     };
 
-
-
     const [map, setMap] = useState(null);
-    const [markerPosition, setMarkerPosition] = useState(center);
 
 
     const onLoad = React.useCallback(function callback(map) {
-
         setMap(map);
     }, []);
 
@@ -39,7 +36,6 @@ function MyComponent({ location }) {
     }, []);
 
     const zoomLevel = 14
-
 
     return isLoaded ? (
         <div>
@@ -50,12 +46,12 @@ function MyComponent({ location }) {
                 onLoad={onLoad}
                 onUnmount={onUnmount}
             >
-                <MarkerF position={markerPosition} />
+                <MarkerF position={center} />
 
             </GoogleMap>
 
         </div>
-    ) : <></>;
+    ) : <Loader />;
 }
 
 export default React.memo(MyComponent);

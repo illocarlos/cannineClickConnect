@@ -4,14 +4,14 @@ const { verifyToken } = require("../middlewares/verifyToken")
 const {
     listEvent,
     eventId,
-    newPark
+    newEvent,
 } = require('./../controllers/event.controllers')
 
 router.get('/list', listEvent)
 router.get('/:event_id', eventId)
-router.post('/newEvent', verifyToken, newPark)
+router.post('/newEvent', verifyToken, newEvent)
 router.put('/edit/:event_id', verifyToken, eventId)
-router.delete('/delete/:event:id', verifyToken)
+router.delete('/delete/:event_id', verifyToken)
 
 
 module.exports = router

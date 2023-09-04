@@ -58,7 +58,7 @@ const parkSchema = new Schema(
             },
             cordinates: {
                 type: [Number],
-                default: [100, 100],
+                default: [41.40702692638753, 2.14960025202085],
             },
         },
 
