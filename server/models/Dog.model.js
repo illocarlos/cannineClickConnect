@@ -12,7 +12,8 @@ const dogSchema = new Schema(
 
         description: {
             type: String,
-            minlength: [10, 'Description must be at least 20 characters long']
+            minlength: [10, 'Description must be at least 20 characters long'],
+            maxlength: [20, 'Description must be at least 20 characters long']
         },
 
         images: {
@@ -30,7 +31,7 @@ const dogSchema = new Schema(
 
         size: {
             type: String,
-            enum: ['LARGE', 'MEDIUM', 'SMALL'],
+            enum: ['BIG', 'MEDIUM', 'SMALL'],
             required: [true, 'Size is required.'],
         },
 

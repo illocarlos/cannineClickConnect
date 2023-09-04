@@ -1,10 +1,13 @@
 import './DetailsUsersPage.css';
+import { useContext } from "react";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import usersService from '../../../services/users.service';
 import { Container, Row, Col, Card } from "react-bootstrap";
+import { ThemeContext } from "../../../contexts/theme.context";
 
 const DetailsUserPage = () => {
+    const { theme, switchTheme } = useContext(ThemeContext)
     const { user_id } = useParams();
     const [user, setUser] = useState(null);
 
@@ -50,7 +53,7 @@ const DetailsUserPage = () => {
                                         to="/user/list"
                                         className="btn btn-dark"
                                     >
-                                        Volver a la galería
+                                        gallery
                                     </Link>
                                     <Link
                                         style={{ width: '50%' }}
@@ -63,25 +66,36 @@ const DetailsUserPage = () => {
                             </Card.Body>
                         </Card>
                     </div>
+                    <h1 className='d-flex justify-content-center ' >DOGS</h1>
+                    <hr />
                     <div className="d-flex flex-row">
                         <Col className="d-flex flex-row" md={{ span: 6, offset: 1 }}>
                             {user.dogs.map((dog, index) => (
                                 <Card
                                     className={`me-3 mt-4 ${dog.isFlipped ? 'flipped' : ''}`}
                                     style={{
-                                        width: '14rem',
+                                        backgroundColor: { theme },
+                                        width: '20rem',
                                         transformStyle: 'preserve-3d',
                                         transition: 'transform 0.5s ease',
                                     }}
                                     key={dog._id}
                                     onClick={() => handleCardClick(index)}
                                 >
-                                    <Card.Img
-                                        variant="top"
-                                        src={dog.images[0]}
-                                    />
-                                    <Card.Text className="card-back">
-                                        {dog.description}
+                                    <Card.Img variant="top"
+                                        src={dog.images[0]}>
+                                    </Card.Img>
+                                    <Card.Text
+
+                                        className="card-back">
+                                        <div>
+                                            <h1>{dog.name}</h1>
+                                            <p> {dog.description}</p>
+                                            <p>{dog.age} years</p>
+                                            <p>{dog.gender}</p>
+                                            <p>{dog.size}</p>
+                                        </div>
+
                                     </Card.Text>
                                 </Card>
                             ))}
