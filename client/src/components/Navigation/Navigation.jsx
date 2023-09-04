@@ -31,10 +31,10 @@ const Navigation = () => {
               {
                 loggedUser &&
                 <div className="d-flex mt-2">
+
+                  <Link to={"/park/list"} className="nav-link me-4">Dog</Link>
                   <Link to={"/park/list"} className="nav-link me-4">Park</Link>
-
                   <Link to={"/event/list"} className="nav-link me-4">Events</Link>
-
                   <Link to={"/user/list"} className="nav-link me-4"> Community</Link>
                 </div>
 
@@ -52,6 +52,7 @@ const Navigation = () => {
                   loggedUser &&
                   <>
                     <Link to={'/'} className='nav-link' onClick={logout}>log out</Link>
+                    <Link to={`/user/${loggedUser._id}`} className='nav-link' >profile</Link>
                   </>
                 }
                 {
