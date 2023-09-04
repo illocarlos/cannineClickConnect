@@ -9,6 +9,7 @@ import DetailsParkPage from '../pages/Parks/DetailsParkPage/DetailsParkPage'
 import SignupPage from '../pages/Auth/SignupPage/SignupPage'
 import LoginPage from '../pages/Auth/LoginPage/LoginPage'
 import DetailsUserPage from '../pages/Users/ProfilePage/DetailsUsersPage'
+import NewDogPage from '../pages/Dogs/NewDogPage'
 
 // import PrivateRoute from './PrivateRoutes'
 
@@ -20,6 +21,7 @@ function AppRoutes() {
 
     <Routes>
       <Route path={"/"} />
+      <Route path={"/dog/newdog"} element={<NewDogPage />} />
       <Route path={"/park/list"} element={<ParkGalleryPage />} />
       <Route path={"/user/list"} element={<UsersPage />} />
       <Route path={"/event/list"} element={<EventsGalleryPage />} />

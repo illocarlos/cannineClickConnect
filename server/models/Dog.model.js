@@ -16,8 +16,11 @@ const dogSchema = new Schema(
         },
 
         images: {
-            type: String,
-            default: "#"
+            type: [String],
+            validate: {
+                validator: value => value.length > 0,
+                message: 'at least one photo is required'
+            }
         },
 
         age: {

@@ -1,4 +1,5 @@
 const User = require('../models/User.model')
+
 const signUpUser = (req, res, next) => {
 
     const { username, email, password, avatar, about, city } = req.body
@@ -9,7 +10,7 @@ const signUpUser = (req, res, next) => {
         .catch(err => next(err))
 }
 const logInUser = (req, res, next) => {
-    console.log('en llogin endpoint')
+
 
     const { email, password } = req.body;
 

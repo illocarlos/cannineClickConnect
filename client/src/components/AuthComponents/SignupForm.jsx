@@ -12,9 +12,10 @@ const SignupForm = () => {
     const [signupData, setSignupData] = useState({
         username: '',
         email: '',
+        city: '',
         password: '',
-        avatar: "",
-        about: "",
+        avatar: '',
+        about: ''
 
     })
 
@@ -25,7 +26,10 @@ const SignupForm = () => {
 
     const handleInputChange = e => {
         const { value, name } = e.target
-        setSignupData({ ...signupData, [name]: value })
+        setSignupData({
+            ...signupData,
+            [name]: value
+        })
     }
 
     const handleFormSubmit = e => {
@@ -58,7 +62,10 @@ const SignupForm = () => {
         uploadServices
             .uploadimages(formData)
             .then(({ data }) => {
-                setSignupData({ ...signupData, avatar: data.cloudinary_urls })
+                setSignupData({
+                    ...signupData,
+                    avatar: data.cloudinary_urls
+                })
             })
             .catch(err => console.log(err))
     }
@@ -69,19 +76,24 @@ const SignupForm = () => {
         <Form onSubmit={handleFormSubmit}>
 
             <Form.Group className="mb-3" controlId="username">
-                <Form.Label>Nombre de usuario</Form.Label>
+                <Form.Label>Name</Form.Label>
                 <Form.Control type="text" value={signupData.username} onChange={handleInputChange} name="username" />
             </Form.Group>
 
 
             <Form.Group className="mb-3" controlId="about">
-                <Form.Label>about</Form.Label>
+                <Form.Label>About</Form.Label>
                 <Form.Control type="text" value={signupData.about} onChange={handleInputChange} name="about" />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="city">
+                <Form.Label>City</Form.Label>
+                <Form.Control type="text" value={signupData.city} onChange={handleInputChange} name="city" />
             </Form.Group>
 
 
             <Form.Group className="mb-3" controlId="password">
-                <Form.Label>Contraseña</Form.Label>
+                <Form.Label>Password</Form.Label>
                 <Form.Control type="password" value={signupData.password} onChange={handleInputChange} name="password" />
             </Form.Group>
 
@@ -100,7 +112,7 @@ const SignupForm = () => {
                 <Loader />
             ) : (
                 <div className="d-grid">
-                    <Button variant="dark" type="submit">Registrarme</Button>
+                    <Button variant="dark" type="submit">Sign up</Button>
                 </div>
             )}
 

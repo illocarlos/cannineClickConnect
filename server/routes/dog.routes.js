@@ -2,17 +2,15 @@ const router = require("express").Router()
 
 
 const {
-
-    newDog,
+    ListDog,
     dogId,
-    ListDog
-
+    newDog,
+    addDogToUser
 } = require('../controllers/dog.controllers')
 
-router.get('/newDog', newDog)
-
+router.post('/newDog', newDog)
+router.post('/addDogToUser', addDogToUser)
 router.get('/:dog_id', dogId)
-
 router.get('/list', ListDog)
 
 module.exports = router

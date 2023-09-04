@@ -14,6 +14,7 @@ const userId = (req, res, next) => {
 
     User
         .findById(user_id)
+        .populate('dogs')
         .then(response => res.json(response))
         .catch(err => next(err))
 }

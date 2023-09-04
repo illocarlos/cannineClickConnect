@@ -3,20 +3,25 @@ import './NewDog.css'
 import { Form, Button } from 'react-bootstrap';
 import ButtonCastrated from './ButtonOpen'
 import dogService from "../../services/dogs.service";
-import uploadServices from '../../../services/upload.service';
-import { MessageContext } from '../../../contexts/message.context';
+import uploadServices from '../../services/upload.service';
+import { MessageContext } from '../../contexts/message.context';
 import { useNavigate } from "react-router-dom"
+import { AuthContext } from '../../contexts/auth.context';
 
 
 
 function NewDogForm() {
+
+
+    const { loggedUser } = useContext(AuthContext)
+
     const [DogData, setDogData] = useState({
         name: "",
         description: "",
         images: "",
         age: 0,
         size: "",
-        gender: 0,
+        gender: "",
         castrated: false,
     })
     const navigate = useNavigate()
@@ -24,7 +29,7 @@ function NewDogForm() {
     const { emitMessage } = useContext(MessageContext)
 
     const handleCastratedStatus = value => {
-        setParkData({
+        setDogData({
             ...DogData,
             castrated: value
         })
@@ -39,17 +44,26 @@ function NewDogForm() {
         })
     }
 
-    const handleParkSubmit = e => {
+    const handleDogSubmit = e => {
         e.preventDefault()
 
 
         dogService
             .newDog(DogData)
-            .then(() => {
+            .then(({ data }) => {
+
+                const idDog = data._id
+                const idUser = loggedUser._id
+
+                dogService
+                    .addDogToUser(idUser, idDog)
+                    .then(() => console.log("se ha añadido el perro al user"))
+                    .catch(err => consoe.log(err))
+
+
                 emitMessage('create new dog')
                 navigate('/user/list')
             })
-
             .catch(err => console.log(err))
     }
 
@@ -58,9 +72,9 @@ function NewDogForm() {
         const formData = new FormData()
 
         for (let i = 0; i < e.target.files.length; i++) {
-            formData.append('imagesData',
-                e.target.files[i])
+            formData.append('imagesData', e.target.files[i])
         }
+
 
         uploadServices
             .uploadimages(formData)
@@ -73,9 +87,10 @@ function NewDogForm() {
             .catch(err => console.log(err))
     }
 
+
     return (
         <div className='NewDogForm'>
-            <Form onSubmit={handleParkSubmit} encType='multipart/form-data'>
+            <Form onSubmit={handleDogSubmit} encType='multipart/form-data'>
                 <Form.Group className="mb-3">
                     <Form.Label>Name</Form.Label>
                     <Form.Control type="text" placeholder="Enter Name" name="name" value={DogData.name} onChange={handleInputChange} />
@@ -90,18 +105,25 @@ function NewDogForm() {
                 </Form.Group>
 
                 <Form.Group className="mb-3" >
-                    <Form.Label htmlFor="disabledSelect">Size park</Form.Label>
+                    <Form.Label>age</Form.Label>
+                    <Form.Control type="number" placeholder="age" name="age" value={DogData.age} onChange={handleInputChange} />
+                    <Form.Text className="text-muted">
+                    </Form.Text>
+                </Form.Group>
+
+                <Form.Group className="mb-3" >
+                    <Form.Label htmlFor="disabledSelect">Size </Form.Label>
                     <Form.Select id="size" value={DogData.size} name="size" onChange={handleInputChange}>
                         <option>Disabled select</option>
-                        <option>LARGE</option>
+                        <option>BIG</option>
                         <option>MEDIUM</option>
                         <option>SMALL</option>
                     </Form.Select>
                 </Form.Group>
 
                 <Form.Group className="mb-3" >
-                    <Form.Label htmlFor="disabledSelect">Crowdedness</Form.Label>
-                    <Form.Select id="crowdedness" value={DogData.gender} name="crowdedness" onChange={handleInputChange}>
+                    <Form.Label htmlFor="disabledSelect">gender</Form.Label>
+                    <Form.Select id="gender" value={DogData.gender} name="gender" onChange={handleInputChange}>
                         <option>Disabled select</option>
                         <option>MALE</option>
                         <option>FEMALE</option>

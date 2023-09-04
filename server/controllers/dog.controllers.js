@@ -1,4 +1,6 @@
 const Dog = require('../models/Dog.model')
+const User = require('../models/User.model')
+
 
 const ListDog = (req, res, next) => {
 
@@ -21,16 +23,27 @@ const dogId = (req, res, next) => {
 
 const newDog = (req, res, next) => {
 
-    const { name, description, image, age, size, gender, castrated } = req.body
+    const { name, description, images, age, size, gender, castrated } = req.body
 
 
     Dog
-        .create({ name, description, image, age, size, gender, castrated })
-        .then((response) => res.json())
+        .create({ name, description, images, age, size, gender, castrated })
+        .then((reponse) => res.json(reponse))
         .catch(err => next(err))
 }
+
+const addDogToUser = (req, res, next) => {
+    const { idUser, idDog } = req.body
+
+    User
+        .findByIdAndUpdate(idUser, { $push: { dogs: idDog } })
+        .then(() => console.log("perro añadido al usuario!!!"))
+        .catch(err => next(err))
+}
+
 module.exports = {
     newDog,
+    addDogToUser,
     dogId,
     ListDog
 

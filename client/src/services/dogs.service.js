@@ -29,6 +29,11 @@ class DogService {
     newDog(dogData) {
         return this.api.post("/dog/newdog", dogData);
     }
+
+    addDogToUser(idUser, idDog) {
+        return this.api.post("/dog/addDogToUser", { idUser, idDog });
+
+    }
 }
 
 const dogService = new DogService();
