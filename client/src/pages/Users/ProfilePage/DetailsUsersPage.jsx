@@ -67,6 +67,13 @@ const DetailsUserPage = () => {
                                     >
                                         gallery
                                     </Link>
+
+                                    <Link
+                                        to={`/user/edit/${user_id}`}
+                                        className="btn btn-warning">
+                                        Edit my Profile
+                                    </Link>
+
                                     <Link
                                         style={{ width: '50%' }}
                                         to="/dog/newdog"

@@ -30,7 +30,7 @@ const DetailsEventsPage = () => {
 
     const handleDeleteEvent = () => {
         eventsService
-            .deleteEvent(event_id)
+            .deleteEvent(event_id, event)
             .then(() => navigate('/event/list'))
             .catch((err) => console.log(err))
     }
@@ -63,7 +63,11 @@ const DetailsEventsPage = () => {
                 </Col>
                 {ownerEvent &&
                     <>
-                        <Button onClick={handleUpdateEvent}>Edit</Button>
+                        <Link
+                            to={`/event/edit/${event_id}`}
+                            className="btn btn-warning">
+                            Edit Event
+                        </Link>
 
                         <Button onClick={handleDeleteEvent}>Delete</Button>
                     </>

@@ -56,7 +56,11 @@ const DetailsParkPage = () => {
                 </Col>
                 {ownerPark &&
                     <>
-                        <Button variant="primary">Edit</Button>
+                        <Link
+                            to={`/park/edit/${park_id}`}
+                            className="btn btn-warning">
+                            Edit Park
+                        </Link>
 
                         <Button onClick={handleDeletePark}>Delete</Button>
                     </>
