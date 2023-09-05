@@ -12,12 +12,8 @@ const dogSchema = new Schema(
 
         description: {
             type: String,
-<<<<<<< HEAD
-            minlength: [10, 'Description must be at least 20 characters long'],
-=======
             minlength: [5, 'Description must be at least 20 characters long'],
 
->>>>>>> 925a64d4f16093397e08e2f35f60db1b288f3c33
         },
 
         images: {

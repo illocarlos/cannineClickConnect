@@ -28,17 +28,19 @@ const newDog = (req, res, next) => {
 
     Dog
         .create({ name, description, images, age, size, gender, castrated })
-        .then(() => res.sendStatus(201))
+        .then(dog => res.json(dog))
         .catch(err => next(err))
 }
 
 const addDogToUser = (req, res, next) => {
+
     const { idUser, idDog } = req.body
 
     User
-        .findByIdAndUpdate(idUser, { $push: { dogs: idDog } })
-        .then(() => console.log("perro añadido al usuario!!!"))
+        .findByIdAndUpdate(idUser, { $addToSet: { dogs: idDog } }, { new: true })
+        .then(() => res.status(201))
         .catch(err => next(err))
+
 }
 
 module.exports = {
