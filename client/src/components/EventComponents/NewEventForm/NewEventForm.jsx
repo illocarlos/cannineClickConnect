@@ -1,12 +1,15 @@
+import './NewEventForm.css'
 import { useState, useContext } from "react"
 import { Form, Button, Row, Col } from "react-bootstrap"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import eventService from "../../../services/events.service"
 import { MessageContext } from "../../../contexts/message.context"
 import Loader from "../../Loader/Loader"
+import { ThemeContext } from "../../../contexts/theme.context";
 
 
 const NewEventForm = () => {
+  const { theme, switchTheme } = useContext(ThemeContext)
 
   const [eventData, setEventData] = useState({
     title: '',
@@ -60,7 +63,8 @@ const NewEventForm = () => {
   }
 
   return (
-    <Form onSubmit={handleEventSubmit}>
+    <Form bg={theme === 'dark' ? 'light' : 'dark'}
+      data-bs-theme={theme === 'dark' ? 'light' : 'dark'} style={{ width: '300px' }} onSubmit={handleEventSubmit}>
 
       <Form.Group className="mb-3" controlId="title">
         <Form.Label>Title</Form.Label>
@@ -82,13 +86,15 @@ const NewEventForm = () => {
           <Form.Control type="date" value={eventData.date} name="date" onChange={handleInputChange} />
         </Col>
 
-        <Col>
+        <Col >
           <Form.Group className="mb-3" controlId="street">
-            <Form.Label>Street</Form.Label>
-            <Form.Control type="text" value={eventData.address.street} name="street" onChange={handleInputChange} />
+
+            <Form.Control type="text" value={eventData.address.street} placeholder="Street" name="street" onChange={handleInputChange} />
           </Form.Group>
         </Col>
+      </Row>
 
+      <Row>
         <Col>
           <Form.Group className="mb-3" controlId="number">
             <Form.Label>Number</Form.Label>
@@ -112,21 +118,25 @@ const NewEventForm = () => {
 
         <Col>
           <Form.Group className="mb-3" controlId="zipcode">
-            <Form.Label>ZIP code</Form.Label>
+            <Form.Label>ZIP</Form.Label>
             <Form.Control type="text" value={eventData.address.zipcode} name="zipcode" onChange={handleInputChange} />
           </Form.Group>
         </Col>
 
       </Row>
 
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <Button variant="dark" type="submit">Submit</Button>
-      )}
+      {
+        isLoading ? (
+          <Loader />
+        ) : (
+
+          <Button className="buttonClick" variant="warning" style={{ width: '300px' }} type="submit">Submit</Button>
+
+        )
+      }
 
 
-    </Form>
+    </Form >
   )
 }
 

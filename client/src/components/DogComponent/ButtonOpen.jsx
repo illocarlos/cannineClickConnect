@@ -1,3 +1,4 @@
+import './ButtonOpen.css'
 import { useState } from 'react';
 import { ButtonGroup, ToggleButton } from 'react-bootstrap';
 
@@ -16,8 +17,7 @@ const ButtonCastrated = ({ handleCastratedStatus }) => {
     }
 
     return (
-
-        <ButtonGroup>
+        <ButtonGroup className='ButtonCastrated'>
             {boleCastrated.map((bolean, idx) => (
                 <ToggleButton
                     key={idx}
@@ -28,12 +28,13 @@ const ButtonCastrated = ({ handleCastratedStatus }) => {
                     value={bolean.value}
                     checked={castratedValue === bolean.value}
                     onClick={() => inputValue(bolean.value)}
+                    className="custom-button"
                 >
                     {bolean.name}
                 </ToggleButton>
-            ))
-            }
-        </ButtonGroup >
+            ))}
+        </ButtonGroup>
+
 
     )
 }

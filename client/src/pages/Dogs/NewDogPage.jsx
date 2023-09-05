@@ -1,3 +1,4 @@
+import './NewDogPage.css'
 import { Container } from "react-bootstrap";
 import NewDogForm from "../../components/DogComponent/NewDogForm"
 
@@ -6,8 +7,8 @@ const NewDogPage = () => {
 
     return (
 
-        <div className="newDog">
-            <Container>
+        <div>
+            <Container className="newDog">
                 <h1>NUEVO PERRO</h1>
                 <NewDogForm />
             </Container>

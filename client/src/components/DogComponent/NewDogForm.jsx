@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import './NewDog.css'
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import ButtonCastrated from './ButtonOpen'
 import dogService from "../../services/dogs.service";
 import uploadServices from '../../services/upload.service';
@@ -8,13 +8,13 @@ import { MessageContext } from '../../contexts/message.context';
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from '../../contexts/auth.context';
 import Loader from '../Loader/Loader'
-
+import { ThemeContext } from "../../contexts/theme.context";
 
 
 
 function NewDogForm() {
 
-
+    const { theme, switchTheme } = useContext(ThemeContext)
     const { loggedUser } = useContext(AuthContext)
 
     const [DogData, setDogData] = useState({
@@ -70,7 +70,8 @@ function NewDogForm() {
                         navigate('/user/list')
                     })
                     .catch(err => {
-                        setErrors(err.response.data.errorMessages)
+                        setErrors(err.response.data.errorMessages
+                        )
                     })
 
 
@@ -105,7 +106,9 @@ function NewDogForm() {
 
     return (
         <div className='NewDogForm'>
-            <Form onSubmit={handleDogSubmit} encType='multipart/form-data'>
+
+            <Form bg={theme === 'dark' ? 'light' : 'dark'}
+                data-bs-theme={theme === 'dark' ? 'light' : 'dark'} onSubmit={handleDogSubmit} encType='multipart/form-data'>
                 <Form.Group className="mb-3">
                     <Form.Label>Name</Form.Label>
                     <Form.Control type="text" placeholder="Enter Name" name="name" value={DogData.name} onChange={handleInputChange} />
@@ -118,48 +121,56 @@ function NewDogForm() {
                     <Form.Text className="text-muted">
                     </Form.Text>
                 </Form.Group>
+                <Row>
+                    <Col>
+                        <Form.Group className="mb-3" >
+                            <Form.Label>age</Form.Label>
+                            <Form.Control type="number" placeholder="age" name="age" value={DogData.age} onChange={handleInputChange} />
+                            <Form.Text className="text-muted">
+                            </Form.Text>
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group className="mb-3" >
+                            <Form.Label htmlFor="disabledSelect">Size </Form.Label>
+                            <Form.Select id="size" value={DogData.size} name="size" onChange={handleInputChange}>
+                                <option>Disabled select</option>
+                                <option>BIG</option>
+                                <option>MEDIUM</option>
+                                <option>SMALL</option>
+                            </Form.Select>
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group className="mb-3" >
+                            <Form.Label htmlFor="disabledSelect">gender</Form.Label>
+                            <Form.Select id="gender" value={DogData.gender} name="gender" onChange={handleInputChange}>
+                                <option>Disabled select</option>
+                                <option>MALE</option>
+                                <option>FEMALE</option>
 
-                <Form.Group className="mb-3" >
-                    <Form.Label>age</Form.Label>
-                    <Form.Control type="number" placeholder="age" name="age" value={DogData.age} onChange={handleInputChange} />
-                    <Form.Text className="text-muted">
-                    </Form.Text>
-                </Form.Group>
-
-                <Form.Group className="mb-3" >
-                    <Form.Label htmlFor="disabledSelect">Size </Form.Label>
-                    <Form.Select id="size" value={DogData.size} name="size" onChange={handleInputChange}>
-                        <option>Disabled select</option>
-                        <option>BIG</option>
-                        <option>MEDIUM</option>
-                        <option>SMALL</option>
-                    </Form.Select>
-                </Form.Group>
-
-                <Form.Group className="mb-3" >
-                    <Form.Label htmlFor="disabledSelect">gender</Form.Label>
-                    <Form.Select id="gender" value={DogData.gender} name="gender" onChange={handleInputChange}>
-                        <option>Disabled select</option>
-                        <option>MALE</option>
-                        <option>FEMALE</option>
-
-                    </Form.Select>
-                </Form.Group>
+                            </Form.Select>
+                        </Form.Group>
+                    </Col>
+                </Row>
                 <Form.Group className="mb-3" controlId="images">
                     <Form.Label>Imagen (URL)</Form.Label>
                     <Form.Control type="file" multiple onChange={handleFileUpload} />
                 </Form.Group>
+                <Form.Group>
 
-                <ButtonCastrated handleCastratedStatus={handleCastratedStatus} />
+                    <ButtonCastrated handleCastratedStatus={handleCastratedStatus} />
+                </Form.Group>
 
                 {isLoading ? (
                     <Loader />
                 ) : (
-                    <Button variant="dark" type="submit">Add</Button>
+                    <Button variant='warning' style={{ width: '100%' }} type="submit">Add</Button>
                 )}
 
 
             </Form>
+
         </div>
     )
 }
