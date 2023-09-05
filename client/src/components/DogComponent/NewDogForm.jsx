@@ -32,6 +32,8 @@ function NewDogForm() {
     const navigate = useNavigate()
 
     const { emitMessage } = useContext(MessageContext)
+    const [errors, setErrors] = useState([])
+    console.log("estos sonlos errores", errors)
 
     const handleCastratedStatus = value => {
         setDogData({
@@ -64,7 +66,7 @@ function NewDogForm() {
                 dogService
                     .addDogToUser(idUser, idDog)
                     .then(() => console.log("se ha añadido el perro al user"))
-                    .catch(err => consoe.log(err))
+                    .catch(err => setErrors(err.response.data.errorMessages))
 
 
                 emitMessage('create new dog')
