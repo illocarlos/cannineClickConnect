@@ -20,7 +20,7 @@ function NewDogForm() {
     const [DogData, setDogData] = useState({
         name: "",
         description: "",
-        images: "",
+        images: [],
         age: 0,
         size: "",
         gender: "",

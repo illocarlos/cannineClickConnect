@@ -35,6 +35,13 @@ const DetailsEventsPage = () => {
             .catch((err) => console.log(err))
     }
 
+    const handleUpdateEvent = () => {
+        eventsService
+            .editEvent(event_id)
+            .then(() => navigate('/event/list'))
+            .catch((err) => console.log(err))
+    }
+
     return (
         <Container>
 
@@ -56,7 +63,7 @@ const DetailsEventsPage = () => {
                 </Col>
                 {ownerEvent &&
                     <>
-                        <Button variant="primary">Edit</Button>
+                        <Button onClick={handleUpdateEvent}>Edit</Button>
 
                         <Button onClick={handleDeleteEvent}>Delete</Button>
                     </>

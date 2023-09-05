@@ -45,6 +45,15 @@ const newEvent = (req, res, next) => {
         .catch(err => next(err))
 }
 
+const updateEvent = (req, res, next) => {
+    const {event_id} = req.params
+    Event
+    .findByIdAndUpdate(event_id)
+    .then(() => res.sendStatus(201))
+    .catch((err) => next(err))
+}
+
+
 const deleteEvent = (req,res, next) => {
     const {event_id} = req.params
     Event
@@ -58,5 +67,6 @@ module.exports = {
     listEvent,
     eventId,
     newEvent,
-    deleteEvent
+    deleteEvent,
+    updateEvent
 }

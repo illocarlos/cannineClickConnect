@@ -17,8 +17,6 @@ function AppRoutes() {
 
   return (
 
-    // TODO: REVISAR TODAS LAS LISTAS QUE PUDIESEN ALOJAR SU PROPIO ESTADO
-
     <Routes>
 
       <Route path={"/"} />

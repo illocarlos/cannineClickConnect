@@ -1,24 +1,31 @@
 import React, { useState } from 'react';
-import { GoogleAutoComplete } from 'react-google-autocomplete';
-
+import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
 
 const AddressInput = ({ onPlaceSelected }) => {
 
     const [value, setValue] = useState('');
 
+    const handleSelect = async (place) => {
+        try {
+            const results = await geocodeByAddress(place.label);
+            const latLng = await getLatLng(results[0]);
+            onPlaceSelected({ label: place.label, latLng });
+        } catch (error) {
+            console.error('Error al obtener las coordenadas:', error);
+        }
+    };
+
     return (
         <div>
-            <GoogleAutoComplete
-                placeholder="Busca una dirección"
-                value={value}
-                onChange={(event) => {
-                    setValue(event.target.value);
+            <GooglePlacesAutocomplete
+                selectProps={{
+                    place,
+                    onChange: setPLace
                 }}
-                onPlaceSelected={onPlaceSelected}
+                apiKey="AIzaSyCIkt_MWj32EbnKrxghvdDSFRzxDfC4uMs"
             />
         </div>
     );
 };
-
 
 export default AddressInput;
