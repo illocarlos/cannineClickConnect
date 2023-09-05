@@ -3,11 +3,11 @@ import { useContext } from "react";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import usersService from '../../../services/users.service';
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Col, Card } from "react-bootstrap";
 import { ThemeContext } from "../../../contexts/theme.context";
 
 const DetailsUserPage = () => {
-    const { theme, switchTheme } = useContext(ThemeContext)
+    const { theme } = useContext(ThemeContext)
     const { user_id } = useParams();
     const [user, setUser] = useState(null);
 
