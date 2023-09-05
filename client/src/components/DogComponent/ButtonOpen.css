@@ -1,0 +1,15 @@
+.ButtonCastrated {
+    width: 100%;
+}
+
+.custom-button:hover {
+    background-color: green;
+    border-color: green;
+    color: white;
+}
+
+.custom-button:active {
+    background-color: red;
+    border-color: red;
+    color: white;
+}
