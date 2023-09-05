@@ -7,7 +7,6 @@ import MapContainer from "../../../components/Maps/Maps"
 const DetailsParkPage = () => {
 
     const { park_id } = useParams()
-
     const [park, setPark] = useState({})
 
     const navigate = useNavigate()

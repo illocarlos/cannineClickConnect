@@ -28,7 +28,7 @@ const newDog = (req, res, next) => {
 
     Dog
         .create({ name, description, images, age, size, gender, castrated })
-        .then((reponse) => res.json(reponse))
+        .then(() => res.sendStatus(201))
         .catch(err => next(err))
 }
 

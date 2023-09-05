@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom"
 import eventService from "../../../services/events.service"
 import { MessageContext } from "../../../contexts/message.context"
 import Loader from "../../Loader/Loader"
+
+
 const NewEventForm = () => {
 
   const [eventData, setEventData] = useState({

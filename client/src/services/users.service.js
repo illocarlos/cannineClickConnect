@@ -25,6 +25,10 @@ class UsersService {
     getUserDetails(user_id) {
         return this.api.get(`/user/${user_id}`);
     }
+
+    deleteUser(user_id) {
+        return this.api.delete(`user/delete/${user_id}`)
+    }
 }
 
 const usersService = new UsersService()

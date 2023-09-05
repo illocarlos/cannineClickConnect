@@ -34,7 +34,7 @@
 .card-back {
     transform: rotateY(180deg);
     text-align: center;
-  background-image:url("../../../..") ;
+
     padding: 10px;
     box-sizing: border-box;
     display: flex;

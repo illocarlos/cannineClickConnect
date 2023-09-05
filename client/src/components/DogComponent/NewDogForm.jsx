@@ -7,6 +7,8 @@ import uploadServices from '../../services/upload.service';
 import { MessageContext } from '../../contexts/message.context';
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from '../../contexts/auth.context';
+import Loader from '../Loader/Loader'
+
 
 
 
@@ -24,6 +26,9 @@ function NewDogForm() {
         gender: "",
         castrated: false,
     })
+
+    const [isLoading, setIsLoading] = useState(false);
+
     const navigate = useNavigate()
 
     const { emitMessage } = useContext(MessageContext)
@@ -46,6 +51,7 @@ function NewDogForm() {
 
     const handleDogSubmit = e => {
         e.preventDefault()
+        setIsLoading(true)
 
 
         dogService
@@ -65,6 +71,9 @@ function NewDogForm() {
                 navigate('/user/list')
             })
             .catch(err => console.log(err))
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
 
     const handleFileUpload = e => {
@@ -137,13 +146,11 @@ function NewDogForm() {
 
                 <ButtonCastrated handleCastratedStatus={handleCastratedStatus} />
 
-                {/* TODO: CREAR ESTADO DE CARGA PARA INHABILITAR BOTÓN DURANTE SUBIDA */}
-
-                <div className="d-grid">
-                    <Button variant="dark" type="submit">
-                        New Dog
-                    </Button>
-                </div>
+                {isLoading ? (
+                    <Loader />
+                ) : (
+                    <Button variant="dark" type="submit">Add</Button>
+                )}
 
 
             </Form>

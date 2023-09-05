@@ -4,7 +4,7 @@ const listPark = (req, res, next) => {
 
     Park
         .find()
-        // TODO: REVISAR ENDPOINTS QUE PUEDAN SER PROYECTADOS U ORDENADOS
+        .sort({ name: 1 }) //Fuera de MVP -> Añadir buscador por ciudad?
         .then(response => res.json(response))
         .catch(err => next(err))
 }
@@ -24,7 +24,6 @@ const newPark = (req, res, next) => {
 
     const { name, description, gallery, size, crowdedness, open } = req.body
 
-    // TODO: REVISAR ENDPOINTS RESOLUBLES CON ESTADOS HTTP
 
     Park
         .create({ name, description, gallery, size, crowdedness, open })
@@ -36,7 +35,7 @@ const deletePark = (req, res, next) => {
     const {park_id} = req.params
     Park
     .findByIdAndDelete(park_id)
-    .then(response => res.json(response))
+    .then(() => res.sendStatus(204))
     .catch((err) => next(err))
 }
 
@@ -45,5 +44,4 @@ module.exports = {
     parkId,
     listPark,
     deletePark
-
 }

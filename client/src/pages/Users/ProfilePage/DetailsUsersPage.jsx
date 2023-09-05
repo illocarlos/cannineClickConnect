@@ -1,15 +1,19 @@
 import './DetailsUsersPage.css';
 import { useContext } from "react";
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import usersService from '../../../services/users.service';
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { ThemeContext } from "../../../contexts/theme.context";
 
 const DetailsUserPage = () => {
+
     const { theme, switchTheme } = useContext(ThemeContext)
     const { user_id } = useParams();
     const [user, setUser] = useState(null);
+
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         loadUserProfile();
@@ -33,6 +37,14 @@ const DetailsUserPage = () => {
         updatedUser.dogs[index].isFlipped = !updatedUser.dogs[index].isFlipped;
         setUser(updatedUser);
     };
+
+    const handleDeleteUser = () => {
+        usersService
+            .deleteUser(user_id)
+            .then(() => navigate('/user/list'))
+            .catch((err) => console.log(err))
+    }
+
 
     return (
         <Container>
@@ -62,6 +74,8 @@ const DetailsUserPage = () => {
                                     >
                                         Create dog
                                     </Link>
+
+                                    <Button onClick={handleDeleteUser}>Delete</Button>
                                 </div>
                             </Card.Body>
                         </Card>
