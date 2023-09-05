@@ -34,6 +34,12 @@ class DogService {
         return this.api.post("/dog/addDogToUser", { idUser, idDog });
 
     }
+
+    deletedDog(idUser, idDog) {
+        console.log(idUser, idDog)
+        return this.api.post("/dog/deleteDogUser", { idUser, idDog });
+    }
+
 }
 
 const dogService = new DogService();

@@ -12,7 +12,6 @@ const DetailsEventsPage = () => {
 
     const navigate = useNavigate()
 
-
     useEffect(() => {
         loadEventDeails()
     }, [event])
@@ -24,7 +23,7 @@ const DetailsEventsPage = () => {
             .catch(err => console.log(err))
     }
 
-    const ownerEvent = () => {
+    const isEventOwner = () => {
         return owner === loggedUser._id;
     }
 
@@ -58,10 +57,10 @@ const DetailsEventsPage = () => {
 
                 <Col md={{ span: 6 }}>
                     <MapContainer location={event.location} />
-
-
                 </Col>
-                {ownerEvent &&
+
+                {
+                    isEventOwner &&
                     <>
                         <Button onClick={handleUpdateEvent}>Edit</Button>
 
@@ -70,8 +69,6 @@ const DetailsEventsPage = () => {
                 }
 
                 <Link to="/event/list" className="btn btn-dark">Volver a la galería</Link>
-
-
 
             </Row>
 

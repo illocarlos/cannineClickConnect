@@ -12,7 +12,6 @@ import DetailsUserPage from '../pages/Users/ProfilePage/DetailsUsersPage'
 import NewDogPage from '../pages/Dogs/NewDogPage'
 import PrivateRoute from './PrivateRoutes'
 
-
 function AppRoutes() {
 
   return (
@@ -23,8 +22,6 @@ function AppRoutes() {
       <Route path={"/auth/signup"} element={<SignupPage />} />
       <Route path={"/auth/login"} element={<LoginPage />} />
       <Route path={"*"} element={<p>ERROR</p>} />
-
-
 
       <Route element={<PrivateRoute />}>
 

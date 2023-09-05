@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const {verifyToken} = require("../middlewares/verifyToken")
+const { verifyToken } = require("../middlewares/verifyToken")
 
 
 const {
@@ -16,7 +16,7 @@ router.get('/:park_id', parkId)
 
 router.post('/newPark', newPark)
 
-router.delete('/delete/:park_id', verifyToken, deletePark)
+router.post('/delete/:park_id', verifyToken, deletePark)
 
 
 module.exports = router

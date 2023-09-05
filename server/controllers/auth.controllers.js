@@ -18,6 +18,7 @@ const logInUser = (req, res, next) => {
         res.status(400).json({ message: "Provide email and password." });
         return;
     }
+    console.log({ email })
     User
         .findOne({ email })
         .then((foundUser) => {

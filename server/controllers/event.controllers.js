@@ -46,20 +46,24 @@ const newEvent = (req, res, next) => {
 }
 
 const updateEvent = (req, res, next) => {
-    const {event_id} = req.params
+
+    const { event_id } = req.params
+
     Event
-    .findByIdAndUpdate(event_id)
-    .then(() => res.sendStatus(201))
-    .catch((err) => next(err))
+        .findByIdAndUpdate(event_id)
+        .then(() => res.sendStatus(201))
+        .catch((err) => next(err))
 }
 
 
-const deleteEvent = (req,res, next) => {
-    const {event_id} = req.params
+const deleteEvent = (req, res, next) => {
+
+    const { event_id } = req.params
+
     Event
-    .findByIdAndDelete(event_id)
-    .then(() => res.sendStatus(204))
-    .catch((err) => next(err))
+        .findByIdAndDelete(event_id)
+        .then(() => res.sendStatus(204))
+        .catch((err) => next(err))
 }
 
 

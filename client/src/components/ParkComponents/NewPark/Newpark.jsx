@@ -7,8 +7,7 @@ import uploadServices from '../../../services/upload.service';
 import { MessageContext } from '../../../contexts/message.context';
 import { useNavigate } from "react-router-dom"
 import Loader from '../../Loader/Loader';
-
-
+import * as PARK_CONSTS from '../../../consts/park.consts';
 
 function NewParkForm() {
     const [parkData, setParkData] = useState({
@@ -36,6 +35,7 @@ function NewParkForm() {
     const handleInputChange = e => {
 
         const { value, name } = e.currentTarget
+
         setParkData({
             ...parkData,
             [name]: value
@@ -68,7 +68,6 @@ function NewParkForm() {
             formData.append('imagesData', e.target.files[i])
         }
 
-
         uploadServices
             .uploadimages(formData)
             .then(({ data }) => {
@@ -100,9 +99,9 @@ function NewParkForm() {
                     <Form.Label htmlFor="disabledSelect">Size park</Form.Label>
                     <Form.Select id="size" value={parkData.size} name="size" onChange={handleInputChange}>
                         <option>Disabled select</option>
-                        <option>LARGE</option>
-                        <option>MEDIUM</option>
-                        <option>SMALL</option>
+                        {
+                            PARK_CONSTS.PARK_SIZE.map(elm => <option>{elm}</option>)
+                        }
                     </Form.Select>
                 </Form.Group>
 
@@ -110,9 +109,10 @@ function NewParkForm() {
                     <Form.Label htmlFor="disabledSelect">Crowdedness</Form.Label>
                     <Form.Select id="crowdedness" value={parkData.crowdedness} name="crowdedness" onChange={handleInputChange}>
                         <option>Disabled select</option>
-                        <option>HIGH</option>
-                        <option>MODERATE</option>
-                        <option>LOW</option>
+                        {
+                            PARK_CONSTS.PARK_CROWDEDNESS.map(elm => <option>{elm}</option>)
+                        }
+
                     </Form.Select>
                 </Form.Group>
 

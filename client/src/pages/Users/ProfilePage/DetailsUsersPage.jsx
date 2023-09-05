@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import usersService from '../../../services/users.service';
+import dogService from '../../../services/dogs.service';
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { ThemeContext } from "../../../contexts/theme.context";
 
@@ -16,7 +17,9 @@ const DetailsUserPage = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
+
         loadUserProfile();
+
     }, []);
 
     const loadUserProfile = () => {
@@ -28,6 +31,7 @@ const DetailsUserPage = () => {
                     dog.isFlipped = false;
                 });
                 setUser(updatedUser);
+
             })
             .catch(err => console.log(err));
     };
@@ -45,6 +49,13 @@ const DetailsUserPage = () => {
             .catch((err) => console.log(err))
     }
 
+
+    const handleDeleteDog = (idUser, idDog) => {
+        dogService
+            .deletedDog(idUser, idDog)
+            .then(() => loadUserProfile())
+            .catch((err) => console.log(err))
+    }
 
     return (
         <Container>
@@ -111,6 +122,9 @@ const DetailsUserPage = () => {
                                         </div>
 
                                     </Card.Text>
+                                    <Button onClick={() => {
+                                        handleDeleteDog(user._id, dog._id)
+                                    }}>Delete</Button>
                                 </Card>
                             ))}
                             <hr />
