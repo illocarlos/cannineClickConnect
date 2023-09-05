@@ -2,7 +2,7 @@
 const image = (req, res) => {
 
     if (!req.file) {
-        res.status(500).json({ errorMessage: 'Error caragndo el archivo' })
+        res.status(500).json({ errorMessage: 'Error cargando el archivo' })
         return
     }
 
@@ -11,7 +11,7 @@ const image = (req, res) => {
 const images = (req, res) => {
 
     if (!req.files) {
-        res.status(500).json({ errorMessage: 'Error caragndo el archivo' })
+        res.status(500).json({ errorMessage: 'Error cargando el archivo' })
         return
     }
 

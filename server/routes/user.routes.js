@@ -5,12 +5,15 @@ const {
     listUsers,
     userId,
     deleteUser,
+    editUser
 } = require('./../controllers/user.controllers')
 
 router.get('/list', listUsers)
 
 router.get('/:user_id', userId)
 
-router.delete('/delete/:user_id', deleteUser)
+router.post('/edit/:user_id', verifyToken, editUser)
+
+router.delete('/delete/:user_id', verifyToken, deleteUser)
 
 module.exports = router

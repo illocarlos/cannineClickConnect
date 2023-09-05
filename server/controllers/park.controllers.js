@@ -31,6 +31,17 @@ const newPark = (req, res, next) => {
         .catch(err => next(err))
 }
 
+const editPark = (req, res, next) => {
+
+    const {park_id} = req.params
+    const {parkData} = req.body
+
+    Park
+    .findByIdAndUpdate(park_id, parkData)
+    .then(() => res.sendStatus(201))
+    .catch((err) => next(err))
+}
+
 const deletePark = (req, res, next) => {
     const {park_id} = req.params
     Park
@@ -43,5 +54,6 @@ module.exports = {
     newPark,
     parkId,
     listPark,
-    deletePark
+    deletePark,
+    editPark
 }

@@ -6,13 +6,17 @@ const {
     eventId,
     newEvent,
     deleteEvent,
-    updateEvent,
+    editEvent,
 } = require('./../controllers/event.controllers')
 
 router.get('/list', listEvent)
+
 router.get('/:event_id', eventId)
+
 router.post('/newEvent', verifyToken, newEvent)
-router.put('/edit/:event_id', verifyToken, updateEvent)
+
+router.put('/edit/:event_id', verifyToken, editEvent)
+
 router.delete('/delete/:event_id', verifyToken, deleteEvent)
 
 

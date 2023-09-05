@@ -20,8 +20,21 @@ const userId = (req, res, next) => {
         .catch(err => next(err))
 }
 
+
+const editUser = (req, res, next) => {
+
+    const { user_id } = req.params
+    const { userData } = req.body
+
+    User
+        .findByIdAndUpdate(user_id, userData)
+        .then(() => res.sendStatus(201))
+        .catch(err => next(err))
+}
+
 const deleteUser = (req, res, next) => {
     const {user_id} = req.params
+    
     User
     .findByIdAndDelete(user_id)
     .then(() => res.sendStatus(204))
@@ -32,5 +45,6 @@ const deleteUser = (req, res, next) => {
 module.exports = {
     userId,
     listUsers,
-    deleteUser
+    deleteUser,
+    editUser
 }
