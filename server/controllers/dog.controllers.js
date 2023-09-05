@@ -25,7 +25,6 @@ const newDog = (req, res, next) => {
 
     const { name, description, images, age, size, gender, castrated } = req.body
 
-
     Dog
         .create({ name, description, images, age, size, gender, castrated })
         .then(dog => res.json(dog))
@@ -34,19 +33,35 @@ const newDog = (req, res, next) => {
 
 const addDogToUser = (req, res, next) => {
 
-    const { idUser, idDog } = req.body
+    const { idUser, idDog: dogs } = req.body
 
     User
-        .findByIdAndUpdate(idUser, { $addToSet: { dogs: idDog } }, { new: true })
-        .then(() => res.status(201))
+        .findByIdAndUpdate(idUser, { $addToSet: { dogs } }, { new: true })
+        .then(() => res.status(201).send("ok"))
         .catch(err => next(err))
 
+}
+const deletedDog = (req, res, next) => {
+
+
+    const { idUser, idDog: dogs } = req.body
+    console.log({ idUser, dogs })
+    User
+        .findByIdAndUpdate(idUser, { $pull: { dogs } }, { new: true })
+        .then((response) => {
+
+            res.status(201).send("ok")
+        })
+        .catch(err => {
+            next(err)
+        })
 }
 
 module.exports = {
     newDog,
     addDogToUser,
     dogId,
-    ListDog
+    ListDog,
+    deletedDog
 
 }

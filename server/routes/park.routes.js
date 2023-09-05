@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const {verifyToken} = require("../middlewares/verifyToken")
+const { verifyToken } = require("../middlewares/verifyToken")
 
 const {
     listPark,

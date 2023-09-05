@@ -58,7 +58,6 @@ const SignupForm = () => {
             formData.append('imagesData', e.target.files[i])
         }
 
-
         uploadServices
             .uploadimages(formData)
             .then(({ data }) => {

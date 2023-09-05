@@ -11,7 +11,6 @@ const DetailsParkPage = () => {
 
     const navigate = useNavigate()
 
-
     useEffect(() => {
         loadParkDetails()
     }, [park])
@@ -23,7 +22,7 @@ const DetailsParkPage = () => {
             .catch(err => console.log(err))
     }
 
-    const ownerPark = () => {
+    const isParkOwner = () => {
         return owner === loggedUser._id;
     }
 
@@ -46,15 +45,14 @@ const DetailsParkPage = () => {
                     <h3>Descripción</h3>
                     <p>{park.description}</p>
                     <hr />
-
                 </Col>
 
                 <Col md={{ span: 6 }}>
                     <MapContainer location={park.location} />
-
-
                 </Col>
-                {ownerPark &&
+
+                {
+                    isParkOwner &&
                     <>
                         <Link
                             to={`/park/edit/${park_id}`}
@@ -67,7 +65,6 @@ const DetailsParkPage = () => {
                 }
 
                 <Link to="/parks/list" className="btn btn-dark">Volver a la galería</Link>
-
 
             </Row>
 

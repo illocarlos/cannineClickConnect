@@ -24,7 +24,6 @@ const newPark = (req, res, next) => {
 
     const { name, description, gallery, size, crowdedness, open } = req.body
 
-
     Park
         .create({ name, description, gallery, size, crowdedness, open })
         .then(() => res.sendStatus(201))
@@ -43,11 +42,13 @@ const editPark = (req, res, next) => {
 }
 
 const deletePark = (req, res, next) => {
-    const {park_id} = req.params
+
+    const { park_id } = req.params
+
     Park
-    .findByIdAndDelete(park_id)
-    .then(() => res.sendStatus(204))
-    .catch((err) => next(err))
+        .findByIdAndDelete(park_id)
+        .then(() => res.sendStatus(204))
+        .catch((err) => next(err))
 }
 
 module.exports = {

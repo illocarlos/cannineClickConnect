@@ -61,9 +61,9 @@ const deleteEvent = (req,res, next) => {
     const {event_id} = req.params
     
     Event
-    .findByIdAndDelete(event_id)
-    .then(() => res.sendStatus(204))
-    .catch((err) => next(err))
+        .findByIdAndDelete(event_id)
+        .then(() => res.sendStatus(204))
+        .catch((err) => next(err))
 }
 
 

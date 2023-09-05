@@ -22,8 +22,7 @@ class AuthService {
 
 
     signup(userData) {
-        console.log("SIGNUP DESDE SERVICE CLIENTE", userData)
-        return this.api.post('/signup', userData)
+        return this.api.post('/signup', userData) 
     }
 
     login(userData) {

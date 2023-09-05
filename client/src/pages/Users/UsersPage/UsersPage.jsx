@@ -1,24 +1,9 @@
-import { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
-import usersService from '../../../services/users.service'
 import UserList from '../../../components/UserComponents/UserList/UserList'
 
+// TODO: BAJAR ESTADO
 
 const UsersPage = () => {
-
-    const [users, setUsers] = useState([])
-
-    useEffect(() => {
-        loadUsers()
-    }, [])
-
-    const loadUsers = () => {
-
-        usersService
-            .getUsers()
-            .then(({ data }) => setUsers(data))
-            .catch((err) => console.log(err))
-    }
 
     return (
         <>
@@ -26,7 +11,7 @@ const UsersPage = () => {
                 <h1>Nuestra comunidad</h1>
                 <hr />
 
-                <UserList users={users} />
+                <UserList />
 
             </Container>
         </>

@@ -15,7 +15,6 @@ import EditProfile from '../pages/Users/EditProfilePage/EditProfilePage'
 import EditEvent from '../pages/Events/EditEventsPage/EditEventsPage'
 import EditPark from '../pages/Parks/EditParkPage/EditParkPage'
 
-
 function AppRoutes() {
 
   return (
@@ -26,8 +25,6 @@ function AppRoutes() {
       <Route path={"/auth/signup"} element={<SignupPage />} />
       <Route path={"/auth/login"} element={<LoginPage />} />
       <Route path={"*"} element={<p>ERROR</p>} />
-
-
 
       <Route element={<PrivateRoute />}>
 
