@@ -123,6 +123,7 @@ const NewEventForm = () => {
           </Form.Group>
         </Col>
 
+
       </Row>
 
       {
