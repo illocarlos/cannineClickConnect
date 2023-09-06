@@ -31,7 +31,7 @@ class ParkService {
     }
 
     editPark(park_id, parkData) {
-        return this.api.put(`park/edit/${park_id}`, parkData)
+        return this.api.put(`park/edit/${park_id}`, {parkData})
     }
 
     deletePark(park_id) {

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom"
 import { AuthContext } from '../../contexts/auth.context';
 import Loader from '../Loader/Loader'
 import { ThemeContext } from "../../contexts/theme.context";
+import * as DOGS_CONSTS from '../../consts/dog.consts';
 
 
 
@@ -56,28 +57,21 @@ function NewDogForm() {
         e.preventDefault()
         setIsLoading(true)
 
-
         dogService
             .newDog(DogData)
             .then(({ data }) => {
                 const idDog = data._id
                 const idUser = loggedUser._id
 
-                dogService
-                    .addDogToUser(idUser, idDog)
-                    .then(() => {
-                        emitMessage('create new dog')
-                        navigate('/user/list')
-                    })
-                    .catch(err => {
-                        setErrors(err.response.data.errorMessages
-                        )
-                    })
-
-
-
+                return dogService.addDogToUser(idUser, idDog)
             })
-            .catch(err => console.log(err))
+            .then(() => {
+                emitMessage('create new dog')
+                navigate(`/user/${loggedUser._id}`)
+            })
+            .catch(err => {
+                setErrors(err.response.data.errorMessages)
+            })
             .finally(() => {
                 setIsLoading(false);
             });
@@ -90,7 +84,6 @@ function NewDogForm() {
         for (let i = 0; i < e.target.files.length; i++) {
             formData.append('imagesData', e.target.files[i])
         }
-
 
         uploadServices
             .uploadimages(formData)
@@ -135,9 +128,13 @@ function NewDogForm() {
                             <Form.Label htmlFor="disabledSelect">Size </Form.Label>
                             <Form.Select id="size" value={DogData.size} name="size" onChange={handleInputChange}>
                                 <option>Disabled select</option>
-                                <option>BIG</option>
-                                <option>MEDIUM</option>
-                                <option>SMALL</option>
+
+                                {
+
+                                    DOGS_CONSTS.DOG_SIZE.map(elm => <option>{elm}</option>)
+
+
+                                }
                             </Form.Select>
                         </Form.Group>
                     </Col>
@@ -146,8 +143,12 @@ function NewDogForm() {
                             <Form.Label htmlFor="disabledSelect">gender</Form.Label>
                             <Form.Select id="gender" value={DogData.gender} name="gender" onChange={handleInputChange}>
                                 <option>Disabled select</option>
-                                <option>MALE</option>
-                                <option>FEMALE</option>
+                                {
+
+                                    DOGS_CONSTS.DOG_GENDER.map(elm => <option>{elm}</option>)
+
+
+                                }
 
                             </Form.Select>
                         </Form.Group>

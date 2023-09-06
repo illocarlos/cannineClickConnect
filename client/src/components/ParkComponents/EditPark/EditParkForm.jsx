@@ -1,15 +1,12 @@
-import { useContext, useState } from 'react';
-import './NewPark.css'
+import React, { useContext, useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import ButtonOpen from './ButtonOpen';
 import parkService from "../../../services/parks.service";
 import uploadServices from '../../../services/upload.service';
 import { MessageContext } from '../../../contexts/message.context';
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom";
 import Loader from '../../Loader/Loader';
-import * as PARK_CONSTS from '../../../consts/park.consts';
 
-function NewParkForm() {
+function EditParkForm() {
     const [parkData, setParkData] = useState({
         name: "",
         description: "",
@@ -18,54 +15,59 @@ function NewParkForm() {
         crowdedness: "",
         rating: 0,
         open: true,
-    })
+    });
 
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
+    const { emitMessage } = useContext(MessageContext);
 
-    const navigate = useNavigate()
-    const { emitMessage } = useContext(MessageContext)
+    const { park_id } = useParams();
 
-    const handleOpenStatus = value => {
+    useEffect(() => {
+        parkService
+            .getParkDetails(park_id)
+            .then((park) => {
+                setParkData(park);
+            })
+            .catch((err) => console.error(err));
+    }, [park_id]);
+
+    const handleOpenStatus = (value) => {
         setParkData({
             ...parkData,
-            open: value
-        })
-    }
+            open: value,
+        });
+    };
 
-    const handleInputChange = e => {
-
-        const { value, name } = e.currentTarget
-
+    const handleInputChange = (e) => {
+        const { value, name } = e.currentTarget;
         setParkData({
             ...parkData,
-            [name]: value
-        })
-    }
+            [name]: value,
+        });
+    };
 
-    const handleParkSubmit = e => {
-
-        e.preventDefault()
-        setIsLoading(true)
+    const handleParkSubmit = (e) => {
+        e.preventDefault();
+        setIsLoading(true);
 
         parkService
-            .newPark(parkData)
+            .editPark(park_id, parkData)
             .then(() => {
-                emitMessage('create new park')
-                navigate('/park/list')
+                emitMessage('edit park');
+                navigate(`/park/${park_id}`);
             })
-
-            .catch(err => console.log(err))
+            .catch((err) => console.error(err))
             .finally(() => {
                 setIsLoading(false);
             });
-    }
+    };
 
-    const handleFileUpload = e => {
-
-        const formData = new FormData()
+    const handleFileUpload = (e) => {
+        const formData = new FormData();
 
         for (let i = 0; i < e.target.files.length; i++) {
-            formData.append('imagesData', e.target.files[i])
+            formData.append('imagesData', e.target.files[i]);
         }
 
         uploadServices
@@ -73,78 +75,64 @@ function NewParkForm() {
             .then(({ data }) => {
                 setParkData({
                     ...parkData,
-                    gallery: data.cloudinary_urls
-                })
+                    gallery: data.cloudinary_urls,
+                });
             })
-            .catch(err => console.log(err))
-    }
+            .catch((err) => console.error(err));
+    };
 
     return (
-        <div className='NewParkForm'>
-            <Form onSubmit={handleParkSubmit} encType='multipart/form-data'>
+        <div className="EditParkForm">
+            <Form onSubmit={handleParkSubmit} encType="multipart/form-data">
                 <Form.Group className="mb-3">
                     <Form.Label>Name</Form.Label>
                     <Form.Control type="text" placeholder="Enter Name" name="name" value={parkData.name} onChange={handleInputChange} />
-                    <Form.Text className="text-muted">
-                    </Form.Text>
                 </Form.Group>
-                <Form.Group className="mb-3" >
+                <Form.Group className="mb-3">
                     <Form.Label>Description</Form.Label>
                     <Form.Control type="text" placeholder="Description" name="description" value={parkData.description} onChange={handleInputChange} />
-                    <Form.Text className="text-muted">
-                    </Form.Text>
                 </Form.Group>
 
-                <Form.Group className="mb-3" >
-                    <Form.Label htmlFor="disabledSelect">Size park</Form.Label>
+                <Form.Group className="mb-3">
+                    <Form.Label htmlFor="size">Size park</Form.Label>
                     <Form.Select id="size" value={parkData.size} name="size" onChange={handleInputChange}>
-                        <option>Disabled select</option>
-                        {
-                            PARK_CONSTS.PARK_SIZE.map(elm => <option>{elm}</option>)
-                        }
+                        <option value="LARGE">LARGE</option>
+                        <option value="MEDIUM">MEDIUM</option>
+                        <option value="SMALL">SMALL</option>
                     </Form.Select>
                 </Form.Group>
 
-                <Form.Group className="mb-3" >
-                    <Form.Label htmlFor="disabledSelect">Crowdedness</Form.Label>
+                <Form.Group className="mb-3">
+                    <Form.Label htmlFor="crowdedness">Crowdedness</Form.Label>
                     <Form.Select id="crowdedness" value={parkData.crowdedness} name="crowdedness" onChange={handleInputChange}>
-                        <option>Disabled select</option>
-                        {
-                            PARK_CONSTS.PARK_CROWDEDNESS.map(elm => <option>{elm}</option>)
-                        }
-
+                        <option value="HIGH">HIGH</option>
+                        <option value="MODERATE">MODERATE</option>
+                        <option value="LOW">LOW</option>
                     </Form.Select>
                 </Form.Group>
 
-                <Form.Group className="mb-3" >
+                <Form.Group className="mb-3">
                     <Form.Label>Rating</Form.Label>
                     <Form.Control type="number" placeholder="Rating" value={parkData.rating} name="rating" onChange={handleInputChange} />
-                    <Form.Text className="text-muted">
-                    </Form.Text>
                 </Form.Group>
-
-
 
                 <Form.Group className="mb-3" controlId="image">
                     <Form.Label>Imagen (URL)</Form.Label>
                     <Form.Control type="file" multiple onChange={handleFileUpload} />
                 </Form.Group>
 
-                <ButtonOpen handleOpenStatus={handleOpenStatus} />
-
                 {isLoading ? (
                     <Loader />
                 ) : (
                     <div className="d-grid">
                         <Button variant="dark" type="submit">
-                            New Park
+                            Edit Park
                         </Button>
                     </div>
                 )}
-
             </Form>
         </div>
-    )
+    );
 }
 
-export default NewParkForm;
+export default EditParkForm;

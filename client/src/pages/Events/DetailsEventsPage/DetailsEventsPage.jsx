@@ -12,7 +12,6 @@ const DetailsEventsPage = () => {
 
     const navigate = useNavigate()
 
-
     useEffect(() => {
         loadEventDeails()
     }, [event])
@@ -24,13 +23,13 @@ const DetailsEventsPage = () => {
             .catch(err => console.log(err))
     }
 
-    const ownerEvent = () => {
+    const isEventOwner = () => {
         return owner === loggedUser._id;
     }
 
     const handleDeleteEvent = () => {
         eventsService
-            .deleteEvent(event_id)
+            .deleteEvent(event_id, event)
             .then(() => navigate('/event/list'))
             .catch((err) => console.log(err))
     }
@@ -58,20 +57,22 @@ const DetailsEventsPage = () => {
 
                 <Col md={{ span: 6 }}>
                     <MapContainer location={event.location} />
-
-
                 </Col>
-                {ownerEvent &&
+
+                {
+                    isEventOwner &&
                     <>
-                        <Button onClick={handleUpdateEvent}>Edit</Button>
+                        <Link
+                            to={`/event/edit/${event_id}`}
+                            className="btn btn-warning">
+                            Edit Event
+                        </Link>
 
                         <Button onClick={handleDeleteEvent}>Delete</Button>
                     </>
                 }
 
                 <Link to="/event/list" className="btn btn-dark">Volver a la galería</Link>
-
-
 
             </Row>
 

@@ -11,7 +11,9 @@ import LoginPage from '../pages/Auth/LoginPage/LoginPage'
 import DetailsUserPage from '../pages/Users/ProfilePage/DetailsUsersPage'
 import NewDogPage from '../pages/Dogs/NewDogPage'
 import PrivateRoute from './PrivateRoutes'
-
+import EditProfile from '../pages/Users/EditProfilePage/EditProfilePage'
+import EditEvent from '../pages/Events/EditEventsPage/EditEventsPage'
+import EditPark from '../pages/Parks/EditParkPage/EditParkPage'
 
 function AppRoutes() {
 
@@ -24,12 +26,10 @@ function AppRoutes() {
       <Route path={"/auth/login"} element={<LoginPage />} />
       <Route path={"*"} element={<p>ERROR</p>} />
 
-
-
       <Route element={<PrivateRoute />}>
 
         <Route path={"/event/delete/:event_id"} />
-        <Route path={"/event/edit/:event_id"} element={<DetailsUserPage />} />
+        <Route path={"/event/edit/:event_id"} element={<EditEvent />} />
         <Route path={"/park/list"} element={<ParkGalleryPage />} />
         <Route path={"/user/list"} element={<UsersPage />} />
         <Route path={"/event/list"} element={<EventsGalleryPage />} />
@@ -39,6 +39,8 @@ function AppRoutes() {
         <Route path={"/park/:park_id"} element={<DetailsParkPage />} />
         <Route path={"/user/:user_id"} element={<DetailsUserPage />} />
         <Route path={"/dog/newdog"} element={<NewDogPage />} />
+        <Route path={"/user/edit/:user_id"} element={<EditProfile />} />
+        <Route path={"/park/edit/:park_id"} element={<EditPark />} />
       </Route>
 
     </Routes>

@@ -1,16 +1,16 @@
 import './NewEventForm.css'
 import { useState, useContext } from "react"
 import { Form, Button, Row, Col } from "react-bootstrap"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import eventService from "../../../services/events.service"
 import { MessageContext } from "../../../contexts/message.context"
 import Loader from "../../Loader/Loader"
 import { ThemeContext } from "../../../contexts/theme.context";
 
+const NewEventForm = ({ fireFinalActions }) => {
 
-const NewEventForm = () => {
+
   const { theme, switchTheme } = useContext(ThemeContext)
-
   const [eventData, setEventData] = useState({
     title: '',
     description: '',
@@ -53,6 +53,7 @@ const NewEventForm = () => {
     eventService
       .newEvent(eventData)
       .then(() => {
+        fireFinalActions()
         emitMessage('create new event')
         navigate('/event/list')
       })
@@ -63,8 +64,8 @@ const NewEventForm = () => {
   }
 
   return (
-    <Form bg={theme === 'dark' ? 'light' : 'dark'}
-      data-bs-theme={theme === 'dark' ? 'light' : 'dark'} style={{ width: '300px' }} onSubmit={handleEventSubmit}>
+
+    <Form style={{ width: '300px' }} onSubmit={handleEventSubmit}>
 
       <Form.Group className="mb-3" controlId="title">
         <Form.Label>Title</Form.Label>

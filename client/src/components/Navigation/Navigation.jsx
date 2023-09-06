@@ -31,16 +31,12 @@ const Navigation = () => {
               {
                 loggedUser &&
                 <div className="d-flex mt-2">
-
-
                   <Link to={"/park/list"} className="nav-link me-4">Park</Link>
                   <Link to={"/event/list"} className="nav-link me-4">Events</Link>
                   <Link to={"/user/list"} className="nav-link me-4"> Community</Link>
                 </div>
 
               }
-
-
               <DropdownButton
                 variant={theme}
                 align="end"

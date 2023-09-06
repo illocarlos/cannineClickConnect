@@ -1,22 +1,15 @@
-import { useContext, useState, useEffect } from 'react'
-import { Form, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Card, Button, Container } from 'react-bootstrap'
-import { AuthContext } from '../../../contexts/auth.context'
-import eventsService from '../../../services/events.service'
 
 
-const EventList = ({ title, cover, description, _id, owner }) => {
 
-    const { loggedUser } = useContext(AuthContext)
+const EventList = ({ title, cover, description, _id }) => {
 
-    const ownerEvent = () => {
 
-        return owner === loggedUser._id;
-    }
 
     return (
         <Container>
-            <Card style={{ width: '18rem' }}>
+            <Card >
                 <Card.Img variant="top" src={cover} />
                 <Card.Body>
                     <Card.Title>{title}</Card.Title>
@@ -26,7 +19,6 @@ const EventList = ({ title, cover, description, _id, owner }) => {
                     <Link to={`/event/${_id}`}>
                         <Button variant="primary">Details</Button>
                     </Link >
-
                 </Card.Body>
             </Card>
         </Container>
