@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react';
 import './NewDog.css'
+import { useContext, useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import ButtonCastrated from './ButtonOpen'
 import dogService from "../../services/dogs.service";
@@ -10,6 +10,7 @@ import { AuthContext } from '../../contexts/auth.context';
 import Loader from '../Loader/Loader'
 import { ThemeContext } from "../../contexts/theme.context";
 import * as DOGS_CONSTS from '../../consts/dog.consts';
+import FormError from '../FormError/FormError';
 
 
 
@@ -31,11 +32,8 @@ function NewDogForm() {
     const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate()
-
     const { emitMessage } = useContext(MessageContext)
     const [errors, setErrors] = useState([])
-
-    console.log("estos sonlos errores", errors)
 
     const handleCastratedStatus = value => {
         setDogData({
@@ -116,9 +114,14 @@ function NewDogForm() {
                 </Form.Group>
                 <Row>
                     <Col>
-                        <Form.Group className="mb-3" >
+                        <Form.Group className="mb-3">
                             <Form.Label>age</Form.Label>
-                            <Form.Control type="number" placeholder="age" name="age" value={DogData.age} onChange={handleInputChange} />
+                            <Form.Control
+                                min={0}
+                                max={100}
+                                type="number" placeholder="age"
+                                name="age" value={DogData.age}
+                                onChange={handleInputChange} />
                             <Form.Text className="text-muted">
                             </Form.Text>
                         </Form.Group>
@@ -163,11 +166,14 @@ function NewDogForm() {
                     <ButtonCastrated handleCastratedStatus={handleCastratedStatus} />
                 </Form.Group>
 
+
                 {isLoading ? (
                     <Loader />
                 ) : (
-                    <Button variant='warning' style={{ width: '100%' }} type="submit">Add</Button>
+                    <Button className='mt-3' variant='warning' type="submit" style={{ width: '100%' }}  >Add</Button>
                 )}
+
+                {errors.length > 0 && <FormError> {errors.map(elm => <p>{elm}</p>)}</FormError>}
 
 
             </Form>

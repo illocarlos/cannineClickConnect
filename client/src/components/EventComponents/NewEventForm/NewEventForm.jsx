@@ -6,11 +6,19 @@ import eventService from "../../../services/events.service"
 import { MessageContext } from "../../../contexts/message.context"
 import Loader from "../../Loader/Loader"
 import { ThemeContext } from "../../../contexts/theme.context";
+import FormError from '../../FormError/FormError';
+import { useDate } from '../../../contexts/getCurrentDate.context'
+
 
 const NewEventForm = ({ fireFinalActions }) => {
-
-
+  const { getCurrentDate } = useDate()
   const { theme, switchTheme } = useContext(ThemeContext)
+  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState([])
+  const navigate = useNavigate()
+  const { emitMessage } = useContext(MessageContext)
+
+
   const [eventData, setEventData] = useState({
     title: '',
     description: '',
@@ -26,14 +34,14 @@ const NewEventForm = ({ fireFinalActions }) => {
     }
   })
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const navigate = useNavigate()
-  const { emitMessage } = useContext(MessageContext)
 
 
   const handleInputChange = e => {
     const { value, name } = e.currentTarget
+    if (name === "number" && (isNaN(value) || parseInt(value) < 0)) {
+      return;
+    }
+
 
     setEventData({
       ...eventData,
@@ -57,7 +65,9 @@ const NewEventForm = ({ fireFinalActions }) => {
         emitMessage('create new event')
         navigate('/event/list')
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        setErrors(err.response.data.errorMessages)
+      })
       .finally(() => {
         setIsLoading(false);
       });
@@ -65,16 +75,20 @@ const NewEventForm = ({ fireFinalActions }) => {
 
   return (
 
-    <Form style={{ width: '300px' }} onSubmit={handleEventSubmit}>
+    <Form className='formEvent' bg={theme === 'dark' ? 'light' : 'dark'}
+      data-bs-theme={theme === 'dark' ? 'light' : 'dark'}
+      style={{ width: '300px' }} onSubmit={handleEventSubmit}>
 
       <Form.Group className="mb-3" controlId="title">
         <Form.Label>Title</Form.Label>
-        <Form.Control type="text" value={eventData.title} name="title" onChange={handleInputChange} />
+        <Form.Control type="text" value={eventData.title}
+          name="title" onChange={handleInputChange} />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="description">
         <Form.Label>Description</Form.Label>
-        <Form.Control type="text" value={eventData.description} name="description" onChange={handleInputChange} />
+        <Form.Control type="text" value={eventData.description}
+          name="description" onChange={handleInputChange} />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="cover">
@@ -84,13 +98,16 @@ const NewEventForm = ({ fireFinalActions }) => {
 
       <Row>
         <Col>
-          <Form.Control type="date" value={eventData.date} name="date" onChange={handleInputChange} />
+          <Form.Control min={getCurrentDate()}
+            type="date" value={eventData.date}
+            name="date" onChange={handleInputChange} />
         </Col>
 
         <Col >
           <Form.Group className="mb-3" controlId="street">
 
-            <Form.Control type="text" value={eventData.address.street} placeholder="Street" name="street" onChange={handleInputChange} />
+            <Form.Control type="text" value={eventData.address.street}
+              placeholder="Street" name="street" onChange={handleInputChange} />
           </Form.Group>
         </Col>
       </Row>
@@ -99,7 +116,8 @@ const NewEventForm = ({ fireFinalActions }) => {
         <Col>
           <Form.Group className="mb-3" controlId="number">
             <Form.Label>Number</Form.Label>
-            <Form.Control type="number" value={eventData.address.number} name="number" onChange={handleInputChange} />
+            <Form.Control type="number" value={eventData.address.number}
+              name="number" onChange={handleInputChange} />
           </Form.Group>
         </Col>
 
@@ -135,7 +153,7 @@ const NewEventForm = ({ fireFinalActions }) => {
 
         )
       }
-
+      {errors.length > 0 && <FormError> {errors.map(elm => <p>{elm}</p>)}</FormError>}
 
     </Form >
   )

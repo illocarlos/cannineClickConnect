@@ -47,19 +47,19 @@ const newEvent = (req, res, next) => {
 
 const editEvent = (req, res, next) => {
 
-    const {event_id} = req.params
-    const {eventData} = req.body
+    const { event_id } = req.params
+    const { eventData } = req.body
 
     Event
-    .findByIdAndUpdate(event_id, eventData)
-    .then(() => res.sendStatus(201))
-    .catch((err) => next(err))
+        .findByIdAndUpdate(event_id, eventData)
+        .then(() => res.sendStatus(201))
+        .catch((err) => next(err))
 }
 
 
-const deleteEvent = (req,res, next) => {
-    const {event_id} = req.params
-    
+const deleteEvent = (req, res, next) => {
+    const { event_id } = req.params
+
     Event
         .findByIdAndDelete(event_id)
         .then(() => res.sendStatus(204))

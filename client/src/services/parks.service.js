@@ -7,7 +7,7 @@ class ParkService {
             baseURL: `${import.meta.env.VITE_API_URL}`,
         });
         this.api.interceptors.request.use((config) => {
-      
+
             const storedToken = localStorage.getItem("authToken");
 
             if (storedToken) {
@@ -31,7 +31,7 @@ class ParkService {
     }
 
     editPark(park_id, parkData) {
-        return this.api.put(`park/edit/${park_id}`, {parkData})
+        return this.api.put(`park/edit/${park_id}`, { parkData })
     }
 
     deletePark(park_id) {
