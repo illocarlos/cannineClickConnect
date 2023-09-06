@@ -3,3 +3,9 @@
     text-transform: none;
 
 }
+
+
+.nav-link:hover {
+    color: yellow;
+
+}

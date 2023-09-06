@@ -5,9 +5,14 @@ import { useNavigate } from "react-router-dom"
 import uploadServices from "../../services/upload.service"
 import { MessageContext } from "../../contexts/message.context"
 import Loader from "../Loader/Loader"
-
+import FormError from '../../components/FormError/FormError';
 
 const SignupForm = () => {
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [errors, setErrors] = useState([])
+    const navigate = useNavigate()
+    const { emitMessage } = useContext(MessageContext)
 
     const [signupData, setSignupData] = useState({
         username: '',
@@ -19,10 +24,6 @@ const SignupForm = () => {
 
     })
 
-    const [isLoading, setIsLoading] = useState(false);
-
-    const navigate = useNavigate()
-    const { emitMessage } = useContext(MessageContext)
 
     const handleInputChange = e => {
         const { value, name } = e.target
@@ -43,7 +44,9 @@ const SignupForm = () => {
                 emitMessage('welcome')
                 navigate('/')
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                setErrors(err.response.data.errorMessages)
+            })
             .finally(() => {
                 setIsLoading(false);
             });
@@ -72,7 +75,7 @@ const SignupForm = () => {
 
     return (
 
-        <Form onSubmit={handleFormSubmit}>
+        <Form style={{ textAlign: 'center' }} onSubmit={handleFormSubmit}>
 
             <Form.Group className="mb-3" controlId="username">
                 <Form.Label>Name</Form.Label>
@@ -114,7 +117,7 @@ const SignupForm = () => {
                     <Button variant="dark" type="submit">Sign up</Button>
                 </div>
             )}
-
+            {errors.length > 0 && <FormError> {errors.map(elm => <p>{elm}</p>)}</FormError>}
         </Form>
     )
 }

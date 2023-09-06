@@ -10,7 +10,7 @@ const containerStyle = {
 };
 
 
-function MyComponent({ location }) {
+function MyComponent({ locations } = { locations: [] }) {
 
 
     const { isLoaded } = useJsApiLoader({
@@ -19,10 +19,7 @@ function MyComponent({ location }) {
         googleMapsApiKey: "AIzaSyDEfioKfYGi6udaByyFEojQ4p3fvjcP00Q"
     });
 
-    const center = {
-        lat: location?.cordinates[0],
-        lng: location?.cordinates[1],
-    };
+
 
     const [map, setMap] = useState(null);
 
@@ -46,7 +43,15 @@ function MyComponent({ location }) {
                 onLoad={onLoad}
                 onUnmount={onUnmount}
             >
-                <MarkerF position={center} />
+                {locations.map(location => {
+                    const center = {
+                        lat: location?.cordinates[0],
+                        lng: location?.cordinates[1],
+                    };
+
+                    return <MarkerF position={center} />
+                })}
+
 
             </GoogleMap>
 

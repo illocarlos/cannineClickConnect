@@ -82,7 +82,7 @@ const DetailsParkPage = () => {
                     <p>{park.description}</p>
                     <hr />
                     <HandleVote initialValue={userRating} onRate={handleUserRating} />
-                    <Button onClick={handleRatePark}>Votar</Button>
+                    <Button variant='warning' onClick={handleRatePark}>Votar</Button>
                     <Rating media={average} />
 
 
@@ -103,7 +103,7 @@ const DetailsParkPage = () => {
                             Edit Park
                         </Link>
 
-                        <Button onClick={handleDeletePark}>Delete</Button>
+                        <Button variant='warning' onClick={handleDeletePark}>Delete</Button>
                     </>
                 }
 

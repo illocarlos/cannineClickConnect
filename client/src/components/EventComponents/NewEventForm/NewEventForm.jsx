@@ -5,14 +5,16 @@ import { useNavigate } from "react-router-dom"
 import eventService from "../../../services/events.service"
 import { MessageContext } from "../../../contexts/message.context"
 import Loader from "../../Loader/Loader"
-import { ThemeContext } from "../../../contexts/theme.context";
-import FormError from '../../FormError/FormError';
+import uploadServices from "../../../services/upload.service"
+import { ThemeContext } from "../../../contexts/theme.context"
+import FormError from '../../FormError/FormError'
 import { useDate } from '../../../contexts/getCurrentDate.context'
+
 
 
 const NewEventForm = ({ fireFinalActions }) => {
   const { getCurrentDate } = useDate()
-  const { theme, switchTheme } = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext)
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState([])
   const navigate = useNavigate()
@@ -63,21 +65,41 @@ const NewEventForm = ({ fireFinalActions }) => {
       .then(() => {
         fireFinalActions()
         emitMessage('create new event')
-        navigate('/event/list')
+
       })
       .catch(err => {
         setErrors(err.response.data.errorMessages)
       })
       .finally(() => {
-        setIsLoading(false);
+        navigate('/event/list')
+        setIsLoading(false)
       });
+
+  }
+  const handleFileUpload = e => {
+
+    const formData = new FormData()
+
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData.append('imagesData', e.target.files[i])
+    }
+
+    uploadServices
+      .uploadimages(formData)
+      .then(({ data }) => {
+        setEventData({
+          ...eventData,
+          cover: data.cloudinary_urls
+        })
+      })
+      .catch(err => console.log(err))
   }
 
   return (
 
     <Form className='formEvent' bg={theme === 'dark' ? 'light' : 'dark'}
       data-bs-theme={theme === 'dark' ? 'light' : 'dark'}
-      style={{ width: '300px' }} onSubmit={handleEventSubmit}>
+      style={{ width: '300px', textAlign: 'center' }} onSubmit={handleEventSubmit}>
 
       <Form.Group className="mb-3" controlId="title">
         <Form.Label>Title</Form.Label>
@@ -93,7 +115,7 @@ const NewEventForm = ({ fireFinalActions }) => {
 
       <Form.Group className="mb-3" controlId="cover">
         <Form.Label>Image</Form.Label>
-        <Form.Control type="text" value={eventData.cover} name="cover" onChange={handleInputChange} />
+        <Form.Control type="file" multiple name="cover" onChange={handleFileUpload} />
       </Form.Group>
 
       <Row>

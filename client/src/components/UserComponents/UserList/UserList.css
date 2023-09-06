@@ -1,0 +1,59 @@
+/* UserList.css */
+.user-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    /* Establece la altura para ocupar toda la pantalla */
+    margin: 0;
+    /* Elimina el margen exterior predeterminado */
+    overflow: hidden;
+    /* Evita la barra de desplazamiento vertical */
+}
+
+.user-list-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.user-list-carousel {
+    width: 100%;
+    /* Ocupa todo el ancho disponible */
+    max-width: 100%;
+    /* Evita que el contenido se desborde */
+}
+
+.custom-next-arrow,
+.custom-prev-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.custom-next-arrow {
+    right: 20px;
+}
+
+.custom-prev-arrow {
+    left: 20px;
+}
+
+.custom-next-arrow:hover,
+.custom-prev-arrow:hover {
+    background-color: #0056b3;
+}
+
+.arrow-label {
+    display: block;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 5px;
+}

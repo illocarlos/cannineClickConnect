@@ -9,8 +9,12 @@ const eventSchema = new Schema(
         },
 
         cover: {
-            type: String,
-            default: "img"
+            type: [String],
+            required: [true, 'You need a photo'],
+            validate: {
+                validator: value => value.length > 0,
+                message: 'at least one photo is required',
+            },
         },
 
         description: {

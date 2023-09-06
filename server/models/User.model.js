@@ -16,7 +16,8 @@ const userSchema = new Schema(
       validate: {
         validator: value => value.length > 0,
         message: 'at least one photo is required'
-      }
+      },
+      required: [true, 'Photo is required.'],
     },
 
     email: {

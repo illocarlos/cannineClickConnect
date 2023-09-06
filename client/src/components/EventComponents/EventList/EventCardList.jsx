@@ -1,27 +1,43 @@
 import { Link } from 'react-router-dom'
-import { Card, Button, Container } from 'react-bootstrap'
+import { Card, Button, Col, Carousel } from 'react-bootstrap'
 
 
 
 const EventList = ({ title, cover, description, _id }) => {
-
-
-
     return (
-        <Container>
-            <Card >
-                <Card.Img variant="top" src={cover} />
+        <Col md={{ span: 3 }} key={_id}>
+            <Card style={{ height: '500px' }} >
+                <Carousel>
+                    {
+                        cover.map((image, index) => (
+                            <Carousel.Item key={index}>
+                                <Card.Img variant="top" src={image}
+                                    style={{ width: '100%', height: '200px' }} />
+                            </Carousel.Item>
+                        ))
+                    }
+                </Carousel>
                 <Card.Body>
-                    <Card.Title>{title}</Card.Title>
-                    <Card.Text>
-                        {description}
-                    </Card.Text>
-                    <Link to={`/event/${_id}`}>
-                        <Button variant="primary">Details</Button>
-                    </Link >
+                    <div style={{ height: '100%' }} className='d-flex flex-column justify-content-between'>
+                        <div>
+                            <Card.Title style={{
+                                whiteSpace: 'nowrap', textOverflow:
+                                    'ellipsis', overflow: 'hidden'
+                            }}>{title}</Card.Title>
+                            <Card.Text style={{
+                                height: '170px',
+                                textOverflow: 'ellipsis', overflow: 'hidden'
+                            }}>
+                                {description}</Card.Text>
+                        </div>
+                        <Link to={`/event/${_id}`}>
+                            <Button style={{ width: '100%' }} variant='warning'>Details</Button>
+                        </Link>
+                    </div>
                 </Card.Body>
             </Card>
-        </Container>
+        </Col >
     )
+
 }
 export default EventList
