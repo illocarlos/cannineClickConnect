@@ -56,6 +56,7 @@ const DetailsParkPage = () => {
             .catch((err) => console.log(err));
     };
 
+
     const averageRating = () => {
         if (park.rating && park.rating.length > 0) {
             const sum = park.rating.reduce((total, rating) => total + rating, 0);

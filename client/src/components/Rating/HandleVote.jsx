@@ -23,4 +23,5 @@ const HandleVote = ({ initialValue, onRate }) => {
     );
 };
 
+
 export default HandleVote;
