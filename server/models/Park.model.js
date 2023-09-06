@@ -40,7 +40,7 @@ const parkSchema = new Schema(
         },
 
         rating: {
-            type: Number
+            type: [Number]
         },
 
         address: {
