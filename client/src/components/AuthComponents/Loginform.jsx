@@ -6,7 +6,13 @@ import { AuthContext } from "../../contexts/auth.context"
 import { MessageContext } from "../../contexts/message.context"
 
 
+
 const LoginForm = () => {
+    const [errors, setErrors] = useState([])
+    const navigate = useNavigate()
+    const { emitMessage } = useContext(MessageContext)
+    const { authenticateUser, storeToken } = useContext(AuthContext)
+    const { loggedUser } = useContext(AuthContext)
 
     const [loginData, setLoginData] = useState({
 
@@ -15,11 +21,6 @@ const LoginForm = () => {
 
     })
 
-    const navigate = useNavigate()
-    const { emitMessage } = useContext(MessageContext)
-
-    const { authenticateUser, storeToken } = useContext(AuthContext)
-    const { loggedUser } = useContext(AuthContext)
 
     const handleInputChange = e => {
         const { value, name } = e.target
@@ -37,7 +38,10 @@ const LoginForm = () => {
                 storeToken(data.authToken)
                 authenticateUser()
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                setErrors(err.response.data.message)
+
+            })
     }
 
     useEffect(() => {
@@ -61,6 +65,8 @@ const LoginForm = () => {
             <div className="d-grid">
                 <Button variant="dark" type="submit">Acceder</Button>
             </div>
+            {errors && <p className="mt-3" style={{ backgroundColor: 'rgba(255, 0, 0, 0.5)', color: 'black', fontSize: "1.3rem", textAlign: "center" }}>{errors}</p>}
+
 
         </Form>
     )
