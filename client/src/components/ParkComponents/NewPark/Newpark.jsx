@@ -8,8 +8,17 @@ import { MessageContext } from '../../../contexts/message.context';
 import { useNavigate } from "react-router-dom"
 import Loader from '../../Loader/Loader';
 import * as PARK_CONSTS from '../../../consts/park.consts';
+import { ThemeContext } from "../../../contexts/theme.context";
 
-function NewParkForm() {
+
+function NewParkForm({ fireFinalActions }) {
+    const navigate = useNavigate()
+    const { theme, switchTheme } = useContext(ThemeContext)
+    const { emitMessage } = useContext(MessageContext)
+    const [isLoading, setIsLoading] = useState(false);
+    const [errors, setErrors] = useState([])
+
+
     const [parkData, setParkData] = useState({
         name: "",
         description: "",
@@ -20,10 +29,7 @@ function NewParkForm() {
         open: true,
     })
 
-    const [isLoading, setIsLoading] = useState(false);
 
-    const navigate = useNavigate()
-    const { emitMessage } = useContext(MessageContext)
 
     const handleOpenStatus = value => {
         setParkData({
@@ -50,11 +56,16 @@ function NewParkForm() {
         parkService
             .newPark(parkData)
             .then(() => {
+                fireFinalActions()
                 emitMessage('create new park')
                 navigate('/park/list')
             })
 
-            .catch(err => console.log(err))
+            .catch(err => {
+
+                setErrors(err.response.data.errorMessages)
+
+            })
             .finally(() => {
                 setIsLoading(false);
             });
@@ -81,7 +92,9 @@ function NewParkForm() {
 
     return (
         <div className='NewParkForm'>
-            <Form onSubmit={handleParkSubmit} encType='multipart/form-data'>
+            <Form bg={theme === 'dark' ? 'light' : 'dark'}
+                data-bs-theme={theme === 'dark' ? 'light' : 'dark'}
+                onSubmit={handleParkSubmit} encType='multipart/form-data'>
                 <Form.Group className="mb-3">
                     <Form.Label>Name</Form.Label>
                     <Form.Control type="text" placeholder="Enter Name" name="name" value={parkData.name} onChange={handleInputChange} />
@@ -90,7 +103,9 @@ function NewParkForm() {
                 </Form.Group>
                 <Form.Group className="mb-3" >
                     <Form.Label>Description</Form.Label>
-                    <Form.Control type="text" placeholder="Description" name="description" value={parkData.description} onChange={handleInputChange} />
+                    <Form.Control type="text" placeholder="Description"
+                        name="description" value={parkData.description}
+                        onChange={handleInputChange} />
                     <Form.Text className="text-muted">
                     </Form.Text>
                 </Form.Group>
@@ -118,7 +133,11 @@ function NewParkForm() {
 
                 <Form.Group className="mb-3" >
                     <Form.Label>Rating</Form.Label>
-                    <Form.Control type="number" placeholder="Rating" value={parkData.rating} name="rating" onChange={handleInputChange} />
+                    <Form.Control
+                        min={0}
+                        type="number" placeholder="Rating"
+                        value={parkData.rating} name="rating"
+                        onChange={handleInputChange} />
                     <Form.Text className="text-muted">
                     </Form.Text>
                 </Form.Group>
@@ -141,6 +160,7 @@ function NewParkForm() {
                         </Button>
                     </div>
                 )}
+                {errors.length > 0 && <FormError> {errors.map(elm => <p>{elm}</p>)}</FormError>}
 
             </Form>
         </div>

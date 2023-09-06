@@ -133,10 +133,13 @@ const UpdateEventForm = () => {
                         <Form.Label>Number</Form.Label>
                         <Form.Control
                             type="number"
+                            min={0}
+                            max={100}
                             value={eventData.address.number}
                             name="number"
-                            onChange={handleInputChangeInAdress}
-                        />
+                            onChange={handleInputChangeInAdress} />
+                        <Form.Text className="text-muted" />
+
                     </Form.Group>
                 </Col>
 

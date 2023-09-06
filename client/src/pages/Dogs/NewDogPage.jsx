@@ -7,11 +7,13 @@ const NewDogPage = () => {
 
     return (
 
-        <div>
-            <Container className="newDog">
-                <h1>NUEVO PERRO</h1>
+        <div className=" mt-5 ">
+
+            <Container className='newDog' >
+                <h1>NEW DOG</h1>
                 <NewDogForm />
             </Container>
+
         </div>
     )
 

@@ -11,15 +11,15 @@ const newEventPage = () => {
         navigate('/')
     }
     return (
-        <div >
 
+        <div>
             <Container className="newEvents">
-                <h1>Create a new Event</h1>
+                <h1>New Event</h1>
                 <hr />
                 <NewEventForm fireFinalActions={fireFinalActions} />
-            </Container>
-
+            </Container >
         </div>
+
     )
 }
 

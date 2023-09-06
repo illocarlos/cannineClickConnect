@@ -39,7 +39,8 @@ const eventSchema = new Schema(
             number: Number,
             zipcode: Number,
             city: String,
-            country: String
+            country: String,
+
         },
 
         location: {
