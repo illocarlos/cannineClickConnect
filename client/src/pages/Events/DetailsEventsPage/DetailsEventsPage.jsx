@@ -1,35 +1,27 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
 import eventsService from '../../../services/events.service'
 import { Container, Row, Col, Button } from "react-bootstrap"
+import EventMaps from "../../../components/Maps/EventMaps"
 import Loader from "../../../components/Loader/Loader"
-import ParkMaps from "../../../components/Maps/ParkMaps"
+import usersService from '../../../services/users.service'
+import { AuthContext } from "../../../contexts/auth.context";
+import { MessageContext } from "../../../contexts/message.context"
+
 
 const DetailsEventsPage = () => {
 
+    const { loggedUser } = useContext(AuthContext)
     const { event_id } = useParams()
-
     const [event, setEvent] = useState({})
-
     const navigate = useNavigate()
-
     const [isRegistered, setIsRegistered] = useState(false);
-
     const [isLoading, setIsLoading] = useState(true);
+    const { emitMessage } = useContext(MessageContext)
 
     useEffect(() => {
         loadEventDetails()
-    }, [event])
-    const handleAddToEvent = () => {
-        handleRegister()
-        handleRegister(event.id)
-            .then(() => {
-                setIsRegistered(true);
-            })
-            .catch((error) => {
-                console.error('Error al registrar usuario en el evento:', error);
-            });
-    };
+    }, [])
 
 
     const loadEventDetails = () => {
@@ -48,18 +40,38 @@ const DetailsEventsPage = () => {
 
     const handleDeleteEvent = () => {
         eventsService
-            .deleteEvent(event_id, event)
+            .deleteEvent(isLoading, event)
             .then(() => navigate('/event/list'))
             .catch((err) => console.log(err))
     }
 
-    const handleRegister = (eventId) => {
-        console.log(eventId)
+
+    const handleRegister = () => {
         setIsRegistered(true);
-        const updatedEvent = { ...event };
-        updatedEvent.attendees.push(loggedUser._id);
-        setEvent(updatedEvent);
+
+        usersService
+            .addUserToEvent(event_id, loggedUser)
+            .then(() => {
+                emitMessage('you are already registered')
+                loadEventDetails()
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     };
+
+    const handleRemove = () => {
+        console.log("-------------->", event_id)
+        usersService
+            .removeUserToEvent(event_id, loggedUser)
+            .then(() => {
+                emitMessage('you are already remooove')
+                loadEventDetails()
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
 
 
 
@@ -68,7 +80,7 @@ const DetailsEventsPage = () => {
         <Container>
 
 
-            <h1 className="mb-4">Detalles de {event.title}</h1>
+            <h1 className="mb-4">Details{event.title}</h1>
             <hr />
 
             <Row>
@@ -77,7 +89,7 @@ const DetailsEventsPage = () => {
                 ) : (
 
                     <Col md={{ span: 6 }}>
-                        <h3>Descripción</h3>
+                        <h3>Descriptions</h3>
                         <p>{event.description}</p>
                         <hr />
                         <p>{event.date}</p>
@@ -85,15 +97,16 @@ const DetailsEventsPage = () => {
 
 
                         <hr />
+                        <button onClick={handleRegister}>Add to Event</button>
+                        <button onClick={
+                            handleRemove
+                        }>reeemooooove</button>
                         {event.attendees}
-
-                        <button onClick={handleAddToEvent}>Add to Event</button>
-
                     </Col>
                 )}
 
                 <Col md={{ span: 6 }}>
-                    <ParkMaps event={event} />
+                    <EventMaps event={event} />
                 </Col>
 
                 {

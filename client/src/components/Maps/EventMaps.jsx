@@ -9,8 +9,8 @@ const EventMaps = ({ event }) => {
     };
 
     const center = {
-        lat: event.location?.coordinates[1],
-        lng: event.location?.coordinates[0]
+        lat: 40,
+        lng: 39
     };
 
     useEffect(() => {

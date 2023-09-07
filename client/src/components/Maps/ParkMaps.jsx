@@ -10,8 +10,8 @@ const ParkMaps = ({ park }) => {
     };
 
     const center = {
-        lat: park.location?.coordinates[1],
-        lng: park.location?.coordinates[0]
+        lat: 40,
+        lng: 39
     };
 
     useEffect(() => {

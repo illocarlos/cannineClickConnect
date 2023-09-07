@@ -1,5 +1,5 @@
 const User = require('../models/User.model')
-const Event = require ('../models/Event.model')
+const Event = require('../models/Event.model')
 
 const listUsers = (req, res, next) => {
 
@@ -35,13 +35,26 @@ const editUser = (req, res, next) => {
 }
 
 const addUserToEvent = (req, res, next) => {
-    const {idEvent, idUser: users} = req.body
+    const { idEvent, idUser } = req.body
+
 
     Event
-    .findByIdAndUpdate(idEvent, {$addToSet: {users}}, {new: true})
-    .then(() => res.status(201).send("ok"))
-    .catch(err=> next(err))
+        .findByIdAndUpdate(idEvent, { $addToSet: { attendees: idUser } }, { new: true })
+        .then(() => res.status(201).send("ok"))
+        .catch(err => next(err))
 }
+
+
+const removeUserToEvent = (req, res, next) => {
+    const { idEvent, idUser } = req.body
+    const { _id } = idUser
+
+    Event
+        .findByIdAndUpdate(idEvent, { $pull: { attendees: _id } }, { new: true })
+        .then(() => res.status(201).send("ok"))
+        .catch(err => next(err))
+}
+
 
 const deleteUser = (req, res, next) => {
 
@@ -58,5 +71,6 @@ module.exports = {
     listUsers,
     deleteUser,
     editUser,
-    addUserToEvent
+    addUserToEvent,
+    removeUserToEvent
 }
