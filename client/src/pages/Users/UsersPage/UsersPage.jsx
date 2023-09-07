@@ -11,7 +11,6 @@ const UsersPage = () => {
             <Container className='users-page-container'>
                 <h1 className='d-flex justify-content-center mt-4'>COMMUNITY</h1>
                 <hr />
-
                 <UserList />
 
             </Container>

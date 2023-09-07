@@ -15,9 +15,7 @@ const UserList = () => {
 
     return (
         <div className="user-list-container">
-            <div className="user-list-header">
-                <h2>User List</h2>
-            </div>
+
             <div className="user-card-list">
                 {users.map((user) => (
                     <div key={user._id} className="user-card">

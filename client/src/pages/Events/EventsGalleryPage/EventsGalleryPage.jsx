@@ -34,7 +34,7 @@ const EventsGalleryPage = ({ }) => {
     <>
       <Container>
         <div className='d-flex justify-content-between' >
-          <h1>Galeria de eventos</h1>
+          <h1>Event</h1>
           {loggedUser && <Button className='mt-2'
             variant='warning' size='sm' onClick={() => setShowModal(true)}>New Event</Button>}
         </div>
