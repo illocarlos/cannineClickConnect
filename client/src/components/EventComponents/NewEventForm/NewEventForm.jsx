@@ -37,14 +37,11 @@ const NewEventForm = ({ fireFinalActions }) => {
     coordinates: ""
   })
 
-
-
   const handleInputChange = e => {
     const { value, name } = e.currentTarget
     if (name === "number" && (isNaN(value) || parseInt(value) < 0)) {
       return;
     }
-
 
     setEventData({
       ...eventData,

@@ -2,6 +2,7 @@ const router = require("express").Router()
 const { verifyToken } = require("../middlewares/verifyToken")
 
 const {
+    removeUserToEvent,
     listUsers,
     userId,
     deleteUser,
@@ -18,5 +19,7 @@ router.post('/edit/:user_id', verifyToken, editUser)
 router.delete('/delete/:user_id', verifyToken, deleteUser)
 
 router.post('/addUserToEvent', addUserToEvent)
+
+router.post('/removeUserToEvent', removeUserToEvent)
 
 module.exports = router

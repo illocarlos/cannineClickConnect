@@ -35,8 +35,14 @@ class UsersService {
     }
 
     addUserToEvent(idEvent, idUser) {
-        return this.api.post("/user/addUserToEvent", {idEvent, idUser})
+        return this.api.post("/user/addUserToEvent", { idEvent, idUser })
     }
+
+    removeUserToEvent(idEvent, idUser) {
+        return this.api.post("/user/removeUserToEvent", { idEvent, idUser })
+    }
+
+
 }
 
 const usersService = new UsersService()
