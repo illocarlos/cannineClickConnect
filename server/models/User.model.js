@@ -8,7 +8,9 @@ const userSchema = new Schema(
     username: {
       type: String,
       required: [true, 'Username is required.'],
-      minlength: [2, 'Username must be 2 characters length']
+      minlength: [3, 'Username must be 2 characters length'],
+      maxlength: [10, 'Username must be 10 characters length']
+
     },
 
     avatar: {

@@ -1,0 +1,30 @@
+.overlay-background {
+    background-image: url('../../../../public/desktop-wallpaper-nature-blur-blurry-spring.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* position: fixed; */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    z-index: -1;
+}
+
+.users-page-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    /* Fondo con opacidad */
+}
+
+body,
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
