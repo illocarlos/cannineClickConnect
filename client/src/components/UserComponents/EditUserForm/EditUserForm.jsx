@@ -47,7 +47,6 @@ const UpdateUserForm = () => {
         usersService
             .editUser(user_id, userData)
             .then(() => {
-                console.log("Usuario actualizado con éxito");
                 navigate("/user/list");
             })
             .catch((err) => {

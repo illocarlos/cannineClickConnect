@@ -29,7 +29,7 @@ const EventsGalleryPage = ({ }) => {
     loadEvents()
   }
 
-  console.log('events', events)
+
   return (
     <>
       <Container>
@@ -53,7 +53,7 @@ const EventsGalleryPage = ({ }) => {
           <Modal.Title>New event</Modal.Title>
         </Modal.Header>
         <Modal.Body className='modalEvent'>
-          <NewEventForm fireFinalActions={fireFinalActions} />
+          <NewEventForm fireFinalActions={fireFinalActions} refreshEvents={loadEvents} />
         </Modal.Body>
       </Modal>
 

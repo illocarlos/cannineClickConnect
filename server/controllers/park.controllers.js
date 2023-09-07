@@ -22,10 +22,10 @@ const parkId = (req, res, next) => {
 
 const newPark = (req, res, next) => {
 
-    const { name, description, gallery, size, crowdedness, open } = req.body
+    const { name, description, gallery, size, crowdedness, open, location } = req.body
 
     Park
-        .create({ name, description, gallery, size, crowdedness, open })
+        .create({ name, description, gallery, size, crowdedness, open, location })
         .then(() => res.sendStatus(201))
         .catch(err => next(err))
 }

@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom"
 import eventsService from '../../../services/events.service'
 import { Container, Row, Col, Button } from "react-bootstrap"
 import Loader from "../../../components/Loader/Loader"
-import ParkMaps from "../../../components/Maps/ParkMaps"
+import EventMaps from "../../../components/Maps/EventMaps"
 
 const DetailsEventsPage = () => {
 
@@ -83,7 +83,7 @@ const DetailsEventsPage = () => {
                 )}
 
                 <Col md={{ span: 6 }}>
-                    <ParkMaps event={event} />
+                    <EventMaps event={event} />
                 </Col>
 
                 {

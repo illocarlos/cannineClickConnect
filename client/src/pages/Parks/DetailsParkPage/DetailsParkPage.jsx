@@ -21,7 +21,7 @@ const DetailsParkPage = () => {
 
     useEffect(() => {
         loadParkDetails()
-    }, [park])
+    }, [])
 
     const loadParkDetails = () => {
         parksService

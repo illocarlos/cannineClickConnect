@@ -12,7 +12,6 @@ import { useDate } from '../../../contexts/getCurrentDate.context'
 import MapsAutocomplete from '../../Autocomplete/Autocomplete'
 
 
-
 const NewEventForm = ({ fireFinalActions }) => {
   const navigate = useNavigate()
   const { getCurrentDate } = useDate()

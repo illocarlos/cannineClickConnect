@@ -14,6 +14,7 @@ const NewParkPage = () => {
         <div className="newPark">
             <Container>
                 <h1>New park</h1>
+                <hr />
                 <NewParkForm fireFinalActions={fireFinalActions} />
             </Container>
         </div>

@@ -5,7 +5,7 @@ import NewParkForm from '../../../components/ParkComponents/NewPark/Newpark';
 import parkService from '../../../services/parks.service';
 import { useEffect, useState, useContext } from 'react'
 
-const ParkGalleryPage = () => {
+const ParkGalleryPage = ({ }) => {
     const [showModal, setShowModal] = useState(false)
     const [parks, setParks] = useState([])
     const { loggedUser } = useContext(AuthContext)
@@ -53,7 +53,7 @@ const ParkGalleryPage = () => {
                     <Modal.Title>New Park</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className='modalPark'>
-                    <NewParkForm fireFinalActions={fireFinalActions} />
+                    <NewParkForm fireFinalActions={fireFinalActions} refreshParks={loadParks} />
                 </Modal.Body>
             </Modal>
         </>

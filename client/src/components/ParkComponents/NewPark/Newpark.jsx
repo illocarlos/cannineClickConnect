@@ -9,16 +9,16 @@ import { useNavigate } from "react-router-dom"
 import Loader from '../../Loader/Loader';
 import * as PARK_CONSTS from '../../../consts/park.consts';
 import { ThemeContext } from "../../../contexts/theme.context";
-import MapsAutocomplete from '../../Autocomplete/ParksAutocomplete';
+import ParksAutocomplete from '../../Autocomplete/ParksAutocomplete';
 import FormError from '../../FormError/FormError';
 
-function NewParkForm({ fireFinalActions }) {
+
+function NewParkForm({ fireFinalActions, refreshParks }) {
     const navigate = useNavigate()
     const { theme } = useContext(ThemeContext)
     const { emitMessage } = useContext(MessageContext)
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([])
-
 
 
     const [parkData, setParkData] = useState({
@@ -70,6 +70,7 @@ function NewParkForm({ fireFinalActions }) {
         parkService
             .newPark(parkData)
             .then(() => {
+                refreshParks()
                 fireFinalActions()
                 emitMessage('create new park')
 
@@ -152,13 +153,13 @@ function NewParkForm({ fireFinalActions }) {
                 <ButtonOpen handleOpenStatus={handleOpenStatus} />
 
                 <Col >
-                    <MapsAutocomplete parkData={parkData} setParkData={setParkData}>
+                    <ParksAutocomplete parkData={parkData} setParkData={setParkData}>
                         <Form.Group className="mb-3" controlId="street">
 
                             <Form.Control type="text" value={parkData.address.street}
                                 placeholder="Street" name="street" onChange={handleInputChange} />
                         </Form.Group>
-                    </MapsAutocomplete>
+                    </ParksAutocomplete>
                 </Col>
 
                 {isLoading ? (

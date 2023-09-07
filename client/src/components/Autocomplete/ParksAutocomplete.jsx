@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import Geocode from "react-geocode";
 
-const MapsAutocomplete = ({ parkData, setParkData }) => {
+const ParksAutocomplete = ({ parkData, setParkData }) => {
 
     const [value, setValue] = useState()
     Geocode.setApiKey("AIzaSyDEfioKfYGi6udaByyFEojQ4p3fvjcP00Q")
@@ -31,4 +31,4 @@ const MapsAutocomplete = ({ parkData, setParkData }) => {
         </div>
     );
 }
-export default MapsAutocomplete
+export default ParksAutocomplete

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 
 const EventMaps = ({ event }) => {
+
     const containerStyle = {
         width: '400px',
         height: '400px',

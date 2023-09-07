@@ -1,8 +1,7 @@
 
 
 const Rating = ({ media }) => {
-    console.log(media)
-    // const allStars = Math.min(Math.round(numberStars), 5);
+
     const allStars = media;
 
     const fullStar = '★';
