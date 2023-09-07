@@ -14,7 +14,7 @@ import FormError from '../../FormError/FormError';
 
 function NewParkForm({ fireFinalActions }) {
     const navigate = useNavigate()
-    const { theme, switchTheme } = useContext(ThemeContext)
+    const { theme } = useContext(ThemeContext)
     const { emitMessage } = useContext(MessageContext)
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([])
@@ -72,15 +72,14 @@ function NewParkForm({ fireFinalActions }) {
             .then(() => {
                 fireFinalActions()
                 emitMessage('create new park')
-                navigate('/park/list')
+
             })
 
             .catch(err => {
-
                 setErrors(err.response.data.errorMessages)
-
             })
             .finally(() => {
+                navigate('/park/list')
                 setIsLoading(false);
             });
     }
@@ -106,7 +105,7 @@ function NewParkForm({ fireFinalActions }) {
 
     return (
         <div className='NewParkForm'>
-            <Form bg={theme === 'dark' ? 'light' : 'dark'}
+            <Form style={{ textAlign: 'center' }} bg={theme === 'dark' ? 'light' : 'dark'}
                 data-bs-theme={theme === 'dark' ? 'light' : 'dark'}
                 onSubmit={handleParkSubmit} encType='multipart/form-data'>
                 <Form.Group className="mb-3">
@@ -145,19 +144,6 @@ function NewParkForm({ fireFinalActions }) {
                     </Form.Select>
                 </Form.Group>
 
-                <Form.Group className="mb-3" >
-                    <Form.Label>Rating</Form.Label>
-                    <Form.Control
-                        min={0}
-                        type="number" placeholder="Rating"
-                        value={parkData.rating} name="rating"
-                        onChange={handleInputChange} />
-                    <Form.Text className="text-muted">
-                    </Form.Text>
-                </Form.Group>
-
-
-
                 <Form.Group className="mb-3" controlId="image">
                     <Form.Label>Imagen (URL)</Form.Label>
                     <Form.Control type="file" multiple onChange={handleFileUpload} />
@@ -178,13 +164,15 @@ function NewParkForm({ fireFinalActions }) {
                 {isLoading ? (
                     <Loader />
                 ) : (
-                    <div className="d-grid">
+                    <div className="d-grid ">
                         <Button variant="dark" type="submit">
                             New Park
                         </Button>
                     </div>
                 )}
-                {errors.length > 0 && <FormError> {errors.map(elm => <p>{elm}</p>)}</FormError>}
+                <div className='mt-3'>
+                    {errors.length > 0 && <FormError> {errors.map(elm => <p >{elm}</p>)}</FormError>}
+                </div>
 
             </Form>
         </div>

@@ -117,7 +117,7 @@ const DetailsParkPage = () => {
                             Edit Park
                         </Link>
 
-                        <Button onClick={handleDeletePark}>Delete</Button>
+                        <Button variant='warning' onClick={handleDeletePark}>Delete</Button>
                     </>
                 }
 

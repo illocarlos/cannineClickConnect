@@ -30,10 +30,11 @@ const Navigation = () => {
             <div className="d-flex">
               {
                 loggedUser &&
-                <div className="d-flex mt-2">
+                <div className=" d-flex mt-2">
                   <Link to={"/park/list"} className="nav-link me-4">Park</Link>
                   <Link to={"/event/list"} className="nav-link me-4">Events</Link>
                   <Link to={"/user/list"} className="nav-link me-4"> Community</Link>
+                  <Link to={`/user/${loggedUser._id}`} className="nav-link me-4">Profile</Link>
                 </div>
 
               }

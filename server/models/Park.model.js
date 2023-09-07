@@ -16,27 +16,33 @@ const parkSchema = new Schema(
 
         gallery: {
             type: [String],
+            required: [true, 'You need a photo'],
             validate: {
                 validator: value => value.length > 0,
-                message: 'at least one photo is required'
-            }
+                message: 'at least one photo is required',
+            },
         },
 
         size: {
             type: String,
             enum: ['LARGE', 'MEDIUM', 'SMALL'],
-            default: 'MEDIUM'
+            default: 'MEDIUM',
+            required: [true, 'You need a size'],
+
         },
 
         crowdedness: {
             type: String,
             enum: ['HIGH', 'MODERATE', 'LOW'],
-            default: 'MODERATE'
+            default: 'MODERATE',
+            required: [true, 'You need a crowdedness'],
+
         },
 
         open: {
             type: Boolean,
             default: true,
+
         },
 
         rating: {
@@ -48,7 +54,7 @@ const parkSchema = new Schema(
             number: Number,
             zipcode: Number,
             city: String,
-            country: String
+            country: String,
         },
 
         location: {

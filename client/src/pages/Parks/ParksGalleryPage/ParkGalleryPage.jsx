@@ -1,4 +1,4 @@
-import { Container, Button, Modal } from 'react-bootstrap'
+import { Container, Button, Modal, Row, Col } from 'react-bootstrap'
 import ParkList from '../../../components/ParkComponents/ParkList/ParkList'
 import { AuthContext } from "../../../contexts/auth.context";
 import NewParkForm from '../../../components/ParkComponents/NewPark/Newpark';
@@ -31,10 +31,16 @@ const ParkGalleryPage = () => {
 
         <>
             <Container>
-                <h1>Galeria de parques</h1>
+                <div className='d-flex justify-content-between' >
+
+                    <h1>Galeria de parques</h1>
+
+                    {loggedUser && <Button style={{ width: '120px', fontSize: '1.2rem' }} className='mt-2' variant='warning'
+                        size='sm' onClick={() => setShowModal(true)}>New park</Button>}
+
+                </div>
                 <hr />
 
-                {loggedUser && <Button variant='dark' size='sm' onClick={() => setShowModal(true)}>New park</Button>}
                 <br />
                 <ParkList parks={parks} />
             </Container>

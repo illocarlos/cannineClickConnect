@@ -17,9 +17,10 @@ const ButtonOpen = ({ handleOpenStatus }) => {
 
     return (
 
-        <ButtonGroup>
+        <ButtonGroup className='d-flex mb-2'>
             {boleOpen.map((bolean, idx) => (
                 <ToggleButton
+
                     key={idx}
                     id={`radio-${idx}`}
                     type="radio"
