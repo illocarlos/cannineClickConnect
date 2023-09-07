@@ -20,7 +20,7 @@ const Navigation = () => {
       <Container>
 
 
-        <Link className="hTitle" to={'/'}>
+        <Link className="hTitle">
           <h1> {import.meta.env.VITE_APP_NAME}</h1>
         </Link>
 

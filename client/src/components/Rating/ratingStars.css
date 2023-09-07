@@ -1,0 +1,17 @@
+.ratingStars {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.star {
+    background-color: transparent;
+    color: #f82020;
+    border: none;
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.star.filled {
+    color: #ff0000;
+}

@@ -21,7 +21,7 @@ const ParkList = () => {
 
   return (
     <Container>
-      <Row>
+      <Row >
         {
           parks.map(elm => <ParkCard {...elm} />)
         }

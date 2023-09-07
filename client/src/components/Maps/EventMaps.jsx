@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 const EventMaps = ({ event }) => {
 
     const containerStyle = {
-        width: '400px',
-        height: '400px',
+        width: '500px',
+        height: '500px',
     };
 
     const center = {

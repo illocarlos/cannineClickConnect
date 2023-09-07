@@ -8,8 +8,6 @@ const dogSchema = new Schema(
             required: [true, 'Name is required.'],
         },
 
-        // EXTENDER LA VALIDACIÓN DE LOS MODELOS RESPONSABLEMENTE
-
         description: {
             type: String,
             minlength: [5, 'Description must be at least 20 characters long'],
@@ -20,7 +18,7 @@ const dogSchema = new Schema(
             type: [String],
             validate: {
                 validator: value => value.length > 0,
-                message: 'at least one photo is required'
+                message: 'At least one photo is required'
             }
         },
 
@@ -38,7 +36,7 @@ const dogSchema = new Schema(
         gender: {
             type: String,
             enum: ['MALE', 'FEMALE'],
-            required: [true, 'gender is required.'],
+            required: [true, 'Gender is required.'],
         },
 
         castrated: {

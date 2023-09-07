@@ -1,0 +1,33 @@
+.park-card {
+    height: 500px;
+}
+
+
+.carousel-image {
+    width: 100%;
+    height: 200px;
+}
+
+
+.text-container {
+    height: 100%;
+}
+
+
+.park-title {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+
+.park-description {
+    height: 170px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+
+.details-button {
+    width: 100%;
+}

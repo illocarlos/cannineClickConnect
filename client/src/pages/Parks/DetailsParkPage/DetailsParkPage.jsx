@@ -6,6 +6,7 @@ import ParkMaps from "../../../components/Maps/ParkMaps"
 import Rating from "../../../components/Rating/AverageRating"
 import HandleVote from "../../../components/Rating/HandleVote"
 import Loader from "../../../components/Loader/Loader"
+import "./DetailsParkPage.css"
 
 const DetailsParkPage = () => {
 
@@ -80,52 +81,71 @@ const DetailsParkPage = () => {
 
     return (
         <Container>
+            <div className="event-card">
 
-            <h1 className="mb-4">Detalles de {park.name}</h1>
-            <hr />
+                <h1 className="titleEventCard" >{park.name}</h1>
 
-            <Row>
+                <hr />
 
-                {isLoading ? (
-                    <Loader />
-                ) : (
+                <Row>
+                    {isLoading ? (
+                        <Loader />
+                    ) : (
+
+                        <Col md={{ span: 6 }}>
+                            <h3>Description</h3>
+                            <p>{park.description}</p>
+                            <hr />
+
+
+                            <p>SIZE: {park.size}</p>
+
+
+                            <p>CROWDEDNESS: {park.crowdedness}</p>
+
+
+                            <p>OPEN: {park.open ? 'YES' : 'NO'}</p>
+
+                            <h1><Rating media={average} /></h1>
+
+                            <hr />
+
+
+                            <div className="rating-container">
+
+                                <HandleVote initialValue={userRating} onRate={handleUserRating} />
+                                <div className="centered-button">
+                                    <Button variant="success" className="custom-button" onClick={handleRatePark}>
+                                        Vote
+                                    </Button>
+                                </div>
+                            </div>
+                        </Col>
+                    )}
 
                     <Col md={{ span: 6 }}>
-                        <h3>Descripción</h3>
-                        <p>{park.description}</p>
-                        <hr />
-                        <HandleVote initialValue={userRating} onRate={handleUserRating} />
-                        <Button onClick={handleRatePark}>Votar</Button>
-                        <Rating media={average} />
-
-
+                        <div className="centered-content">
+                            <ParkMaps park={park} />
+                        </div>
                     </Col>
-                )}
 
-
-
-                <Col md={{ span: 6 }}>
-                    <ParkMaps park={park} />
-                </Col>
-
-                {
-                    isParkOwner &&
-                    <>
-                        <Link
-                            to={`/park/edit/${park_id}`}
-                            className="btn btn-warning">
-                            Edit Park
-                        </Link>
-
-                        <Button variant='warning' onClick={handleDeletePark}>Delete</Button>
-                    </>
+                </Row>
+                {isParkOwner &&
+                    <Col className="edit-delete-button" md={12}>
+                        <div className="event-actions">
+                            <Link to={`/park/edit/${park_id}`} className="btn btn-warning">
+                                Edit Park
+                            </Link>
+                            <div className="button-separator"></div>
+                            <Button variant='danger' onClick={handleDeletePark}>Delete</Button>
+                        </div>
+                    </Col>
                 }
+            </div>
 
-                <Link to="/parks/list" className="btn btn-dark">Volver a la galería</Link>
+        </Container>
 
-            </Row>
 
-        </Container >
     )
 }
 

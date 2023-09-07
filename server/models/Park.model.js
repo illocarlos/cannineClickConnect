@@ -19,7 +19,7 @@ const parkSchema = new Schema(
             required: [true, 'You need a photo'],
             validate: {
                 validator: value => value.length > 0,
-                message: 'at least one photo is required',
+                message: 'At least one photo is required',
             },
         },
 

@@ -1,0 +1,32 @@
+.galery-title {
+    text-align: center;
+    color: white;
+    margin-top: 30px;
+
+}
+
+
+.custom-button {
+    background-color: #4caf50;
+
+    color: #fff;
+
+    padding: 10px 20px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    transition: background-color 0.3s, transform 0.2s;
+
+}
+
+
+.custom-button:hover {
+    background-color: #45a049;
+
+    transform: scale(1.05);
+
+}

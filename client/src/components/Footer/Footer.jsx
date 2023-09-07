@@ -7,7 +7,7 @@ const Footer = () => {
 
     return (
         <footer bg={theme === 'dark' ? 'light' : 'dark'} data-bs-theme={theme === 'dark' ? 'light' : 'dark'}>
-            heeuuuuuuu soy el footer
+            - WebMad-0723 Ironhack -
         </footer>
     )
 

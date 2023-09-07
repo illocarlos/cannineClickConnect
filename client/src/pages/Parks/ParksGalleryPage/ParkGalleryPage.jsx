@@ -32,16 +32,19 @@ const ParkGalleryPage = ({ }) => {
     return (
 
         <>
-            <Container>
-                <div className='d-flex justify-content-between' >
-
-                    <h1>Galeria de parques</h1>
-
-                    {loggedUser && <Button style={{ width: '120px', fontSize: '1.2rem' }} className='mt-2' variant='warning'
-                        size='sm' onClick={() => setShowModal(true)}>New park</Button>}
-
+            <Container >
+                <div className='d-flex justify-content-between align-items-center'>
+                    <div>
+                        <h1 className='galery-title'>Galery</h1>
+                    </div>
+                    <div>
+                        {loggedUser && (
+                            <Button variant="success" className='custom-button'
+                                onClick={() => setShowModal(true)}>New park</Button>
+                        )}
+                    </div>
                 </div>
-                <hr />
+
 
                 <br />
 

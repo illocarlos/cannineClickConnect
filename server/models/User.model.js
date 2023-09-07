@@ -17,7 +17,7 @@ const userSchema = new Schema(
       type: [String],
       validate: {
         validator: value => value.length > 0,
-        message: 'at least one photo is required'
+        message: 'At least one photo is required'
       },
       required: [true, 'Photo is required.'],
     },
@@ -33,7 +33,7 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: [true, 'Password is required.'],
-      minlength: [3, 'min 3 character....blessss'],
+      minlength: [3, 'Min 3 character'],
     },
 
     about: {

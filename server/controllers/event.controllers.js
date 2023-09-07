@@ -15,6 +15,7 @@ const eventId = (req, res, next) => {
 
     Event
         .findById(event_id)
+        .populate("attendees")
         .then(response => res.json(response))
         .catch(err => next(err))
 

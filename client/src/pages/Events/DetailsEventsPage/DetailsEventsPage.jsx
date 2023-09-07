@@ -8,6 +8,7 @@ import usersService from '../../../services/users.service'
 import { AuthContext } from "../../../contexts/auth.context";
 import { MessageContext } from "../../../contexts/message.context"
 import { formatDate } from "../../../utils/Date.utils"
+import "./DetailsEventsPage.css"
 
 
 const DetailsEventsPage = () => {
@@ -81,54 +82,67 @@ const DetailsEventsPage = () => {
     return (
 
         <Container>
+            <div className="event-card">
 
+                <h1 className="titleEventCard" >{event.title}</h1>
 
-            <h1 className="mb-4">Details{event.title}</h1>
-            <hr />
+                <hr />
 
-            <Row>
-                {isLoading ? (
-                    <Loader />
-                ) : (
+                <Row>
+                    {isLoading ? (
+                        <Loader />
+                    ) : (
+                        <>
+                            <Col md={6}>
+                                <h3>Description</h3>
+                                <p>{event.description}</p>
+                                <hr />
+                                <h5>Date: {formattedDate}</h5>
+                                <hr />
+                                <div className="attendees">
+                                    <ul>
+                                        {event.attendees.map((elm) => (
+                                            <li key={elm.id} className="attendee">
+                                                <Link to={`/user/${elm._id}`} className="custom-link">
+                                                    <p className="custom-text">{elm.username}</p>
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
 
-                    <Col md={{ span: 6 }}>
-                        <h3>Descriptions</h3>
-                        <p>{event.description}</p>
-                        <hr />
-                        <p>{formattedDate}</p>
-                        <hr />
-                        {event.attendees}
+                                <Button variant="success" onClick={handleRegister} className="custom-button">
+                                    Add to Event
+                                </Button>
+                                <div className="button-separator"></div>
+                                <Button variant="success" onClick={handleRemove} className="custom-button">
+                                    Leave Event
+                                </Button>
+                            </Col>
 
-                        <button onClick={handleRegister}>Add to Event</button>
-                        <button onClick={
-                            handleRemove
-                        }>Leave event</button>
-
+                            <Col md={6}>
+                                <div className="centered-content">
+                                    <EventMaps event={event} />
+                                </div>
+                            </Col>
+                        </>
+                    )}
+                </Row>
+                {isEventOwner && (
+                    <Col className="edit-delete-button" md={12}>
+                        <div className="event-actions">
+                            <Link to={`/event/edit/${event_id}`} className="btn btn-warning">
+                                Edit Event
+                            </Link>
+                            <div className="button-separator"></div>
+                            <Button variant="danger" onClick={handleDeleteEvent}>Delete</Button>
+                        </div>
                     </Col>
                 )}
+            </div>
 
-                <Col md={{ span: 6 }}>
-                    <EventMaps event={event} />
-                </Col>
+        </Container>
 
-                {
-                    isEventOwner &&
-                    <>
-                        <Link
-                            to={`/event/edit/${event_id}`}
-                            className="btn btn-warning">
-                            Edit Event
-                        </Link>
-
-                        <Button onClick={handleDeleteEvent}>Delete</Button>
-                    </>
-                }
-
-                <Link to="/event/list" className="btn btn-dark">Gallery</Link>
-
-            </Row>
-
-        </Container >
     )
 }
 
