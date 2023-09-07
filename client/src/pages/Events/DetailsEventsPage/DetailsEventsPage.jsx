@@ -20,6 +20,17 @@ const DetailsEventsPage = () => {
     useEffect(() => {
         loadEventDetails()
     }, [event])
+    const handleAddToEvent = () => {
+        handleRegister()
+        handleRegister(event.id)
+            .then(() => {
+                setIsRegistered(true);
+            })
+            .catch((error) => {
+                console.error('Error al registrar usuario en el evento:', error);
+            });
+    };
+
 
     const loadEventDetails = () => {
         eventsService
@@ -42,13 +53,11 @@ const DetailsEventsPage = () => {
             .catch((err) => console.log(err))
     }
 
-    const handleRegister = () => {
-
+    const handleRegister = (eventId) => {
+        console.log(eventId)
         setIsRegistered(true);
-
         const updatedEvent = { ...event };
         updatedEvent.attendees.push(loggedUser._id);
-
         setEvent(updatedEvent);
     };
 
@@ -77,7 +86,8 @@ const DetailsEventsPage = () => {
 
                         <hr />
                         {event.attendees}
-                        <Button onClick={handleRegister}>Add to Event</Button>
+
+                        <button onClick={handleAddToEvent}>Add to Event</button>
 
                     </Col>
                 )}
@@ -99,7 +109,7 @@ const DetailsEventsPage = () => {
                     </>
                 }
 
-                <Link to="/event/list" className="btn btn-dark">Volver a la galería</Link>
+                <Link to="/event/list" className="btn btn-dark">Gallery</Link>
 
             </Row>
 
