@@ -1,16 +1,16 @@
-// UserCard.jsx
 import React from 'react';
 import './UserCard.css';
+import { Link } from "react-router-dom"
+
 
 const UserCard = ({ username, avatar, about, _id }) => {
     return (
-        <div className="user-card">
+
+        <Link className="user-card" to={`/user/${_id}`} >
             <img src={avatar} alt="Avatar" className="user-avatar" />
-            <h4 className="user-name">{username}</h4>
-            <p className="user-about">{about}</p>
-            <p className="user-about">Añade más información aquí si es necesario.</p>
-            {/* Puedes agregar más contenido si deseas alargar aún más las tarjetas */}
-        </div>
+            <h4 className="user-name mt-5">{username}</h4>
+        </Link>
+
     );
 };
 

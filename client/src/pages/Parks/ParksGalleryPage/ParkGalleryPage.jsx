@@ -1,4 +1,5 @@
-import { Container, Button, Modal, Row, Col } from 'react-bootstrap'
+import './ParkGalleryPage.css'
+import { Container, Button, Modal } from 'react-bootstrap'
 import ParkList from '../../../components/ParkComponents/ParkList/ParkList'
 import { AuthContext } from "../../../contexts/auth.context";
 import NewParkForm from '../../../components/ParkComponents/NewPark/Newpark';
@@ -43,7 +44,9 @@ const ParkGalleryPage = ({ }) => {
                 <hr />
 
                 <br />
+
                 <ParkList parks={parks} />
+
             </Container>
             <Modal
                 show={showModal}
