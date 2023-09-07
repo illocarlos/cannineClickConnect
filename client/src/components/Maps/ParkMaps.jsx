@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 
 import { useEffect } from 'react';
 
-const Maps = ({ park }) => {
+const ParkMaps = ({ park }) => {
+
     const containerStyle = {
         width: '400px',
         height: '400px',
@@ -38,4 +39,4 @@ const Maps = ({ park }) => {
     }
     return (<div id="map" style={containerStyle} />)
 }
-export default Maps
+export default ParkMaps

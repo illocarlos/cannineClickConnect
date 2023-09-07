@@ -5,7 +5,6 @@ import eventService from '../../../services/events.service'
 import EventList from '../../../components/EventComponents/EventList/EventList'
 import { AuthContext } from "../../../contexts/auth.context";
 import NewEventForm from '../../../components/EventComponents/NewEventForm/NewEventForm'
-import MapContainer from "../../../components/Maps/Maps"
 
 const EventsGalleryPage = ({ }) => {
 
@@ -44,9 +43,6 @@ const EventsGalleryPage = ({ }) => {
 
       </Container>
 
-      <Col md={{ span: 6 }}>
-        {/* <MapContainer location={events.location} /> */}
-      </Col>
 
       <Modal
         show={showModal}

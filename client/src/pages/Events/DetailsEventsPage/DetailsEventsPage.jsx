@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
 import eventsService from '../../../services/events.service'
 import { Container, Row, Col, Button } from "react-bootstrap"
-import MapContainer from "../../../components/Maps/Maps"
 import Loader from "../../../components/Loader/Loader"
+import ParkMaps from "../../../components/Maps/ParkMaps"
 
 const DetailsEventsPage = () => {
 
@@ -93,7 +93,7 @@ const DetailsEventsPage = () => {
                 )}
 
                 <Col md={{ span: 6 }}>
-                    <MapContainer event={event} />
+                    <ParkMaps event={event} />
                 </Col>
 
                 {
