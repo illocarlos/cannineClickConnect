@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import UserCard from './UserCard.jsx';
 import usersService from '../../../services/users.service';
 import Slider from 'react-slick';
-import '../../../../node_modules/slick-carousel/slick/slick.css';
-import '../../../../node_modules/slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const CustomNextArrow = (props) => (
     <div {...props} className="custom-next-arrow">
@@ -23,7 +23,6 @@ const UserList = () => {
     let slider;
 
     useEffect(() => {
-        // Simulamos la obtención de usuarios desde un servicio
         usersService
             .getUsers()
             .then(({ data }) => setUsers(data))
