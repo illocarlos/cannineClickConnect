@@ -7,6 +7,7 @@ import Loader from "../../../components/Loader/Loader"
 import usersService from '../../../services/users.service'
 import { AuthContext } from "../../../contexts/auth.context";
 import { MessageContext } from "../../../contexts/message.context"
+import { formatDate } from "../../../utils/Date.utils"
 
 
 const DetailsEventsPage = () => {
@@ -18,6 +19,7 @@ const DetailsEventsPage = () => {
     const [isRegistered, setIsRegistered] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const { emitMessage } = useContext(MessageContext)
+
 
     useEffect(() => {
         loadEventDetails()
@@ -52,7 +54,7 @@ const DetailsEventsPage = () => {
         usersService
             .addUserToEvent(event_id, loggedUser)
             .then(() => {
-                emitMessage('you are already registered')
+                emitMessage('You are already registered!')
                 loadEventDetails()
             })
             .catch((err) => {
@@ -61,11 +63,11 @@ const DetailsEventsPage = () => {
     };
 
     const handleRemove = () => {
-        console.log("-------------->", event_id)
+
         usersService
             .removeUserToEvent(event_id, loggedUser)
             .then(() => {
-                emitMessage('you are already remooove')
+                emitMessage('You are already remove!')
                 loadEventDetails()
             })
             .catch((err) => {
@@ -73,6 +75,7 @@ const DetailsEventsPage = () => {
             })
     }
 
+    const formattedDate = formatDate(new Date(event.date))
 
 
     return (
@@ -92,16 +95,15 @@ const DetailsEventsPage = () => {
                         <h3>Descriptions</h3>
                         <p>{event.description}</p>
                         <hr />
-                        <p>{event.date}</p>
-
-
-
+                        <p>{formattedDate}</p>
                         <hr />
+                        {event.attendees}
+
                         <button onClick={handleRegister}>Add to Event</button>
                         <button onClick={
                             handleRemove
-                        }>reeemooooove</button>
-                        {event.attendees}
+                        }>Leave event</button>
+
                     </Col>
                 )}
 

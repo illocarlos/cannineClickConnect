@@ -143,9 +143,6 @@ const NewEventForm = ({ fireFinalActions }) => {
 
       </Row>
 
-
-
-
       {
         isLoading ? (
           <Loader />

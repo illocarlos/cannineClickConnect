@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { useEffect } from 'react';
-
 const EventMaps = ({ event }) => {
 
     const containerStyle = {
@@ -10,9 +9,10 @@ const EventMaps = ({ event }) => {
     };
 
     const center = {
-        lat: 40,
-        lng: 39
+        lat: event.location?.coordinates[1],
+        lng: event.location?.coordinates[0]
     };
+    console.log(center)
 
     useEffect(() => {
         const script = document.createElement('script');
@@ -24,7 +24,9 @@ const EventMaps = ({ event }) => {
         return () => {
             document.head.removeChild(script);
         };
-    }, []);
+    }, [center], {
+        delay: 500
+    });
 
     const initMap = () => {
         const map = new window.google.maps.Map(document.getElementById('map'), {

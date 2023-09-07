@@ -10,9 +10,10 @@ const ParkMaps = ({ park }) => {
     };
 
     const center = {
-        lat: 40,
-        lng: 39
+        lat: park.location?.coordinates[1],
+        lng: park.location?.coordinates[0]
     };
+    console.log(center)
 
     useEffect(() => {
         const script = document.createElement('script');
@@ -24,7 +25,9 @@ const ParkMaps = ({ park }) => {
         return () => {
             document.head.removeChild(script);
         };
-    }, []);
+    }, [center], {
+        delay: 500
+    });
 
     const initMap = () => {
         const map = new window.google.maps.Map(document.getElementById('map'), {

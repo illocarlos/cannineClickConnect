@@ -11,6 +11,7 @@ const ParkGalleryPage = ({ }) => {
     const { loggedUser } = useContext(AuthContext)
 
     useEffect(() => {
+
         loadParks()
     }, [])
 
@@ -53,7 +54,7 @@ const ParkGalleryPage = ({ }) => {
                     <Modal.Title>New Park</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className='modalPark'>
-                    <NewParkForm fireFinalActions={fireFinalActions} refreshParks={loadParks} />
+                    <NewParkForm fireFinalActions={fireFinalActions} />
                 </Modal.Body>
             </Modal>
         </>

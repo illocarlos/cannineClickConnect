@@ -10,7 +10,7 @@ const ParkList = () => {
 
   useEffect(() => {
     loadParks()
-  }, [])
+  }, [parks])
 
   const loadParks = () => {
     parkService
