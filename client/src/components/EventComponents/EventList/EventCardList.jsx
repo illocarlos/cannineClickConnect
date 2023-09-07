@@ -6,7 +6,7 @@ import { Card, Button, Col, Carousel } from 'react-bootstrap'
 const EventList = ({ title, cover, description, _id }) => {
     return (
         <Col md={{ span: 3 }} key={_id}>
-            <Card style={{ height: '500px' }} >
+            <Card style={{ height: '500px', width: '300px' }} >
                 <Carousel>
                     {
                         cover.map((image, index) => (

@@ -1,41 +1,121 @@
-.card {
-    width: 18rem;
-    transform-style: preserve-3d;
-    transition: transform 0.5s ease;
-    cursor: pointer;
-    margin-right: 20px;
+.tarProf {
+    background-color: #b3afaf96;
+    color: white;
+    border-radius: 10px;
+}
+
+/* Estilos para el carrusel */
+.carousel {
+    width: 100%;
+    /* Ocupa todo el ancho de la pantalla */
+    max-width: 100%;
+    /* Evita que el carrusel tenga un ancho máximo */
     margin-bottom: 20px;
+    /* Espacio inferior opcional */
 }
 
-.card.flipped {
-    transform: rotateY(180deg);
-}
 
-.card-inner {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-}
 
-.card-front,
-.card-back {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    backface-visibility: hidden;
-}
-
-.card-front {
-    transform: rotateY(0deg);
-}
-
-.card-back {
-    transform: rotateY(180deg);
-    text-align: center;
-    padding: 10px;
-    box-sizing: border-box;
+/* Estilos para las cartas en el carrusel */
+.carousel .slide {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    background-color: #b0aaaa58;
+    /* Fondo blanco */
+    border: 1px solid #ccc;
+    /* Borde gris */
+    border-radius: 5px;
+    /* Esquinas redondeadas */
+
+    /* Sombra ligera */
+    padding: 10px;
+    /* Espacio interno reducido */
+    min-width: 120px;
+    /* Ancho mínimo de cada carta (ajusta este valor) */
+    min-height: 150px;
+    /* Altura mínima de cada carta (ajusta este valor) */
+    margin: 0 10px;
+    /* Márgenes horizontales entre cartas */
+    transition: transform 0.3s ease;
+    /* Efecto de transición al hacer clic */
+    cursor: pointer;
+}
+
+.carousel .slide:hover {
+    transform: scale(1.05);
+    /* Efecto de aumento al pasar el ratón */
+}
+
+/* DetallesUserPage.css */
+
+/* Estilos para el carrusel */
+.carousel {
+    width: 100%;
+    /* Ocupa todo el ancho de la pantalla */
+    max-width: 100%;
+    /* Evita que el carrusel tenga un ancho máximo */
+
+    /* Espacio inferior opcional */
+    position: relative;
+    /* Añade posición relativa para los elementos absolutos */
+}
+
+/* Estilos para las flechas del carrusel */
+.carousel-arrows {
+    background-color: #020202;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    /* Espacio opcional entre las flechas y el carrusel */
+}
+
+.card {
+    background-color: #b0aaaa58 !important;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+
+}
+
+.arrow {
+    background-color: #000000;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    padding: 5px 10px;
+    z-index: 100;
+    cursor: pointer;
+}
+
+button.control-arrow:hover {
+    background-color: #000000 !important;
+}
+
+.prev {
+    margin-right: auto;
+    background-color: black;
+    /* Mueve la flecha "Anterior" a la izquierda */
+}
+
+.next {
+    margin-left: auto;
+    background-color: black;
+    /* Mueve la flecha "Siguiente" a la derecha */
+}
+
+.deletdDog {
+    border: solid red !important;
+    background-color: red !important;
+}
+
+.deletdDog:hover {
+
+    background-color: rgb(191, 7, 7) !important;
+}
+
+button.control-arrow {
+
+    background-color: black !important;
 }

@@ -6,6 +6,7 @@ import uploadServices from "../../services/upload.service"
 import { MessageContext } from "../../contexts/message.context"
 import Loader from "../Loader/Loader"
 import FormError from '../../components/FormError/FormError';
+import './SignupForm.css'
 
 const SignupForm = () => {
 
@@ -78,35 +79,35 @@ const SignupForm = () => {
         <Form style={{ textAlign: 'center' }} onSubmit={handleFormSubmit}>
 
             <Form.Group className="mb-3" controlId="username">
-                <Form.Label>Name</Form.Label>
+                <Form.Label className="fLabel">Name</Form.Label>
                 <Form.Control type="text" value={signupData.username} onChange={handleInputChange} name="username" />
             </Form.Group>
 
 
             <Form.Group className="mb-3" controlId="about">
-                <Form.Label>About</Form.Label>
+                <Form.Label className="fLabel">About</Form.Label>
                 <Form.Control type="text" value={signupData.about} onChange={handleInputChange} name="about" />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="city">
-                <Form.Label>City</Form.Label>
+                <Form.Label className="fLabel">City</Form.Label>
                 <Form.Control type="text" value={signupData.city} onChange={handleInputChange} name="city" />
             </Form.Group>
 
 
             <Form.Group className="mb-3" controlId="password">
-                <Form.Label>Password</Form.Label>
+                <Form.Label className="fLabel">Password</Form.Label>
                 <Form.Control type="password" value={signupData.password} onChange={handleInputChange} name="password" />
             </Form.Group>
 
 
             <Form.Group className="mb-3" controlId="email">
-                <Form.Label>Email</Form.Label>
+                <Form.Label className="fLabel">Email</Form.Label>
                 <Form.Control type="email" value={signupData.email} onChange={handleInputChange} name="email" />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="avatar">
-                <Form.Label>Avatar (URL)</Form.Label>
+                <Form.Label className="fLabel">Avatar (URL)</Form.Label>
                 <Form.Control type="file" multiple onChange={handleFileUpload} />
             </Form.Group>
 

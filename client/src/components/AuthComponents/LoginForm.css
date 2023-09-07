@@ -1,0 +1,19 @@
+.fLabel {
+    color: white !important;
+}
+
+.logForm {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    width: 300px;
+    background-color: #858181b3;
+    border-radius: 5px;
+
+}
+
+.logPage {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center
+}

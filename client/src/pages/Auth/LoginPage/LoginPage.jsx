@@ -11,7 +11,7 @@ const LoginPage = () => {
 
                 <Col md={{ offset: 3, span: 6 }}>
 
-                    <h1>Acceso</h1>
+                    <h1 className='mt-3 d-flex justify-content-center'>Access</h1>
 
                     <hr />
 
