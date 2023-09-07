@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 
 import { useEffect } from 'react';
 
-const Maps = ({ event }) => {
+const Maps = ({ park }) => {
     const containerStyle = {
         width: '400px',
         height: '400px',
     };
 
     const center = {
-        lat: event.location?.coordinates[1],
-        lng: event.location?.coordinates[0]
+        lat: park.location?.coordinates[1],
+        lng: park.location?.coordinates[0]
     };
 
     useEffect(() => {

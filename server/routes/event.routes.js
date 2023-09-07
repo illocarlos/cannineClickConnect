@@ -20,4 +20,5 @@ router.put('/edit/:event_id', verifyToken, editEvent)
 router.delete('/delete/:event_id', verifyToken, deleteEvent)
 
 
+
 module.exports = router

@@ -33,6 +33,10 @@ class UsersService {
     deleteUser(user_id) {
         return this.api.delete(`/user/delete/${user_id}`)
     }
+
+    addUserToEvent(idEvent, idUser) {
+        return this.api.post("/user/addUserToEvent", {idEvent, idUser})
+    }
 }
 
 const usersService = new UsersService()

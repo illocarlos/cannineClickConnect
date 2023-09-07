@@ -37,6 +37,7 @@ class EventService {
   deleteEvent(event_id) {
     return this.api.delete(`/event/delete/${event_id}`);
   }
+  
 }
 
 const eventsService = new EventService();

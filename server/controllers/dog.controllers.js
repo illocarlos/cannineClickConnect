@@ -45,7 +45,7 @@ const deletedDog = (req, res, next) => {
 
 
     const { idUser, idDog: dogs } = req.body
-    console.log({ idUser, dogs })
+
     User
         .findByIdAndUpdate(idUser, { $pull: { dogs } }, { new: true })
         .then((response) => {

@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom"
 import eventsService from '../../../services/events.service'
 import { Container, Row, Col, Button } from "react-bootstrap"
 import MapContainer from "../../../components/Maps/Maps"
+import Loader from "../../../components/Loader/Loader"
 
 const DetailsEventsPage = () => {
 
@@ -12,15 +13,22 @@ const DetailsEventsPage = () => {
 
     const navigate = useNavigate()
 
+    const [isRegistered, setIsRegistered] = useState(false);
+
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
-        loadEventDeails()
+        loadEventDetails()
     }, [event])
 
-    const loadEventDeails = () => {
+    const loadEventDetails = () => {
         eventsService
             .getEventDetails(event_id)
             .then(({ data }) => setEvent(data))
             .catch(err => console.log(err))
+            .finally(() => {
+                setIsLoading(false)
+            })
     }
 
     const isEventOwner = () => {
@@ -34,29 +42,48 @@ const DetailsEventsPage = () => {
             .catch((err) => console.log(err))
     }
 
-    const handleUpdateEvent = () => {
-        eventsService
-            .editEvent(event_id)
-            .then(() => navigate('/event/list'))
-            .catch((err) => console.log(err))
-    }
+    const handleRegister = () => {
+
+        setIsRegistered(true);
+
+        const updatedEvent = { ...event };
+        updatedEvent.attendees.push(loggedUser._id);
+
+        setEvent(updatedEvent);
+    };
+
+
 
     return (
+
         <Container>
+
 
             <h1 className="mb-4">Detalles de {event.title}</h1>
             <hr />
 
             <Row>
+                {isLoading ? (
+                    <Loader />
+                ) : (
+
+                    <Col md={{ span: 6 }}>
+                        <h3>Descripción</h3>
+                        <p>{event.description}</p>
+                        <hr />
+                        <p>{event.date}</p>
+
+
+
+                        <hr />
+                        {event.attendees}
+                        <Button onClick={handleRegister}>Add to Event</Button>
+
+                    </Col>
+                )}
 
                 <Col md={{ span: 6 }}>
-                    <h3>Descripción</h3>
-                    <p>{event.description}</p>
-                    <hr />
-                </Col>
-
-                <Col md={{ span: 6 }}>
-                    <MapContainer location={event.location} />
+                    <MapContainer event={event} />
                 </Col>
 
                 {

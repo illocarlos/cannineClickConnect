@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import './NewPark.css'
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Col } from 'react-bootstrap';
 import ButtonOpen from './ButtonOpen';
 import parkService from "../../../services/parks.service";
 import uploadServices from '../../../services/upload.service';
@@ -9,7 +9,8 @@ import { useNavigate } from "react-router-dom"
 import Loader from '../../Loader/Loader';
 import * as PARK_CONSTS from '../../../consts/park.consts';
 import { ThemeContext } from "../../../contexts/theme.context";
-
+import MapsAutocomplete from '../../Autocomplete/ParksAutocomplete';
+import FormError from '../../FormError/FormError';
 
 function NewParkForm({ fireFinalActions }) {
     const navigate = useNavigate()
@@ -17,6 +18,7 @@ function NewParkForm({ fireFinalActions }) {
     const { emitMessage } = useContext(MessageContext)
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([])
+
 
 
     const [parkData, setParkData] = useState({
@@ -27,6 +29,14 @@ function NewParkForm({ fireFinalActions }) {
         crowdedness: "",
         rating: 0,
         open: true,
+        address: {
+            street: '',
+            number: 0,
+            zipcode: 0,
+            city: '',
+            country: ''
+        },
+        coordinates: ""
     })
 
 
@@ -44,7 +54,11 @@ function NewParkForm({ fireFinalActions }) {
 
         setParkData({
             ...parkData,
-            [name]: value
+            [name]: value,
+            address: {
+                ...parkData.address,
+                [name]: value,
+            }
         })
     }
 
@@ -150,6 +164,16 @@ function NewParkForm({ fireFinalActions }) {
                 </Form.Group>
 
                 <ButtonOpen handleOpenStatus={handleOpenStatus} />
+
+                <Col >
+                    <MapsAutocomplete parkData={parkData} setParkData={setParkData}>
+                        <Form.Group className="mb-3" controlId="street">
+
+                            <Form.Control type="text" value={parkData.address.street}
+                                placeholder="Street" name="street" onChange={handleInputChange} />
+                        </Form.Group>
+                    </MapsAutocomplete>
+                </Col>
 
                 {isLoading ? (
                     <Loader />

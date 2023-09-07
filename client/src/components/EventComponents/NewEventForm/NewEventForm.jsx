@@ -8,14 +8,15 @@ import Loader from "../../Loader/Loader"
 import { ThemeContext } from "../../../contexts/theme.context";
 import FormError from '../../FormError/FormError';
 import { useDate } from '../../../contexts/getCurrentDate.context'
+import MapsAutocomplete from '../../Autocomplete/Autocomplete'
 
 
 const NewEventForm = ({ fireFinalActions }) => {
+  const navigate = useNavigate()
   const { getCurrentDate } = useDate()
   const { theme, switchTheme } = useContext(ThemeContext)
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState([])
-  const navigate = useNavigate()
   const { emitMessage } = useContext(MessageContext)
 
 
@@ -31,7 +32,8 @@ const NewEventForm = ({ fireFinalActions }) => {
       zipcode: 0,
       city: '',
       country: ''
-    }
+    },
+    coordinates: ""
   })
 
 
@@ -65,13 +67,17 @@ const NewEventForm = ({ fireFinalActions }) => {
         emitMessage('create new event')
         navigate('/event/list')
       })
+
       .catch(err => {
+
         setErrors(err.response.data.errorMessages)
+
       })
       .finally(() => {
         setIsLoading(false);
       });
   }
+
 
   return (
 
@@ -103,47 +109,24 @@ const NewEventForm = ({ fireFinalActions }) => {
             name="date" onChange={handleInputChange} />
         </Col>
 
-        <Col >
-          <Form.Group className="mb-3" controlId="street">
-
-            <Form.Control type="text" value={eventData.address.street}
-              placeholder="Street" name="street" onChange={handleInputChange} />
-          </Form.Group>
-        </Col>
       </Row>
 
       <Row>
-        <Col>
-          <Form.Group className="mb-3" controlId="number">
-            <Form.Label>Number</Form.Label>
-            <Form.Control type="number" value={eventData.address.number}
-              name="number" onChange={handleInputChange} />
-          </Form.Group>
-        </Col>
 
-        <Col>
-          <Form.Group className="mb-3" controlId="city">
-            <Form.Label>City</Form.Label>
-            <Form.Control type="text" value={eventData.address.city} name="city" onChange={handleInputChange} />
-          </Form.Group>
-        </Col>
+        <Col >
+          <MapsAutocomplete eventData={eventData} setEventData={setEventData}>
+            <Form.Group className="mb-3" controlId="street">
 
-        <Col>
-          <Form.Group className="mb-3" controlId="country">
-            <Form.Label>Country</Form.Label>
-            <Form.Control type="text" value={eventData.address.country} name="country" onChange={handleInputChange} />
-          </Form.Group>
+              <Form.Control type="text" value={eventData.address.street}
+                placeholder="Street" name="street" onChange={handleInputChange} />
+            </Form.Group>
+          </MapsAutocomplete>
         </Col>
-
-        <Col>
-          <Form.Group className="mb-3" controlId="zipcode">
-            <Form.Label>ZIP</Form.Label>
-            <Form.Control type="text" value={eventData.address.zipcode} name="zipcode" onChange={handleInputChange} />
-          </Form.Group>
-        </Col>
-
 
       </Row>
+
+
+
 
       {
         isLoading ? (

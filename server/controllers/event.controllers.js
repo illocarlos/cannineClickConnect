@@ -22,7 +22,7 @@ const eventId = (req, res, next) => {
 
 const newEvent = (req, res, next) => {
 
-    const { title, description, cover, date, attendees, address: { street, number, zipcode, city, country } } = req.body
+    const { title, description, cover, date, attendees, address: { street, number, zipcode, city, country }, location } = req.body
     const { _id: owner } = req.payload
 
     Event
@@ -39,7 +39,8 @@ const newEvent = (req, res, next) => {
                 zipcode,
                 city,
                 country
-            }
+            },
+            location
         })
         .then(() => res.sendStatus(201))
         .catch(err => next(err))

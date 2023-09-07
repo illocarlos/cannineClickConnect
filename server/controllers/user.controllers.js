@@ -1,4 +1,5 @@
 const User = require('../models/User.model')
+const Event = require ('../models/Event.model')
 
 const listUsers = (req, res, next) => {
 
@@ -33,6 +34,15 @@ const editUser = (req, res, next) => {
         .catch(err => next(err))
 }
 
+const addUserToEvent = (req, res, next) => {
+    const {idEvent, idUser: users} = req.body
+
+    Event
+    .findByIdAndUpdate(idEvent, {$addToSet: {users}}, {new: true})
+    .then(() => res.status(201).send("ok"))
+    .catch(err=> next(err))
+}
+
 const deleteUser = (req, res, next) => {
 
     const { user_id } = req.params
@@ -43,10 +53,10 @@ const deleteUser = (req, res, next) => {
         .catch((err) => next(err))
 }
 
-
 module.exports = {
     userId,
     listUsers,
     deleteUser,
-    editUser
+    editUser,
+    addUserToEvent
 }

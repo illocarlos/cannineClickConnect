@@ -6,6 +6,7 @@ import usersService from '../../../services/users.service';
 import dogService from '../../../services/dogs.service';
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { ThemeContext } from "../../../contexts/theme.context";
+import Loader from '../../../components/Loader/Loader';
 
 const DetailsUserPage = () => {
 
@@ -60,7 +61,7 @@ const DetailsUserPage = () => {
     return (
         <Container>
             {!user ? (
-                <p>cargando datos de perfil.....</p>
+                <Loader />
             ) : (
                 <div className="d-flex flex-column justify-content-center">
                     <div className="d-flex justify-content-center mt-4">

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import Geocode from "react-geocode";
 
-const MapsAutocomplete = ({ eventData, setEventData }) => {
+const MapsAutocomplete = ({ parkData, setParkData }) => {
 
     const [value, setValue] = useState()
     Geocode.setApiKey("AIzaSyDEfioKfYGi6udaByyFEojQ4p3fvjcP00Q")
@@ -11,7 +11,7 @@ const MapsAutocomplete = ({ eventData, setEventData }) => {
         .fromAddress(value.label)
         .then((response) => {
             const { lat, lng } = response.results[0].geometry.location
-            setEventData({ ...eventData, location: { type: 'Point', coordinates: [lng, lat] }, address: value.label })
+            setParkData({ ...parkData, location: { type: 'Point', coordinates: [lng, lat] }, address: value.label })
             setValue(undefined)
         },
             (error) => {

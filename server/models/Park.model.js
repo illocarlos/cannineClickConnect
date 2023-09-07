@@ -55,10 +55,10 @@ const parkSchema = new Schema(
 
             type: {
                 type: String,
+                default: 'Point'
             },
-            cordinates: {
+            coordinates: {
                 type: [Number],
-                default: [41.40702692638753, 2.14960025202085],
             },
         },
 

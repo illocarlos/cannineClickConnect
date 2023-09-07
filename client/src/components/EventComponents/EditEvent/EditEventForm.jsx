@@ -42,17 +42,13 @@ const UpdateEventForm = () => {
         setEventData({
             ...eventData,
             [name]: value,
+            address: {
+                ...eventData.address,
+                [name]: value,
+            }
         });
     };
 
-    const handleInputChangeInAdress = (e) => {
-        const { value, name } = e.target;
-
-        setEventData({
-            ...eventData,
-            address: { [name]: value },
-        });
-    };
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -123,7 +119,7 @@ const UpdateEventForm = () => {
                             value={eventData.address.street}
                             placeholder="Street"
                             name="street"
-                            onChange={handleInputChangeInAdress}
+                            onChange={handleInputChange}
                         />
                     </Form.Group>
                 </Col>
@@ -137,7 +133,7 @@ const UpdateEventForm = () => {
                             max={100}
                             value={eventData.address.number}
                             name="number"
-                            onChange={handleInputChangeInAdress} />
+                            onChange={handleInputChange} />
                         <Form.Text className="text-muted" />
 
                     </Form.Group>
@@ -150,7 +146,7 @@ const UpdateEventForm = () => {
                             type="text"
                             value={eventData.address.city}
                             name="city"
-                            onChange={handleInputChangeInAdress}
+                            onChange={handleInputChange}
                         />
                     </Form.Group>
                 </Col>
@@ -162,7 +158,7 @@ const UpdateEventForm = () => {
                             type="text"
                             value={eventData.address.country}
                             name="country"
-                            onChange={handleInputChangeInAdress}
+                            onChange={handleInputChange}
                         />
                     </Form.Group>
                 </Col>
@@ -174,7 +170,7 @@ const UpdateEventForm = () => {
                             type="text"
                             value={eventData.address.zipcode}
                             name="zipcode"
-                            onChange={handleInputChangeInAdress}
+                            onChange={handleInputChange}
                         />
                     </Form.Group>
                 </Col>

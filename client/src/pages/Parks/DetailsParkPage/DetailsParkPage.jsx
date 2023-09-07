@@ -2,16 +2,22 @@ import { useEffect, useState } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
 import parksService from '../../../services/parks.service'
 import { Container, Row, Col, Button } from 'react-bootstrap'
-import MapContainer from "../../../components/Maps/Maps"
+import MapContainer from "../../../components/Maps/ParkMaps"
 import Rating from "../../../components/Rating/AverageRating"
 import HandleVote from "../../../components/Rating/HandleVote"
+import Loader from "../../../components/Loader/Loader"
 
 const DetailsParkPage = () => {
 
     const { park_id } = useParams()
+
     const [park, setPark] = useState({})
+
     const [userRating, setUserRating] = useState(0);
+
     const navigate = useNavigate()
+
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         loadParkDetails()
@@ -22,6 +28,9 @@ const DetailsParkPage = () => {
             .getParkDetails(park_id)
             .then(({ data }) => setPark(data))
             .catch(err => console.log(err))
+            .finally(() => {
+                setIsLoading(false)
+            })
     }
 
     const isParkOwner = () => {
@@ -77,21 +86,26 @@ const DetailsParkPage = () => {
 
             <Row>
 
+                {isLoading ? (
+                    <Loader />
+                ) : (
+
+                    <Col md={{ span: 6 }}>
+                        <h3>Descripción</h3>
+                        <p>{park.description}</p>
+                        <hr />
+                        <HandleVote initialValue={userRating} onRate={handleUserRating} />
+                        <Button onClick={handleRatePark}>Votar</Button>
+                        <Rating media={average} />
+
+
+                    </Col>
+                )}
+
+
+
                 <Col md={{ span: 6 }}>
-                    <h3>Descripción</h3>
-                    <p>{park.description}</p>
-                    <hr />
-                    <HandleVote initialValue={userRating} onRate={handleUserRating} />
-                    <Button onClick={handleRatePark}>Votar</Button>
-                    <Rating media={average} />
-
-
-                </Col>
-
-
-
-                <Col md={{ span: 6 }}>
-                    <MapContainer location={park.location} />
+                    <MapContainer park={park} />
                 </Col>
 
                 {
