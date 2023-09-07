@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
 import parksService from '../../../services/parks.service'
 import { Container, Row, Col, Button } from 'react-bootstrap'
-import MapContainer from "../../../components/Maps/ParkMaps"
+import ParkMaps from "../../../components/Maps/ParkMaps"
 import Rating from "../../../components/Rating/AverageRating"
 import HandleVote from "../../../components/Rating/HandleVote"
 import Loader from "../../../components/Loader/Loader"
@@ -105,7 +105,7 @@ const DetailsParkPage = () => {
 
 
                 <Col md={{ span: 6 }}>
-                    <MapContainer park={park} />
+                    <ParkMaps park={park} />
                 </Col>
 
                 {

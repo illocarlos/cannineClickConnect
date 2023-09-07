@@ -2,16 +2,15 @@ import React, { useState } from 'react';
 
 import { useEffect } from 'react';
 
-const ParkMaps = ({ park }) => {
-
+const EventMaps = ({ event }) => {
     const containerStyle = {
         width: '400px',
         height: '400px',
     };
 
     const center = {
-        lat: park.location?.coordinates[1],
-        lng: park.location?.coordinates[0]
+        lat: event.location?.coordinates[1],
+        lng: event.location?.coordinates[0]
     };
 
     useEffect(() => {
@@ -39,4 +38,4 @@ const ParkMaps = ({ park }) => {
     }
     return (<div id="map" style={containerStyle} />)
 }
-export default ParkMaps
+export default EventMaps
