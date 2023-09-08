@@ -30,7 +30,7 @@ const Navigation = () => {
             <div className="d-flex">
               {
                 loggedUser &&
-                <div className=" d-flex mt-2">
+                <div className=" d-flex mt-2 me-3">
                   <Link to={"/park/list"} className="nav-link me-4">Park</Link>
                   <Link to={"/event/list"} className="nav-link me-4">Events</Link>
                   <Link to={"/user/list"} className="nav-link me-4"> Community</Link>
@@ -48,15 +48,17 @@ const Navigation = () => {
                 {
                   loggedUser &&
                   <>
-                    <Link to={'/'} className='nav-link' onClick={logout}>log out</Link>
-                    <Link to={`/user/${loggedUser._id}`} className='nav-link' >profile</Link>
+                    <Link to={'/'} className='mx-2  nav-link' onClick={logout}>log out</Link>
+                    <hr />
+                    <Link to={`/user/${loggedUser._id}`} className='mx-2  nav-link' >profile</Link>
                   </>
                 }
                 {
                   !loggedUser &&
                   <>
-                    <Link to={"/auth/signup"} className="nav-link"> Sign Up</Link>
-                    <Link to={"/auth/login"} className="nav-link"> Log In</Link>
+                    <Link to={"/auth/signup"} className=" mx-2 nav-link"> Sign Up</Link>
+                    <hr />
+                    <Link to={"/auth/login"} className=" mx-2  nav-link"> Log In</Link>
                   </>
                 }
               </DropdownButton>

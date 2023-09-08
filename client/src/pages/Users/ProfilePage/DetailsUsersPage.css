@@ -72,7 +72,7 @@
 }
 
 .card {
-    background-color: #b0aaaa58 !important;
+    background-color: #7f7777a9 !important;
     display: flex;
     flex-flow: column;
     justify-content: space-around;
@@ -118,4 +118,34 @@ button.control-arrow:hover {
 button.control-arrow {
 
     background-color: black !important;
+}
+
+/* Estilo de la tarjeta cuando se muestra información adicional */
+.event-card.flipped {
+    transform: rotateY(180deg);
+}
+
+/* Estilo de la información adicional en el reverso de la tarjeta */
+.event-card .card-back {
+    display: none;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+}
+
+/* Estilo del botón "Mostrar Detalles" */
+.toggle-details {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.titleUser {
+    width: 25%;
+
+}
+
+h3 {
+
+    color: white !important;
 }

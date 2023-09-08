@@ -7,6 +7,7 @@
 
 
 .nav-link:hover {
-    color: yellow;
-
+    color: rgb(156, 134, 8) !important;
+    font-size: 1.3rem;
+    transition: 0.4s;
 }

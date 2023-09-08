@@ -40,7 +40,7 @@ body::after {
 }
 
 .btn-warning:hover {
-  background-color: rgb(98, 98, 13) !important;
-  border: solid rgb(98, 98, 13) !important;
-  color: white;
+  background-color: rgba(242, 242, 124, 0.789) !important;
+  border: solid rgba(242, 242, 124, 0.789) !important;
+  color: #ffffff;
 }

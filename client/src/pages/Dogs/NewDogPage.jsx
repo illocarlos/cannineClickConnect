@@ -7,12 +7,17 @@ const NewDogPage = () => {
 
     return (
 
-        <div className=" mt-5 ">
+        <div className=" conDog mt-5 ">
 
-            <Container className='newDog' >
-                <h1>NEW DOG</h1>
+
+
+
+            <div className='newDog'>
+                <h2>NEW DOG</h2>
+                <hr />
                 <NewDogForm />
-            </Container>
+            </div>
+
 
         </div>
     )

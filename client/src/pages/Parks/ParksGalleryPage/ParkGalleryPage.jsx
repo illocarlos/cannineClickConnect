@@ -31,7 +31,7 @@ const ParkGalleryPage = ({ }) => {
 
     return (
 
-        <>
+        <div className="overlay-background">
             <Container >
                 <div className='d-flex justify-content-between align-items-center'>
                     <div>
@@ -63,7 +63,7 @@ const ParkGalleryPage = ({ }) => {
                     <NewParkForm fireFinalActions={fireFinalActions} />
                 </Modal.Body>
             </Modal>
-        </>
+        </div>
 
     )
 }
