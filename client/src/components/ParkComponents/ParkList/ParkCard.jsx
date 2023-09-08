@@ -5,8 +5,9 @@ import './ParkCard.css'
 
 const ParkCard = ({ name, description, _id, gallery }) => {
     return (
+
         <Col md={{ span: 3 }} key={_id}>
-            <Card style={{ backgroundColor: "rgba(106, 101, 101, 0.8)", color: "white" }} className="park-card">
+            <Card style={{ backgroundColor: "rgba(106, 101, 101, 0.8)", color: "white" }} className="mt-3 park-card">
                 <Carousel>
                     {gallery.map((image, index) => (
                         <Carousel.Item key={index}>
@@ -27,6 +28,7 @@ const ParkCard = ({ name, description, _id, gallery }) => {
                 </Card.Body>
             </Card>
         </Col>
+
     )
 }
 

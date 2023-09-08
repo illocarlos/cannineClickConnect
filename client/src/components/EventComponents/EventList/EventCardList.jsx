@@ -1,24 +1,25 @@
 import { Link } from 'react-router-dom'
 import { Card, Button, Col, Carousel } from 'react-bootstrap'
-
+import './EventList.css'
 
 
 const EventList = ({ title, cover, description, _id }) => {
     return (
-        <Col md={{ span: 3 }} key={_id}>
-            <Card style={{ height: '500px', width: '300px' }} >
-                <Carousel>
+        <div key={_id}>
+            <Card  >
+                <Carousel style={{ height: '300px', width: '300px' }}>
                     {
                         cover.map((image, index) => (
                             <Carousel.Item key={index}>
                                 <Card.Img variant="top" src={image}
-                                    style={{ width: '100%', height: '200px' }} />
+                                />
                             </Carousel.Item>
                         ))
                     }
                 </Carousel>
-                <Card.Body>
-                    <div style={{ height: '100%' }} className='d-flex flex-column justify-content-between'>
+
+                <Card.Body style={{ color: 'white', height: '300px', width: '300px' }}>
+                    <div className='d-flex flex-column justify-content-between'>
                         <div>
                             <Card.Title style={{
                                 whiteSpace: 'nowrap', textOverflow:
@@ -31,12 +32,12 @@ const EventList = ({ title, cover, description, _id }) => {
                                 {description}</Card.Text>
                         </div>
                         <Link to={`/event/${_id}`}>
-                            <Button style={{ width: '100%' }} variant='warning'>Details</Button>
+                            <Button className='bottonEvent' style={{ width: '100%' }} variant='warning'>Details</Button>
                         </Link>
                     </div>
                 </Card.Body>
             </Card>
-        </Col >
+        </div >
     )
 
 }

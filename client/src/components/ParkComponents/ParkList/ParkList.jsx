@@ -21,11 +21,13 @@ const ParkList = () => {
 
   return (
     <Container>
+
       <Row >
         {
           parks.map(elm => <ParkCard {...elm} />)
         }
       </Row>
+
     </Container>
   )
 }

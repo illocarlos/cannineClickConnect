@@ -8,12 +8,13 @@ import { ThemeContext } from "../../../contexts/theme.context";
 import Loader from '../../../components/Loader/Loader';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-
+import Collapse from 'react-bootstrap/Collapse';
 const DetailsUserPage = () => {
     const { theme, switchTheme } = useContext(ThemeContext);
     const { user_id } = useParams();
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         loadUserProfile();
@@ -77,7 +78,7 @@ const DetailsUserPage = () => {
                                     </div>
                                 </Card.Title>
 
-                                <Card.Title className='d-flex flex-column align-items-center justify-content-center'>
+                                <Card.Title className='titleUser d-flex flex-column align-items-center justify-content-center'>
                                     <p> {user.about}</p>
                                 </Card.Title>
                             </div>
@@ -123,31 +124,42 @@ const DetailsUserPage = () => {
 
                                         transformStyle: 'preserve-3d',
                                         transition: 'transform 0.5s ease',
-                                        width: '300px', /* Ajusta el ancho de la carta */
-                                        height: '270px', /* Ajusta la altura de la carta */
+                                        width: '300px',
+                                        height: '270px',
                                     }}
-                                    onClick={() => handleCardClick(index)}
+
                                 >
-                                    <Card.Img variant="top"
-                                        src={dog.images[0]}>
-                                    </Card.Img>
-                                    <Card.Text
-                                        className="card-back">
+                                    <Card.Img
+                                        variant="top"
+                                        style={{
+                                            maxWidth: '300px',
+                                            maxHeight: '200px',
+                                            width: 'auto',
+                                            height: 'auto',
+                                        }}
+                                        src={dog.images[0]}
+                                        alt="Descripción de la imagen"
+                                    />
+                                    <Card.Text >
+                                        <h3 className='mt-1'>{dog.name}</h3>
 
                                     </Card.Text>
                                     <Button className='deletdDog' onClick={() => {
                                         handleDeleteDog(user._id, dog._id)
                                     }}>Delete</Button>
 
+
                                 </Card>
+
 
                             ))}
                         </Carousel>
 
                     </div>
-                </div>
-            )}
-        </Container>
+                </div >
+            )
+            }
+        </Container >
     );
 };
 

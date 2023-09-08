@@ -1,0 +1,35 @@
+.overlay-background {
+    background-image: url('../../../../public/fondoreal.jpg');
+    /* position: fixed; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    backdrop-filter: blur(1000px);
+
+
+}
+
+h1 {
+    color: white;
+}
+
+
+
+.overlay-background::after {
+
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    z-index: -1;
+    background-image: inherit;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: inherit;
+    transform: scale(0.5);
+    transform-origin: top left;
+}
