@@ -43,7 +43,7 @@ const DetailsEventsPage = () => {
 
     const handleDeleteEvent = () => {
         eventsService
-            .deleteEvent(isLoading, event)
+            .deleteEvent(event_id)
             .then(() => navigate('/event/list'))
             .catch((err) => console.log(err))
     }
